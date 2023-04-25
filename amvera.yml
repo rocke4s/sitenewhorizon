@@ -1,0 +1,13 @@
+meta:
+  environment: jvm
+  toolchain:
+    name: maven
+    version: 8
+build:
+  artifacts:
+    target/*.war: /
+  args: 'spring-boot:repackage '
+run:
+  jarName: /target/SpringSecurityApp.war
+  persistence_mount: /data
+  container_port: 80
