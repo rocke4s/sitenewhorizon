@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=utf-8" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
@@ -91,7 +92,9 @@
     </c:if>
 </div>
 <c:forEach var="Task" items="${Tasks.getTasks()}">
-    <details ><div class="layer1" margin-top="5px"  margin-bottom="5px"><button>Чат</button></div>
+    <details ><div class="layer1" margin-top="5px"  margin-bottom="5px">
+<%--        <button>Чат</button>--%>
+    </div>
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
 
             <table>
@@ -100,7 +103,8 @@
                     <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
                     <c:if test="${!Task.getTaskPartner().isEmpty()}"><th>Контрагент</th></c:if>
                     <c:if test="${!Task.getTaskStatus().isEmpty()}"><th>Состояние заявки</th></c:if>
-                    <c:if test="${Task.getTaskStatus()=='Проверено' && Task.getTaskStatus()=='Выполнена' && Task.getTaskStatus()!='Отменено'}">
+                    <c:if test="${Task.getTaskStatus()!='Отменено' && Task.getTaskStatus()!='Проверено'
+                     && Task.getTaskStatus()!='В работе' && Task.getTaskStatus()!='На доработке'}">
                         <th>Изменить состояние</th>
                     </c:if>
                     <c:if test="${!Task.getTypeTask().isEmpty()}"><th>Тип задачи</th></c:if>
@@ -115,62 +119,77 @@
                     <c:if test="${!Task.getTaskEmployee().isEmpty()}"><th>Сотрудник</th></c:if>
                 </tr>
                 </thead>
-            <c:forEach var="Task" items="${Tasks.getTasks()}">
+            <c:forEach var="Tasks" items="${Tasks.getTasks()}">
+                <c:if test="${Task.getTaskNumber()==Tasks.getTaskNumber()}">
                 <tr>
-                    <c:if test="${!Task.getTaskUrl().isEmpty()}"><td>${Task.getTaskUrl()}</td></c:if>
-                    <c:if test="${!Task.getTaskPartner().isEmpty()}"><td>${Task.getTaskPartner()}</td></c:if>
-                    <c:if test="${!Task.getTaskStatus().isEmpty()}"><td>${Task.getTaskStatus()}</td></c:if>
-                    <c:if test="${Task.getTaskStatus()=='Проверено' && Task.getTaskStatus()!='На доработке' &&
-                                  Task.getTaskStatus()!='Выполнена' && Task.getTaskStatus()!='Отменено'}">
+                    <c:if test="${!Tasks.getTaskUrl().isEmpty()}"><td>${Tasks.getTaskUrl()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskPartner().isEmpty()}"><td>${Tasks.getTaskPartner()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskStatus().isEmpty()}"><td>${Tasks.getTaskStatus()}</td></c:if>
+                    <c:if test="${Tasks.getTaskStatus()!='Отменено' && Tasks.getTaskStatus()!='Проверено'
+                    && Tasks.getTaskStatus()!='В работе' && Tasks.getTaskStatus()!='На доработке'}">
                         <td>
+                            <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
                             <div>
-                                <form method="GET" action="/changestatus">
-                                    <input type="hidden" value="${Task.getUidDoc()}" name="uidDoc_5">
+                                <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="get" modelAttribute="changeStatus">
+                                    <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_5">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <spring:bind path="causeChangeStatus">
+                                    <form:input type="text" path="causeChangeStatus" class="form-control" placeholder="Причина доработки"
+                                                autofocus="true"></form:input>
+                                    </spring:bind>
                                     <button type="submit">Доработка</button>
-                                </form>
+                                </form:form>
                             </div>
+                        </c:if>
+                            <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
+                                <div>
+                                    <form method="GET" action="/change_status">
+                                        <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_8">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <button type="submit">Проверено</button>
+                                    </form>
+                                </div>
+                            </c:if>
+                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланировано'}">
+                                <div>
+                                    <form method="GET" action="/change_status">
+                                        <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_0">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <button type="submit">Отмена</button>
+                                    </form>
+                                </div>
+                            </c:if>
                         </td>
                     </c:if>
-                    <c:if test="${Task.getTaskStatus()!='Проверено' && Task.getTaskStatus()!='Выполнена' && Task.getTaskStatus()!='Отменено'}">
-                        <td>
-                            <div>
-                                <form method="GET" action="/changestatus">
-                                    <input type="hidden" value="${Task.getUidDoc()}" name="uidDoc_8">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <button type="submit">Проверено</button>
-                                </form>
-                            </div>
-                        </td>
-                    </c:if>
-                    <c:if test="${!Task.getTypeTask().isEmpty()}"><td>${Task.getTypeTask()}</td></c:if>
-                    <c:if test="${!Task.getTaskImportance().isEmpty()}"><td>${Task.getTaskImportance()}</td></c:if>
-                    <c:if test="${!Task.getTaskContent().isEmpty()}"><td>${Task.getTaskContent()}</td></c:if>
-                    <c:if test="${!Task.getTaskDeadline().isEmpty()}"><td>${Task.getTaskDeadline()}</td></c:if>
-                    <c:if test="${!Task.getTaskIntensity().isEmpty()}"><td>${Task.getTaskIntensity()}</td></c:if>
-                    <c:if test="${!Task.getTaskId().isEmpty()}"><td>${Task.getTaskId()}</td></c:if>
-                    <c:if test="${!Task.getTaskDataDone().isEmpty()}"><td>${Task.getTaskDataDone()}</td></c:if>
-                    <c:if test="${!Task.getTaskContentLVR().isEmpty()}"><td>${Task.getTaskContentLVR()}</td></c:if>
-                    <c:if test="${!Task.getTaskData().isEmpty()}"><td>${Task.getTaskData()}</td></c:if>
-                    <c:if test="${!Task.getTaskEmployee().isEmpty()}"><td>${Task.getTaskEmployee()}</td></c:if>
+                    <c:if test="${!Tasks.getTypeTask().isEmpty()}"><td>${Tasks.getTypeTask()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskImportance().isEmpty()}"><td>${Tasks.getTaskImportance()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskContent().isEmpty()}"><td>${Tasks.getTaskContent()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskDeadline().isEmpty()}"><td>${Tasks.getTaskDeadline()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskIntensity().isEmpty()}"><td>${Tasks.getTaskIntensity()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskId().isEmpty()}"><td>${Tasks.getTaskId()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskDataDone().isEmpty()}"><td>${Tasks.getTaskDataDone()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskContentLVR().isEmpty()}"><td>${Tasks.getTaskContentLVR()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskData().isEmpty()}"><td>${Tasks.getTaskData()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskEmployee().isEmpty()}"><td>${Tasks.getTaskEmployee()}</td></c:if>
                 </tr>
+            </c:if>
             </c:forEach>
 
             </tr>
         </table>
-        <div id="chat-page">
-            <ul id="messageArea">
+<%--        <div id="chat-page">--%>
+<%--            <ul id="messageArea">--%>
 
-            </ul>
-            <form id="messageForm" name="messageForm" nameForm="messageForm">
-                <div class="form-group">
-                    <div class="input-group clearfix">
-                        <input type="text" id="message" placeholder="Введите сообщение..." autocomplete="off" class="form-control"/>
-                        <button type="submit" class="primary">Отправить</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+<%--            </ul>--%>
+<%--            <form id="messageForm" name="messageForm" nameForm="messageForm">--%>
+<%--                <div class="form-group">--%>
+<%--                    <div class="input-group clearfix">--%>
+<%--                        <input type="text" id="message" placeholder="Введите сообщение..." autocomplete="off" class="form-control"/>--%>
+<%--                        <button type="submit" class="primary">Отправить</button>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </form>--%>
+<%--        </div>--%>
     </details>
 </c:forEach>
 </div>

@@ -1,21 +1,14 @@
 package net.proselyte.springsecurityapp.model;
 
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
-import org.springframework.http.HttpHeaders;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Generated;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 import java.util.Properties;
 
 /**
@@ -71,6 +64,18 @@ public class Tasks {
     @SerializedName("TypeTask")
     @Expose
     private String typeTask;
+
+    private MultipartFile file;
+
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
     public Tasks() {
     }
 
@@ -202,35 +207,35 @@ public class Tasks {
         this.typeTask = typeTask;
     }
 
-    public void changeStatus(String status) throws IOException{
-        HttpGet request = null;
-        if(status!=null && !status.isEmpty())//передаем выбранное состояние заявки - "на доработку"
-        {
-            if (status.equals("5"))
-            {
-                request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+this.uidDoc+"/5");
-            } else if (status.equals("8")) {
-                request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+this.uidDoc+"/8");
-            }
-            CloseableHttpClient client = HttpClientBuilder.create().build();
-            String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-            String result;
-            request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
-            CloseableHttpResponse response = client.execute(request);//выполняем запрос
-            try {
-                HttpEntity entity = response.getEntity();//получаем ответ от АПИ
-                result = EntityUtils.toString(entity);//засовываем ответ в строку
-                EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
-                System.out.println(result);
-                Gson g = new Gson();
-                //  userForm.setUidUser();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } finally {
-                response.close();
-            }
-        }
-    }
+//    public void changeStatus(String status) throws IOException{
+//        HttpGet request = null;
+//        if(status!=null && !status.isEmpty())//передаем выбранное состояние заявки - "на доработку"
+//        {
+//            if (status.equals("5"))
+//            {
+//                request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+this.uidDoc+"/5");
+//            } else if (status.equals("8")) {
+//                request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+this.uidDoc+"/8");
+//            }
+//            CloseableHttpClient client = HttpClientBuilder.create().build();
+//            String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+//            String result;
+//            request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
+//            CloseableHttpResponse response = client.execute(request);//выполняем запрос
+//            try {
+//                HttpEntity entity = response.getEntity();//получаем ответ от АПИ
+//                result = EntityUtils.toString(entity);//засовываем ответ в строку
+//                EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
+//                System.out.println(result);
+//                Gson g = new Gson();
+//                //  userForm.setUidUser();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            } finally {
+//                response.close();
+//            }
+//        }
+//    }
     public String[] forBasicAuth() throws IOException {
         Properties props = new Properties();
         try (InputStream in = getClass().getClassLoader().getResourceAsStream("config.properties")) {

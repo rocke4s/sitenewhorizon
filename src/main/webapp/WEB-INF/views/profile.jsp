@@ -57,11 +57,6 @@
             <td>${Profile.telefon}</td>
         </tr>
     </table>
-    <form:form method="GET" action="/tasks">
-        <input type="hidden" name="Profile" value="${Profile}"/>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <button type="submit">Показать список задач</button>
-    </form:form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

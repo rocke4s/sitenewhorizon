@@ -1,5 +1,6 @@
 package net.proselyte.springsecurityapp.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +22,6 @@ public class Profile {
     @Column(name = "uidUser")
     @Id
     private String uidUser;
-
     public String getTelefon() {
         return telefon;
     }

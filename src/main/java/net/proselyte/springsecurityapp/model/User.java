@@ -1,5 +1,7 @@
 package net.proselyte.springsecurityapp.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -31,7 +33,6 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-
     @Transient
     private String confirmPassword;
 
@@ -39,6 +40,7 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
 
     public Long getId() {
         return id;

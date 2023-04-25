@@ -13,6 +13,9 @@
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/profile" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/tasks" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/new_task" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/new_tasker" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+
 
         <form-login login-page="/login" default-target-url="/profile" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>

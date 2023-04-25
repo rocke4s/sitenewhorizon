@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome</title>
+    <title>Добро пожаловать!</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -29,8 +29,8 @@
 <div class="container">
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
+<%--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
         </form>
 
         <h2>Добро пожаловать ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Выйти</a>
@@ -39,22 +39,20 @@
 <%--            <a href="/profile" class="btn">${pageContext.request.userPrincipal.name} data</a>--%>
 <%--        </sec:authorize>--%>
         <div>
-            <form:form method="GET" action="/profile" >
+            <form:form method="GET" action="/profile?${_csrf.parameterName}=${_csrf.token}">
 
             <button type="submit">Показать данные пользователя</button>
             </form:form>
         </div>
         <div>
-            <form:form method="GET" action="/tasks">
+            <form:form method="GET" action="/tasks?${_csrf.parameterName}=${_csrf.token}">
                 <input type="hidden" name="Profile" value="${Profile}"/>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button type="submit">Показать список задач</button>
             </form:form>
         </div>
         <div>
-            <form:form method="GET" action="/createTask">
+            <form:form method="POST" action="/new_task?${_csrf.parameterName}=${_csrf.token}">
                 <input type="hidden" name="Profile" value="${User}"/>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button type="submit">Создать задачу</button>
             </form:form>
         </div>

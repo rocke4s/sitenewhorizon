@@ -1,10 +1,7 @@
 package net.proselyte.springsecurityapp.controller;
 
 import com.google.gson.Gson;
-import net.proselyte.springsecurityapp.model.Profile;
-import net.proselyte.springsecurityapp.model.Task;
-import net.proselyte.springsecurityapp.model.Tasks;
-import net.proselyte.springsecurityapp.model.User;
+import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.ProfileService;
 import net.proselyte.springsecurityapp.service.SecurityService;
 import net.proselyte.springsecurityapp.service.UserService;
@@ -20,6 +17,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +28,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,6 +40,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
+import java.util.List;
 
 /**
  * Controller for {@link net.proselyte.springsecurityapp.model.User}'s pages.
@@ -108,8 +108,8 @@ public class UserController {
         }
         if (!profile.getUidUser().isEmpty()) {
             userForm.setUidUser(profile.getUidUser());
-        model.addAttribute("profile",profile);
-        userService.save(userForm);//сохранение в бд
+            model.addAttribute("profile",profile);
+            userService.save(userForm);//сохранение в бд
             profileService.save(profile);
         }
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
@@ -139,13 +139,13 @@ public class UserController {
         System.out.println(authentication.getName());
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-       // profileService.findByUidUser()
+        // profileService.findByUidUser()
         model.addAttribute("Profile",prof);
         return "profile";
     }
 
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
-    public ModelAndView tasks(Model model, Authentication authentication)  throws IOException{
+    public ModelAndView tasks(Model model, Authentication authentication,ChangeStatus changeStatus)  throws IOException{
         CloseableHttpClient client = HttpClientBuilder.create().build();
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
@@ -179,88 +179,109 @@ public class UserController {
             str = str.replaceAll("Дата", "TaskData");
             str = str.replaceAll("Сотрудник", "TaskEmployee");
             task = g.fromJson(str, Task.class);
-          //  System.out.println(profile.getUidUser());
+            //  System.out.println(profile.getUidUser());
 
         } finally {
             response.close();
         }
-
         ModelAndView modelAndView = new ModelAndView("tasks");
         modelAndView.addObject("Tasks", task);
+        modelAndView.addObject("changeStatus",changeStatus);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/changestatus", method = RequestMethod.GET)
-    public String changeStatus(String uidDoc_8,String uidDoc_5) throws IOException {
+    @RequestMapping(value = "/change_status", method = RequestMethod.GET)
+    public String changeStatus(@ModelAttribute("changeStatus")ChangeStatus changeStatus, String uidDoc_8,String uidDoc_5,String uidDoc_0) throws IOException {
         HttpGet request = null;
         if(uidDoc_5!=null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
         {
-            request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5");
+            request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
         }
         if(uidDoc_8!=null && !uidDoc_8.isEmpty())//передаем выбранное состояние заявки - "выполнено"
         {
             request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+uidDoc_8+"/8");
         }
-            CloseableHttpClient client = HttpClientBuilder.create().build();
-            String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-            String result;
-            request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
-            CloseableHttpResponse response = client.execute(request);//выполняем запрос
-            try {
-                HttpEntity entity = response.getEntity();//получаем ответ от АПИ
-                result = EntityUtils.toString(entity);//засовываем ответ в строку
-                EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
-                System.out.println(result);
-                Gson g = new Gson();
-                //  userForm.setUidUser();
-            } finally {
-                response.close();
-            }
+        if(uidDoc_0!=null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
+        {
+            request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
+        }
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+        String result;
+        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
+        CloseableHttpResponse response = client.execute(request);//выполняем запрос
+        try {
+            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
+            result = EntityUtils.toString(entity);//засовываем ответ в строку
+            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
+            System.out.println(result);
+            Gson g = new Gson();
+            //  userForm.setUidUser();
+        } finally {
+            response.close();
+        }
         System.out.println(result);
-
         return "redirect:/tasks";
     }
-
-//    @RequestMapping(value = "/createTask", method = RequestMethod.GET)
-//    public String postNewTask(@ModelAttribute("newTask") Tasks newTask, FileUser fileUser, Model model){
-//        switch (newTask.getTaskImportance())
-//        {
-//            case "Высокая":
-//                newTask.setTaskImportance("2");
-//                break;
-//            case "Средняя":
-//                newTask.setTaskImportance("1");
-//                break;
-//            case "Низкая":
-//                newTask.setTaskImportance("0");
-//                break;
-//            default:
-//                break;
-//        }
-//        File directory = new File("\\\\192.168.1.9\\billi\\"+newTask.getNameTask());
-//        directory.mkdir();
-//        String fileName = StringUtils.cleanPath(fileUser.getFile().getOriginalFilename());
-//        try {
-//            Path path= Paths.get(directory+"\\"+ fileName);
-//            Files.copy(fileUser.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Mono<String> body =
-//                webClient.get()
-//                        .uri("http://192.168.1.224/franrit/hs/RitExchange/GetCreateTask/"+profile.getUidUser()
-//                                +"/"+newTask.getNameTask()+"/0?File="+newTask.getNameTask()+"\\" + fileName)
-//                        //                  .body(Mono.just(newTask), NewTask.class)
-//                        .retrieve()
-//                        .bodyToMono(String.class);
-//        //  Gson g = new Gson();
-//        String str = body.block();
-//        System.out.println(str);
-//        model.addAttribute("newTask",newTask);
-//        model.addAttribute("user", user);
-//        model.addAttribute("task", listTasks);
-//        return "login_client_success";
-//    }
+    @RequestMapping(value = "/new_task", method = RequestMethod.POST)
+    public String createTask(Tasks newTask, Model model) {
+        List<String> listImportance = new ArrayList<>();
+        listImportance.add("Высокая");
+        listImportance.add("Средняя");
+        listImportance.add("Низкая");
+        model.addAttribute("newTask",newTask);
+        model.addAttribute("listImportance",listImportance);
+        return "new_task";
+    }
+    @RequestMapping(value = "/new_tasker", method = RequestMethod.POST,consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String postNewTask(@ModelAttribute("newTask")Tasks newTask,Authentication authentication) throws IOException {
+        HttpGet request = null;
+        switch (newTask.getTaskImportance())
+        {
+            case "Высокая":
+                newTask.setTaskImportance("2");
+                break;
+            case "Средняя":
+                newTask.setTaskImportance("1");
+                break;
+            case "Низкая":
+                newTask.setTaskImportance("0");
+                break;
+            default:
+                break;
+        }
+        File directory = new File("\\\\192.168.1.9\\billi\\"+newTask.getNameTask());
+        directory.mkdir();
+        String fileName = StringUtils.cleanPath(newTask.getFile().getOriginalFilename());
+        try {
+            Path path= Paths.get(directory+"\\"+ fileName);
+            Files.copy(newTask.getFile().getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        User user = userService.findByUsername(authentication.getName());
+        Profile prof = profileService.findByUidUser(user.getUidUser());
+        String q  = newTask.getNameTask()+"\\" + fileName;
+        request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
+                +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+        String result;
+        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
+        CloseableHttpResponse response = client.execute(request);//выполняем запрос
+        try {
+            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
+            result = EntityUtils.toString(entity);//засовываем ответ в строку
+            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
+            System.out.println(result);
+            Gson g = new Gson();
+            //  userForm.setUidUser();
+        } finally {
+            response.close();
+        }
+        System.out.println(result);
+        return "welcome";
+    }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String admin(Model model) {
