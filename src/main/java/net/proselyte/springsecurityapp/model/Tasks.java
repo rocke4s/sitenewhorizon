@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Generated;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
