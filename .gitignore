@@ -1,7 +1,7 @@
 .idea/*
 *.class
-#target/*
-#
-#/.war
-#/.ear
-#/.jar
+target/*
+
+/.war
+/.ear
+/.jar
