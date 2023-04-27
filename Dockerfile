@@ -13,7 +13,7 @@ COPY config/tomcat-users.xml $CATALINA_HOME/conf
 COPY config/context.xml $CATALINA_HOME/conf
 COPY config/manager.xml $CATALINA_HOME/conf/Catalina/localhost
 RUN mv /app/SpringSecurityApp.war $CATALINA_HOME/webapps/
-WORKDIR /opt/tomcat/webapps/myapp
+WORKDIR /opt/tomcat/webapps/myapp/SpringSecurityApp
 COPY src/main/webapp/WEB-INF/views/ /opt/tomcat/webapps/myapp/WEB-INF/jsp/
 EXPOSE 80
 CMD ["catalina.sh", "run"]
