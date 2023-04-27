@@ -12,7 +12,7 @@ COPY config/server.xml $CATALINA_HOME/conf
 COPY config/tomcat-users.xml $CATALINA_HOME/conf
 COPY config/context.xml $CATALINA_HOME/conf
 COPY config/manager.xml $CATALINA_HOME/conf/Catalina/localhost
-RUN mv /app/SpringSecurityApp.war $CATALINA_HOME/webapps/
+RUN mv /app/SpringSecurityApp.war $CATALINA_HOME/webapps/ROOT
 WORKDIR /opt/tomcat/webapps/myapp
 COPY src/main/webapp/WEB-INF/views/ /opt/tomcat/webapps/myapp/WEB-INF/jsp/
 EXPOSE 80
