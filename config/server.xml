@@ -152,7 +152,8 @@
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
-        <Context path="myapp" docBase="/app" debug="0" reloadable="true"/>
+<!--        <Context path="myapp" docBase="/app" debug="0" reloadable="true"/>-->
+        <Context path="/data" docBase="/opt/tomcat/webapps/myapp/data" />
 <!--        <Context docBase="${catalina.base}\webapps\SpringSecurityApp" path="" reloadable="true" />-->
         <!-- SingleSignOn valve, share authentication between web applications
              Documentation at: /docs/config/valve.html -->

@@ -103,7 +103,8 @@
 <%--        <button>Чат</button>--%>
     </div>
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
-
+<button id="buttonShow">Показать чат</button>
+        <button id="buttonHide" hidden="true">Скрыть чат</button>
             <table>
                 <thead>
                 <tr>
@@ -184,23 +185,39 @@
 
             </tr>
         </table>
-<%--        <div id="chat-page">--%>
-<%--            <ul id="messageArea">--%>
+        <div id="chat-page">
+            <ul id="messageArea">
 
-<%--            </ul>--%>
-<%--            <form id="messageForm" name="messageForm" nameForm="messageForm">--%>
-<%--                <div class="form-group">--%>
-<%--                    <div class="input-group clearfix">--%>
-<%--                        <input type="text" id="message" placeholder="Введите сообщение..." autocomplete="off" class="form-control"/>--%>
-<%--                        <button type="submit" class="primary">Отправить</button>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </form>--%>
-<%--        </div>--%>
+            </ul>
+            <form id="chatMessage" name="messageForm" nameForm="messageForm">
+                <div class="form-group">
+                    <div class="input-group clearfix">
+                        <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="get" modelAttribute="chat">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <spring:bind path="message">
+                                <form:input type="text" path="message" class="form-control" placeholder="Введите сообщение..."
+                                            autofocus="true"></form:input>
+                            </spring:bind>
+                            <button type="submit">Доработка</button>
+                        </form:form>
+                    </div>
+                </div>
+            </form>
+        </div>
     </details>
 </c:forEach>
-</div>
-</div>
+<script>
+    document.getElementById('buttonShow').onclick = function() {
+        document.getElementById('chatMessage').hidden = false;
+        document.getElementById('buttonHide').hidden = false;
+        document.getElementById('buttonShow').hidden = true;
+    }
+    document.getElementById('buttonHide').onclick = function() {
+        document.getElementById('chatMessage').hidden = true;
+        document.getElementById('buttonShow').hidden = false;
+        document.getElementById('buttonHide').hidden = true;
+    }
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>

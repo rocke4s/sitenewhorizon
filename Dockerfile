@@ -16,6 +16,7 @@ RUN rm -rf $CATALINA_HOME/webapps/ROOT*
 COPY target/SpringSecurityApp.war $CATALINA_HOME/webapps/ROOT.war
 RUN mv $CATALINA_HOME/webapps/ROOT.war $CATALINA_HOME/webapps/
 WORKDIR /opt/tomcat/webapps/myapp
+RUN mkdir /opt/tomcat/webapps/myapp/data
 COPY src/main/webapp/WEB-INF/views/ /opt/tomcat/webapps/myapp/WEB-INF/jsp/
 EXPOSE 80
 CMD ["catalina.sh", "run"]

@@ -17,3 +17,4 @@ net\proselyte\springsecurityapp\service\UserService.class
 net\proselyte\springsecurityapp\model\Profile.class
 net\proselyte\springsecurityapp\dao\UserDao.class
 net\proselyte\springsecurityapp\validator\UserValidator.class
+net\proselyte\springsecurityapp\model\Chat.class

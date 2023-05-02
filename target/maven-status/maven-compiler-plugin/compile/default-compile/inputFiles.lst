@@ -6,6 +6,7 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\MyAuthenticationSuccessHandler.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\SecurityServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\MyUserDetailsService.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Chat.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\User.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ProfileService.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\validator\UserValidator.java
@@ -13,7 +14,6 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\RoleDao.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\SecurityConfig.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Role.java
-C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\Site.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\ChangeStatus.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\UserServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\ProfileDao.java
