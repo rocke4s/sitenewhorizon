@@ -223,7 +223,7 @@
         document.getElementById('buttonHide'+ids).hidden = true;
     }
 
-    const socket = new WebSocket("ws://194.67.111.29/chat");
+    const socket = new WebSocket("ws://194.67.111.29:8081/chat");
     socket.onopen = function() {
         console.log("Connected to server");
         socket.send("Hello, server!");
