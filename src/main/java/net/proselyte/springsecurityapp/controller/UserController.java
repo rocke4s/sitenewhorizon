@@ -54,7 +54,7 @@ public class UserController {
     private ProfileService profileService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";
+    private String ip="192.168.1.224";
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
