@@ -54,6 +54,7 @@ public class UserController {
     private ProfileService profileService;
     @Autowired
     private UserValidator userValidator;
+    private String ip="192.168.1.224";
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -80,7 +81,7 @@ public class UserController {
         System.out.println();
         String test = userForm.getFIO().replaceAll("\\s+","%20");
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-        HttpGet request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
+        HttpGet request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
                 +"/"+userForm.getINN()+"/"+test+"/"+userForm.getPhone());
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
@@ -145,7 +146,7 @@ public class UserController {
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-        HttpGet request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/getDocuments/"+prof.getUidOrg()+"/"+prof.getUidUser()+"/0");
+        HttpGet request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/getDocuments/"+prof.getUidOrg()+"/"+prof.getUidUser()+"/0");
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
         Task task = new Task();
@@ -192,15 +193,15 @@ public class UserController {
         HttpGet request = null;
         if(uidDoc_5!=null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
         {
-            request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
+            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
         }
         if(uidDoc_8!=null && !uidDoc_8.isEmpty())//передаем выбранное состояние заявки - "выполнено"
         {
-            request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetTestResult/"+uidDoc_8+"/8");
+            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_8+"/8");
         }
         if(uidDoc_0!=null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
         {
-            request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
+            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
         }
         CloseableHttpClient client = HttpClientBuilder.create().build();
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
@@ -267,28 +268,28 @@ public class UserController {
             System.out.println("kek");
             e.printStackTrace();
         }
-//        User user = userService.findByUsername(authentication.getName());
-//        Profile prof = profileService.findByUidUser(user.getUidUser());
-//        String q  = newTask.getNameTask()+"\\" + fileName;
+        User user = userService.findByUsername(authentication.getName());
+        Profile prof = profileService.findByUidUser(user.getUidUser());
+        String q  = newTask.getNameTask()+"\\" + fileName;
 
-//        request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
-//                +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
-//        CloseableHttpClient client = HttpClientBuilder.create().build();
-//        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-//        String result;
-//        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
-//        CloseableHttpResponse response = client.execute(request);//выполняем запрос
-//        try {
-//            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
-//            result = EntityUtils.toString(entity);//засовываем ответ в строку
-//            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
-//            System.out.println(result);
-//            Gson g = new Gson();
-//            //  userForm.setUidUser();
-//        } finally {
-//            response.close();
-//        }
-//        System.out.println(result);
+        request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
+                +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+        String result;
+        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
+        CloseableHttpResponse response = client.execute(request);//выполняем запрос
+        try {
+            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
+            result = EntityUtils.toString(entity);//засовываем ответ в строку
+            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
+            System.out.println(result);
+            Gson g = new Gson();
+            //  userForm.setUidUser();
+        } finally {
+            response.close();
+        }
+        System.out.println(result);
         return "welcome";
     }
     @RequestMapping(value = "/chat", method = RequestMethod.POST)
