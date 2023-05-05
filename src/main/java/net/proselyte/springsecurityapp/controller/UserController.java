@@ -80,7 +80,7 @@ public class UserController {
         System.out.println();
         String test = userForm.getFIO().replaceAll("\\s+","%20");
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-        HttpGet request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
+        HttpGet request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
                 +"/"+userForm.getINN()+"/"+test+"/"+userForm.getPhone());
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
@@ -145,7 +145,7 @@ public class UserController {
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-        HttpGet request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/getDocuments/"+prof.getUidOrg()+"/"+prof.getUidUser()+"/0");
+        HttpGet request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/getDocuments/"+prof.getUidOrg()+"/"+prof.getUidUser()+"/0");
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
         Task task = new Task();
@@ -192,15 +192,15 @@ public class UserController {
         HttpGet request = null;
         if(uidDoc_5!=null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
         {
-            request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
+            request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
         }
         if(uidDoc_8!=null && !uidDoc_8.isEmpty())//передаем выбранное состояние заявки - "выполнено"
         {
-            request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+uidDoc_8+"/8");
+            request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetTestResult/"+uidDoc_8+"/8");
         }
         if(uidDoc_0!=null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
         {
-            request = new HttpGet("http://192.168.1.224/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
+            request = new HttpGet("http://217.114.183.98/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
         }
         CloseableHttpClient client = HttpClientBuilder.create().build();
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
