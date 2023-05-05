@@ -1,4 +1,5 @@
 net\proselyte\springsecurityapp\dao\RoleDao.class
+net\proselyte\springsecurityapp\config\WebSocketConfig.class
 net\proselyte\springsecurityapp\service\ProfileServiceImpl.class
 net\proselyte\springsecurityapp\service\ProfileService.class
 net\proselyte\springsecurityapp\model\Tasks.class

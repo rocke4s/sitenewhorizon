@@ -155,7 +155,7 @@ public class UserController {
             HttpEntity entity = response.getEntity();//получаем ответ от АПИ
             String result = EntityUtils.toString(entity);//засовываем ответ в строку
             EntityUtils.consume(entity);
-            System.out.println(result);
+//            System.out.println(result);
             Gson g = new Gson();
             String str = result;
             str = str.replaceAll("\"Заявки\"", "\"Tasks\"");

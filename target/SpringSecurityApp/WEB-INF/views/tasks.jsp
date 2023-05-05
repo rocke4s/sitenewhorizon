@@ -100,11 +100,10 @@
 </div>
 <c:forEach var="Task" items="${Tasks.getTasks()}">
     <details ><div class="layer1" margin-top="5px"  margin-bottom="5px">
-<%--        <button>Чат</button>--%>
     </div>
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
-<button id="buttonShow">Показать чат</button>
-        <button id="buttonHide" hidden="true">Скрыть чат</button>
+        <button id="buttonShow${Task.getTaskNumber()}" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
+        <button id="buttonHide${Task.getTaskNumber()}" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
             <table>
                 <thead>
                 <tr>
@@ -185,38 +184,65 @@
 
             </tr>
         </table>
-        <div id="chat-page">
-            <ul id="messageArea">
+        <div id="id_${Task.getTaskNumber()}" hidden="true">
+            <ul id="messageArea${Task.getTaskNumber()}">
 
             </ul>
-            <form id="chatMessage" name="messageForm" nameForm="messageForm">
-                <div class="form-group">
-                    <div class="input-group clearfix">
-                        <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="get" modelAttribute="chat">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <spring:bind path="message">
-                                <form:input type="text" path="message" class="form-control" placeholder="Введите сообщение..."
-                                            autofocus="true"></form:input>
-                            </spring:bind>
-                            <button type="submit">Доработка</button>
-                        </form:form>
-                    </div>
-                </div>
-            </form>
+<%--            <form id="chatMessage" name="messageForm" nameForm="messageForm">--%>
+<%--                <div class="form-group">--%>
+<%--                    <div class="input-group clearfix">--%>
+<%--                        <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="get" modelAttribute="chat">--%>
+<%--                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+<%--                            <spring:bind path="message">--%>
+<%--                                <form:input type="text" path="message" class="form-control" placeholder="Введите сообщение..."--%>
+<%--                                            autofocus="true"></form:input>--%>
+<%--                            </spring:bind>--%>
+                                 <input type="text" id="messageForUser">
+                            <button onclick="sendMessage('${Task.getTaskNumber()}')" type="submit">send</button>
+<%--                        </form:form>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </form>--%>
         </div>
     </details>
 </c:forEach>
 <script>
-    document.getElementById('buttonShow').onclick = function() {
-        document.getElementById('chatMessage').hidden = false;
-        document.getElementById('buttonHide').hidden = false;
-        document.getElementById('buttonShow').hidden = true;
+    let ul = null;
+    let messageList = null;
+
+    function ShowChat(ids)
+    {
+       document.getElementById('id_'+ids).hidden= false;
+        document.getElementById('buttonShow'+ids).hidden = true;
+        document.getElementById('buttonHide'+ids).hidden = false;
     }
-    document.getElementById('buttonHide').onclick = function() {
-        document.getElementById('chatMessage').hidden = true;
-        document.getElementById('buttonShow').hidden = false;
-        document.getElementById('buttonHide').hidden = true;
+    function HideChat(ids)
+    {
+       document.getElementById('id_'+ids).hidden= true;
+        document.getElementById('buttonShow'+ids).hidden = false;
+        document.getElementById('buttonHide'+ids).hidden = true;
     }
+
+    const socket = new WebSocket("ws://localhost/chat");
+    socket.onopen = function() {
+        console.log("Connected to server");
+        socket.send("Hello, server!");
+    };
+
+    function sendMessage(ids) {
+        // Отправка сообщения на сервер
+        ul = document.getElementById('messageArea'+ids);
+        socket.send('{message:'+document.querySelector('#id_'+ids+' input[type="text"]').value+',uidDoc:'+ids+'}');
+        document.querySelector('#id_'+ids+' input[type="text"]').value = "";
+    }
+    setInterval(function() {
+        socket.onmessage = function(event) {
+            const li = document.createElement('li');
+            li.textContent = event.data;
+            messageList = event.data;
+            ul.appendChild(li);
+        };
+    }, 1000);
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
