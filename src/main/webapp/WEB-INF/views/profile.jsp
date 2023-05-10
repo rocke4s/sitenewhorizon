@@ -49,12 +49,14 @@
             <th>Организация</th>
             <th>Задолженность</th>
             <th>Номер телефона</th>
+            <th>Почта</th>
         </tr>
         <tr>
             <td>${Profile.name}</td>
             <td>${Profile.orgName}</td>
             <td>${Profile.debt}</td>
             <td>${Profile.telefon}</td>
+            <td>${Profile.userMail}</td>
         </tr>
     </table>
 </div>

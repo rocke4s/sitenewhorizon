@@ -1,5 +1,4 @@
- cd/o.
-FROM openjdk:8-jdk-alpine
+ FROM openjdk:8-jdk-alpine
 WORKDIR /app
 COPY target/SpringSecurityApp.war /app
 COPY data/users.db /app
@@ -11,7 +10,7 @@ ENV PATH=$CATALINA_HOME/bin:$PATH
 COPY config/server.xml $CATALINA_HOME/conf
 COPY config/tomcat-users.xml $CATALINA_HOME/conf
 COPY config/context.xml $CATALINA_HOME/conf
-COPY config/manager.xml $CATALINA_HOME/conf/Catalina/localhost
+#COPY config/manager.xml $CATALINA_HOME/conf/Catalina/localhost
 RUN rm -rf $CATALINA_HOME/webapps/ROOT*
 COPY target/SpringSecurityApp.war $CATALINA_HOME/webapps/ROOT.war
 RUN mv $CATALINA_HOME/webapps/ROOT.war $CATALINA_HOME/webapps/

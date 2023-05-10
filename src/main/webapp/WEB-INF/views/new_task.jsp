@@ -14,7 +14,8 @@
             max-width: 350px;
         }
         .form-zvonok{
-            margin-left: 220%;
+            margin-left: auto;
+            margin-right: auto;
             width: 100%;
             display: flex;
             flex-direction: column;

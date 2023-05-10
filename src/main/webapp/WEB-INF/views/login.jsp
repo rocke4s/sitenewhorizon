@@ -26,7 +26,7 @@
 <body>
 
 <div class="container">
-    <h2 class="form-main">Авторизация в личный кабинет РосИнфотех</h2>
+    <h2 class="form-main">Авторизация в личный кабинет Инфотех</h2>
     <form:form method="POST" action="${contextPath}/login" modelAttribute="user" class="form-signin">
 
 

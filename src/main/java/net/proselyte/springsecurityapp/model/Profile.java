@@ -19,6 +19,8 @@ public class Profile {
     private String telefon;
     @Column(name = "uidOrg")
     private String uidOrg;
+    @Column(name = "userMail")
+    private String userMail;
     @Column(name = "uidUser")
     @Id
     private String uidUser;
@@ -70,4 +72,11 @@ public class Profile {
         this.debt = debt;
     }
 
+    public String getUserMail() {
+        return userMail;
+    }
+
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
+    }
 }

@@ -138,6 +138,7 @@
                             <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
                             <div>
                                 <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="get" modelAttribute="changeStatus">
+                                    <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                     <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_5">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <spring:bind path="causeChangeStatus">
@@ -151,6 +152,7 @@
                             <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
                                 <div>
                                     <form method="GET" action="/change_status">
+                                        <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_8">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                         <button type="submit">Проверено</button>
@@ -160,6 +162,7 @@
                             <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланировано'}">
                                 <div>
                                     <form method="GET" action="/change_status">
+                                        <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_0">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                         <button type="submit">Отмена</button>
@@ -223,7 +226,7 @@
         document.getElementById('buttonHide'+ids).hidden = true;
     }
 
-    const socket = new WebSocket("ws://194.67.111.29:8081/chat");
+    const socket = new WebSocket("ws://192.168.1.224/chat");
     socket.onopen = function() {
         console.log("Connected to server");
         socket.send("Hello, server!");

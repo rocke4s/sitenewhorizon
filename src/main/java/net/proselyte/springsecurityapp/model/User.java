@@ -32,6 +32,8 @@ public class User {
     private String password;
     @Column(name = "phone")
     private String phone;
+    @Column(name = "userMail")
+    private String userMail;
 
     @Transient
     private String confirmPassword;
@@ -112,5 +114,12 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    public String getUserMail() {
+        return userMail;
+    }
+
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
     }
 }

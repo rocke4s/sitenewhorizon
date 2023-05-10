@@ -48,6 +48,12 @@
                             autofocus="true"></form:input>
             </div>
         </spring:bind>
+        <spring:bind path="userMail">
+            <div class="form-group">
+                <form:input type="text" path="userMail" class="form-control" placeholder="Почта"
+                            autofocus="true"></form:input>
+            </div>
+        </spring:bind>
         <spring:bind path="username">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="username" class="form-control" placeholder="Имя пользователя(логин)"
