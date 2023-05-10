@@ -1,6 +1,7 @@
 net\proselyte\springsecurityapp\dao\RoleDao.class
 net\proselyte\springsecurityapp\config\WebSocketConfig.class
 net\proselyte\springsecurityapp\service\ProfileServiceImpl.class
+net\proselyte\springsecurityapp\model\Statuska.class
 net\proselyte\springsecurityapp\service\ProfileService.class
 net\proselyte\springsecurityapp\model\Tasks.class
 net\proselyte\springsecurityapp\controller\UserController.class
@@ -20,4 +21,5 @@ net\proselyte\springsecurityapp\service\UserService.class
 net\proselyte\springsecurityapp\model\Profile.class
 net\proselyte\springsecurityapp\dao\UserDao.class
 net\proselyte\springsecurityapp\validator\UserValidator.class
+net\proselyte\springsecurityapp\config\Statuser.class
 net\proselyte\springsecurityapp\model\Chat.class
