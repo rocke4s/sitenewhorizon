@@ -78,7 +78,26 @@ public class UserController {
         String[] str = new String[]{username,password,mailName,mailPass};
         return str;
     }
-
+    @RequestMapping(value = "/statuser", method = RequestMethod.GET)
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        BufferedReader reader = request.getReader();
+        System.out.println(request.getHeader("dota"));
+        String line;
+        line = reader.readLine();
+        Gson g = new Gson();
+        Statuska task = g.fromJson(line, Statuska.class);
+        System.out.println(task.toString());
+        Sender sender1 = new Sender();
+        User user = userService.findByUsername(task.getUserName());
+        Profile prof = profileService.findByUidUser(user.getUidUser());
+        try {
+            sender1.send("rocke4max@gmail.com", "Изменение статуса заявки", "Статус заявки '"+task.getNameTask()+"' №"+task.getNumberTask()+" изменился с "
+                    +task.getOldStatus()+" на "+task.getNewStatus());
+            System.out.println("Email sent successfully");
+        } catch ( jakarta.mail.MessagingException e) {
+            System.err.println("Email sending failed: " + e.getMessage());
+        }
+    }
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) throws IOException {
         CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -233,15 +252,7 @@ public class UserController {
 //            response.close();
 //        }
 
-        User user = userService.findByUsername(authentication.getName());
-        Profile prof = profileService.findByUidUser(user.getUidUser());
-            Sender sender1 = new Sender();
-        try {
-            sender1.send(prof.getUserMail(), "Изменение статуса заявки", "Статус заявки №"+TaskNumber+" изменился на "+stateDoc);
-            System.out.println("Email sent successfully");
-        } catch ( jakarta.mail.MessagingException e) {
-            System.err.println("Email sending failed: " + e.getMessage());
-        }
+
 
 //        tlsSender.send("Изменение статуса заявки", "Документ №"+doc+"\n изменил свое состояние на "+stateDoc, prof.getUserMail());
 
