@@ -46,15 +46,15 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>Statuser</servlet-name>
-        <servlet-class>net.proselyte.springsecurityapp.config.Statuser</servlet-class>
-    </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>Statuser</servlet-name>-->
+<!--        <servlet-class>net.proselyte.springsecurityapp.config.Statuser</servlet-class>-->
+<!--    </servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>Statuser</servlet-name>
-        <url-pattern>/statuser/*</url-pattern>
-    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Statuser</servlet-name>-->
+<!--        <url-pattern>/statuser/*</url-pattern>-->
+<!--    </servlet-mapping>-->
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>

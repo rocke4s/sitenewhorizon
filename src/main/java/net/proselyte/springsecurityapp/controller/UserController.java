@@ -79,9 +79,8 @@ public class UserController {
         return str;
     }
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request) throws IOException {
         BufferedReader reader = request.getReader();
-        System.out.println(request.getHeader("dota"));
         String line;
         line = reader.readLine();
         Gson g = new Gson();
@@ -91,7 +90,7 @@ public class UserController {
         User user = userService.findByUsername(task.getUserName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
         try {
-            sender1.send("rocke4max@gmail.com", "Изменение статуса заявки", "Статус заявки '"+task.getNameTask()+"' №"+task.getNumberTask()+" изменился с "
+            sender1.send(prof.getUserMail(), "Изменение статуса заявки", "Статус заявки '"+task.getNameTask()+"' №"+task.getNumberTask()+" изменился с "
                     +task.getOldStatus()+" на "+task.getNewStatus());
             System.out.println("Email sent successfully");
         } catch ( jakarta.mail.MessagingException e) {
