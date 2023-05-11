@@ -27,12 +27,13 @@ public class WebSocketConfig {
 
     @OnOpen
     public void onOpen(Session session) {
+
         System.out.println("Connected to client: " + session.getId());
     }
     public String[] forBasicAuth() throws IOException{
         Properties props = new Properties();
         try (
-                InputStream in = getClass().getClassLoader().getResourceAsStream("config.properties")) {
+            InputStream in = getClass().getClassLoader().getResourceAsStream("config.properties")) {
             props.load(in);//Выгружаем с настроек нужные для basic auth переменные
         }
         String username = props.getProperty("username");//Переменные для

@@ -36,9 +36,21 @@
                             autofocus="true"></form:input>
             </div>
         </spring:bind>
-        <spring:bind path="FIO">
+        <spring:bind path="surname">
             <div class="form-group">
-                <form:input type="text" path="FIO" class="form-control" placeholder="ФИО"
+                <form:input type="text" path="surname" class="form-control" placeholder="Фамилия"
+                            autofocus="true"></form:input>
+            </div>
+        </spring:bind>
+        <spring:bind path="name">
+            <div class="form-group">
+                <form:input type="text" path="name" class="form-control" placeholder="Имя"
+                            autofocus="true"></form:input>
+            </div>
+        </spring:bind>
+        <spring:bind path="secondSurname">
+            <div class="form-group">
+                <form:input type="text" path="secondSurname" class="form-control" placeholder="Отчество"
                             autofocus="true"></form:input>
             </div>
         </spring:bind>

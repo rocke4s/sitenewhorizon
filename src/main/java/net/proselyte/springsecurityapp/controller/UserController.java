@@ -11,7 +11,6 @@ import net.proselyte.springsecurityapp.validator.UserValidator;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -53,14 +51,14 @@ public class UserController {
     private ProfileService profileService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";
+    private String ip="192.168.1.224";
 
     public UserController() throws IOException {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
-        model.addAttribute("userForm", new User());
+        model.addAttribute("userForm", new UserReg());
 
         return "registration";
     }
@@ -98,13 +96,22 @@ public class UserController {
         }
     }
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) throws IOException {
+    public String registration(@ModelAttribute("userForm") UserReg userForm, BindingResult bindingResult, Model model) throws IOException {
         CloseableHttpClient client = HttpClientBuilder.create().build();
-        System.out.println();
+        String redName = userForm.getName().replaceAll("[^\\p{IsCyrillic}]+", "");
+        redName = redName.substring(0,1).toUpperCase()+redName.substring(1).toLowerCase();
+        String redSurname = userForm.getSurname().replaceAll("[^\\p{IsCyrillic}]+", "");
+        redSurname = redSurname.substring(0,1).toUpperCase()+redSurname.substring(1).toLowerCase();
+        String redSecondSurname = userForm.getSecondSurname().replaceAll("[^\\p{IsCyrillic}]+", "");
+        redSecondSurname = redSecondSurname.substring(0,1).toUpperCase()+redSecondSurname.substring(1).toLowerCase();
+        userForm.setName(redName);
+        userForm.setSurname(redSurname);
+        userForm.setSecondSurname(redSecondSurname);
+        String FIO = userForm.getSurname()+"%20"+userForm.getName()+"%20"+userForm.getSecondSurname();
         String test = userForm.getFIO().replaceAll("\\s+","%20");
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
         HttpGet request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
-                +"/"+userForm.getINN()+"/"+test+"/"+userForm.getPhone());
+                +"/"+userForm.getINN()+"/"+FIO+"/"+userForm.getPhone());
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
         Profile profile = new Profile();
@@ -127,8 +134,18 @@ public class UserController {
         }
         if (!profile.getUidUser().isEmpty()) {
             userForm.setUidUser(profile.getUidUser());
+            User userokForm=null;
+            userokForm.setUsername(userForm.getUsername());
+            userokForm.setUserMail(userForm.getUserMail());
+            userokForm.setINN(userForm.getINN());
+            userokForm.setPhone(userForm.getPhone());
+            userokForm.setPassword(userForm.getPassword());
+            userokForm.setConfirmPassword(userForm.getConfirmPassword());
+            userokForm.setId(userForm.getId());
+            userokForm.setRoles(userForm.getRoles());
+
             model.addAttribute("profile",profile);
-            userService.save(userForm);//сохранение в бд
+            userService.save(userokForm);//сохранение в бд
             profileService.save(profile);
         }
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
@@ -158,7 +175,6 @@ public class UserController {
         System.out.println(authentication.getName());
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-        // profileService.findByUidUser()
         model.addAttribute("Profile",prof);
         return "profile";
     }
@@ -179,7 +195,6 @@ public class UserController {
             HttpEntity entity = response.getEntity();//получаем ответ от АПИ
             String result = EntityUtils.toString(entity);//засовываем ответ в строку
             EntityUtils.consume(entity);
-//            System.out.println(result);
             Gson g = new Gson();
             String str = result;
             str = str.replaceAll("\"Заявки\"", "\"Tasks\"");
@@ -199,7 +214,6 @@ public class UserController {
             str = str.replaceAll("Дата", "TaskData");
             str = str.replaceAll("Сотрудник", "TaskEmployee");
             task = g.fromJson(str, Task.class);
-            //  System.out.println(profile.getUidUser());
 
         } finally {
             response.close();
@@ -301,7 +315,6 @@ public class UserController {
             Path path= Paths.get("data/"+ fileName);
             Files.copy(newTask.getFile().getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            System.out.println("kek");
             e.printStackTrace();
         }
         User user = userService.findByUsername(authentication.getName());
