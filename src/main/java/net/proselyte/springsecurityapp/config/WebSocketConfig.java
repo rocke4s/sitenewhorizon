@@ -64,16 +64,15 @@ public class WebSocketConfig {
 //            response.close();
 //        }
         try {
-            if(message!=null && !message.equals("") && message.indexOf("message:")!=-1) {
-                String masage =message.substring(message.indexOf("message:")+8,message.indexOf(",uidDoc:"));
-                session.getBasicRemote().sendText("User: " + masage);
-                System.out.println(message);
-            }
+//            if(message!=null && !message.equals("") && message.indexOf("message:")!=-1) {
+//                String masage =message.substring(message.indexOf("message:")+8,message.indexOf(",uidDoc:"));
+                session.getBasicRemote().sendText("User: " + message);
+//                System.out.println(message);
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     @OnError
     public void onError(Throwable e) {
         e.printStackTrace();

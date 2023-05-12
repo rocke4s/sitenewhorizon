@@ -18,6 +18,7 @@
         <intercept-url pattern="/data/**" access="hasAnyRole(permitAll())"/>
         <intercept-url pattern="/chat" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/statuser" access="permitAll"/>
+        <intercept-url pattern="/worker" access="permitAll"/>
 
 
         <form-login login-page="/login" default-target-url="/profile" authentication-failure-url="/login?error"

@@ -1,6 +1,7 @@
 package net.proselyte.springsecurityapp.controller;
 
 import com.google.gson.Gson;
+import net.proselyte.springsecurityapp.config.MyWebSocketClient;
 import net.proselyte.springsecurityapp.config.Sender;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.ProfileService;
@@ -15,6 +16,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.apache.http.util.EntityUtils;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,11 +28,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -341,13 +348,25 @@ public class UserController {
         System.out.println(result);
         return "welcome";
     }
-    @RequestMapping(value = "/chat", method = RequestMethod.POST)
-    public String chatUsers(Model model) {
-        HttpGet request = null;
-        return "tasks";
+
+    @RequestMapping(value = "/worker", method = RequestMethod.GET)
+    public void doChat(HttpServletRequest request) throws IOException {
+        try {
+            // Получаем данные из GET запроса
+            String message = request.getParameter("msg");
+
+            // Отправляем полученное сообщение через WebSocket
+
+            MyWebSocketClient client = new MyWebSocketClient(new URI("ws://localhost:8081/chat"));
+            client.connect();
+            // Отправляем сообщение на сервер
+            client.send(message);
+        } catch (WebsocketNotConnectedException e) {
+            System.out.println("Не удалось установить соединение с сервером: " + e.getMessage());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String admin(Model model) {
         return "admin";

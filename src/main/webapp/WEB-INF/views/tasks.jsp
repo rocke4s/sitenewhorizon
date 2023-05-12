@@ -235,7 +235,7 @@
     function sendMessage(ids) {
         // Отправка сообщения на сервер
         ul = document.getElementById('messageArea'+ids);
-        socket.send('{message:'+document.querySelector('#id_'+ids+' input[type="text"]').value+',uidDoc:'+ids+'}');
+        socket.send('{message:'+document.querySelector('#id_'+ids+' input[type="text"]').value+',uidDoc:'+ids+',user:user}');
         document.querySelector('#id_'+ids+' input[type="text"]').value = "";
     }
     setInterval(function() {

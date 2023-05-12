@@ -3,6 +3,7 @@ net\proselyte\springsecurityapp\config\WebSocketConfig.class
 net\proselyte\springsecurityapp\service\ProfileServiceImpl.class
 net\proselyte\springsecurityapp\model\Statuska.class
 net\proselyte\springsecurityapp\model\UserReg.class
+net\proselyte\springsecurityapp\config\MyWebSocketClient.class
 net\proselyte\springsecurityapp\service\ProfileService.class
 net\proselyte\springsecurityapp\model\Tasks.class
 net\proselyte\springsecurityapp\controller\UserController.class
