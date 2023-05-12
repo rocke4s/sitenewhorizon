@@ -1,6 +1,6 @@
 net\proselyte\springsecurityapp\dao\RoleDao.class
-net\proselyte\springsecurityapp\config\WebSocketConfig.class
 net\proselyte\springsecurityapp\service\ProfileServiceImpl.class
+net\proselyte\springsecurityapp\chat_server\WebSocketServer.class
 net\proselyte\springsecurityapp\model\Statuska.class
 net\proselyte\springsecurityapp\model\UserReg.class
 net\proselyte\springsecurityapp\config\MyWebSocketClient.class
@@ -12,6 +12,7 @@ net\proselyte\springsecurityapp\service\UserServiceImpl.class
 net\proselyte\springsecurityapp\model\Task.class
 net\proselyte\springsecurityapp\service\MyUserDetailsService.class
 net\proselyte\springsecurityapp\config\Sender$1.class
+net\proselyte\springsecurityapp\chat_server\WebSocketServer$ChatHandler.class
 net\proselyte\springsecurityapp\service\SecurityService.class
 net\proselyte\springsecurityapp\model\ChangeStatus.class
 net\proselyte\springsecurityapp\service\SecurityServiceImpl.class

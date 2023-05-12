@@ -225,27 +225,36 @@
         document.getElementById('buttonShow'+ids).hidden = false;
         document.getElementById('buttonHide'+ids).hidden = true;
     }
-
-    const socket = new WebSocket("ws://194.67.111.29/chat");
-    socket.onopen = function() {
-        console.log("Connected to server");
-        socket.send("Hello, server!");
-    };
-
+    const socket = new WebSocket('ws://194.67.111.29/chat');
+    socket.addEventListener('open', event => {
+        console.log('WebSocket connection has been opened!');
+    });
+    socket.addEventListener('close', event => {
+        console.log('WebSocket connection has been closed!');
+    });
+    socket.addEventListener('message', event => {
+        console.log(`Received message from server: ${event.data}`);
+    });
+    // const socket = new WebSocket("ws://localhost:8081/chat");
+    // socket.onopen = function() {
+    //     console.log("Connected to server");
+    //     socket.send("Hello, server!");
+    // };
+    //
     function sendMessage(ids) {
         // Отправка сообщения на сервер
         ul = document.getElementById('messageArea'+ids);
         socket.send('{message:'+document.querySelector('#id_'+ids+' input[type="text"]').value+',uidDoc:'+ids+',user:user}');
         document.querySelector('#id_'+ids+' input[type="text"]').value = "";
     }
-    setInterval(function() {
-        socket.onmessage = function(event) {
-            const li = document.createElement('li');
-            li.textContent = event.data;
-            messageList = event.data;
-            ul.appendChild(li);
-        };
-    }, 1000);
+    // setInterval(function() {
+    //     socket.onmessage = function(event) {
+    //         const li = document.createElement('li');
+    //         li.textContent = event.data;
+    //         messageList = event.data;
+    //         ul.appendChild(li);
+    //     };
+    // }, 1000);
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

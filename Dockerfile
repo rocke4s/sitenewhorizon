@@ -2,6 +2,7 @@ FROM openjdk:8-jdk-alpine
 WORKDIR /app
 COPY target/SpringSecurityApp.war /app
 COPY data/users.db /app
+COPY data/WebSocketServer.java /app
 COPY config/apache-tomcat-9.0.74.tar.gz /app
 RUN tar -xzf /app/apache-tomcat-9.0.74.tar.gz -C /opt
 RUN ln -s /opt/apache-tomcat-9.0.74 /opt/tomcat
@@ -18,4 +19,4 @@ WORKDIR /opt/tomcat/webapps/myapp
 RUN mkdir /opt/tomcat/webapps/myapp/data
 COPY src/main/webapp/WEB-INF/views/ /opt/tomcat/webapps/myapp/WEB-INF/jsp/
 EXPOSE 80
-CMD ["catalina.sh", "run"]
+CMD ["catalina.sh", "run", "&&", "java", "-cp", "/app", "WebSocketServer"]

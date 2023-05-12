@@ -357,7 +357,7 @@ public class UserController {
 
             // Отправляем полученное сообщение через WebSocket
 
-            MyWebSocketClient client = new MyWebSocketClient(new URI("ws://localhost:8081/chat"));
+            MyWebSocketClient client = new MyWebSocketClient(new URI("ws://194.67.111.29/chat"));
             client.connect();
             // Отправляем сообщение на сервер
             client.send(message);
