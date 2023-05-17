@@ -63,7 +63,7 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="192.168.1.224";
+    private String ip="217.114.183.98";
 
     public UserController() throws IOException {
     }
@@ -389,7 +389,7 @@ public class UserController {
             // Отправляем полученное сообщение через WebSocket
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            String uri = "ws://localhost:80/chat";
+            String uri = "ws://194.67.111.29:80/chat";
             MyWebSocketClient endpoint = new MyWebSocketClient();
             Session session = container.connectToServer(endpoint, new URI(uri));
             endpoint.sendMessage("{'uidDoc'='"+uidDoc+"','Name'='"+Name+"','message'='"+message+"'}");
