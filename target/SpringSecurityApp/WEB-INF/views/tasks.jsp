@@ -84,6 +84,11 @@
             height: calc(100% - 150px);
         }
     </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div align="left">
@@ -93,9 +98,7 @@
         </form>
         <h2>Список задач пользователя ${pageContext.request.userPrincipal.name}
         </h2>
-        <sec:authorize access="hasRole('ROLE_USER')"> <!-- Проверяем, что пользователь авторизован -->
-            <a href="/welcome" class="btn">Назад</a> <!-- Отображаем ссылку на профиль -->
-        </sec:authorize>
+            <a href="/welcome" class="btn">Назад</a>
     </c:if>
 </div>
 <c:forEach var="Task" items="${Tasks.getTasks()}">
@@ -128,11 +131,12 @@
                 </thead>
             <c:forEach var="Tasks" items="${Tasks.getTasks()}">
                 <c:if test="${Task.getTaskNumber()==Tasks.getTaskNumber()}">
+
                 <tr>
                     <c:if test="${!Tasks.getTaskUrl().isEmpty()}"><td>${Tasks.getTaskUrl()}</td></c:if>
                     <c:if test="${!Tasks.getTaskPartner().isEmpty()}"><td>${Tasks.getTaskPartner()}</td></c:if>
                     <c:if test="${!Tasks.getTaskStatus().isEmpty()}"><td>${Tasks.getTaskStatus()}</td></c:if>
-                    <c:if test="${Tasks.getTaskStatus()!='Отменено' && Tasks.getTaskStatus()!='Проверено'
+                    <c:if test="${ Tasks.getTaskStatus()!='Проверено'
                     && Tasks.getTaskStatus()!='В работе' && Tasks.getTaskStatus()!='На доработке'}">
                         <td>
                             <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
@@ -149,13 +153,14 @@
                                 </form:form>
                             </div>
                         </c:if>
-                            <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
+                            <c:if test="${Tasks.getTaskStatus()=='Выполнена' || Tasks.getTaskStatus()=='На тестировании'}">
                                 <div>
-                                    <form method="GET" action="/change_status">
-                                        <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
-                                        <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_8">
+                                    <form class="myForm" method="GET" action="/change_status">
+                                        <input id="TaskNumber" type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
+                                        <input id="uidDoc_8" type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_8">
+                                        <input id="NameTasks" type="hidden" value="${Tasks.getNameTask()}" name="NameTasks">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button type="submit">Проверено</button>
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Проверено</button>
                                     </form>
                                 </div>
                             </c:if>
@@ -189,27 +194,81 @@
         </table>
         <div id="id_${Task.getTaskNumber()}" hidden="true">
             <ul id="messageArea${Task.getTaskNumber()}">
-
             </ul>
-<%--            <form id="chatMessage" name="messageForm" nameForm="messageForm">--%>
-<%--                <div class="form-group">--%>
-<%--                    <div class="input-group clearfix">--%>
-<%--                        <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="get" modelAttribute="chat">--%>
-<%--                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-<%--                            <spring:bind path="message">--%>
-<%--                                <form:input type="text" path="message" class="form-control" placeholder="Введите сообщение..."--%>
-<%--                                            autofocus="true"></form:input>--%>
-<%--                            </spring:bind>--%>
-                                 <input type="text" id="messageForUser">
+                                 <input type="text" id="messageForUser" placeholder="Введите сообщение...">
                             <button onclick="sendMessage('${Task.getTaskNumber()}')" type="submit">send</button>
-<%--                        </form:form>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </form>--%>
         </div>
     </details>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Оцените работу сотрудника</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <form class="rating" method="GET" action="/rating">
+                <div class="modal-body">
+                    <p>Оставьте свою оценку:</p>
+                    <div class="btn-group" role="group" aria-label="Оценить">
+                        <input id="uidDoc_88" type="hidden" name="uidDoc_8">
+                        <input id="NameTasker" type="hidden" name="NameTasker">
+                        <button type="submit" class="btn btn-success" name="ratingg" value="Хорошо">Хорошо</button>
+                        <button type="submit" class="btn btn-warning" name="ratingg" value="Удовлетворительно">Удовлетворительно</button>
+                        <button type="submit" class="btn btn-danger" name="ratingg" value="Плохо">Плохо</button>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </c:forEach>
+<%--<h1>Тест скачки файла</h1>--%>
+<%--<div>--%>
+<%--    <a href="http://localhost/data/test.txt" download>--%>
+<%--        <button>Download File</button></a>--%>
+<%--</div>--%>
 <script>
+    const forms = document.querySelectorAll('.myForm');
+
+    // добавляем обработчик события submit для каждой формы
+    forms.forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Получение значений полей формы
+            const uidDoc_8 = form.elements.uidDoc_8.value;
+            const myInput = document.getElementById("uidDoc_88");
+            myInput.value = uidDoc_8;
+            const saveNameTask = form.elements.NameTasks.value;
+            const myInput2 = document.getElementById("NameTasker");
+            myInput2.value = saveNameTask;
+            // Отправка данных на сервер
+            fetch('/change_status?uidDoc_8='+uidDoc_8, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error(error);
+                    // Действия при ошибке отправки данных
+                });
+        });
+    });
+
+
     let ul = null;
     let messageList = null;
 
@@ -225,16 +284,29 @@
         document.getElementById('buttonShow'+ids).hidden = false;
         document.getElementById('buttonHide'+ids).hidden = true;
     }
-    const socket = new WebSocket('ws://localhost:8081/chat');
-    socket.addEventListener('open', event => {
-        console.log('WebSocket connection has been opened!');
-    });
-    socket.addEventListener('close', event => {
-        console.log('WebSocket connection has been closed!');
-    });
-    socket.addEventListener('message', event => {
-        console.log(`Received message from server: ${event.data}`);
-    });
+
+
+    var socket = new WebSocket("ws://194.67.111.29/chat");
+
+    socket.onopen = function(event) {
+        console.log("WebSocket opened");
+    };
+
+    socket.onmessage = function(event) {
+        console.log("WebSocket message received: " + event.data);
+    };
+
+    socket.onclose = function(event) {
+        console.log("WebSocket closed");
+    };
+
+    socket.onerror = function(event) {
+        console.error("WebSocket error: " + event);
+    };
+
+
+
+
     // const socket = new WebSocket("ws://localhost:8081/chat");
     // socket.onopen = function() {
     //     console.log("Connected to server");
@@ -244,19 +316,21 @@
     function sendMessage(ids) {
         // Отправка сообщения на сервер
         ul = document.getElementById('messageArea'+ids);
-        socket.send('{message:'+document.querySelector('#id_'+ids+' input[type="text"]').value+',uidDoc:'+ids+',user:user}');
+        socket.send("{'uidDoc':'"+ids+"','Name':'${pageContext.request.userPrincipal.name}','message':'"+document.querySelector('#id_'+ids+' input[type="text"]').value+"'}");
         document.querySelector('#id_'+ids+' input[type="text"]').value = "";
     }
-    // setInterval(function() {
-    //     socket.onmessage = function(event) {
-    //         const li = document.createElement('li');
-    //         li.textContent = event.data;
-    //         messageList = event.data;
-    //         ul.appendChild(li);
-    //     };
-    // }, 1000);
+    setInterval(function() {
+        socket.onmessage = function(event) {
+            console.log(event.data);
+            var parsed= JSON.parse(event.data);
+            console.log(parsed.Docid)
+            var ull = document.getElementById("messageArea"+parsed.Docid);
+            const li = document.createElement('li');
+            li.innerHTML = parsed.Named+": "+parsed.messg;
+            messageList = event.data;
+            ull.appendChild(li);
+        };
+    }, 1000);
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

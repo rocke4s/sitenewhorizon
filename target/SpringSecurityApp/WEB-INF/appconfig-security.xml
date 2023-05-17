@@ -11,17 +11,18 @@
         <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/rating" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/profile" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/tasks" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/new_task" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/new_tasker" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/data/**" access="hasAnyRole(permitAll())"/>
-        <intercept-url pattern="/chat" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/data/**" access="permitAll"/>
+        <intercept-url pattern="/chat" access="permitAll"/>
         <intercept-url pattern="/statuser" access="permitAll"/>
         <intercept-url pattern="/worker" access="permitAll"/>
 
 
-        <form-login login-page="/login" default-target-url="/profile" authentication-failure-url="/login?error"
+        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>
 
         <logout logout-success-url="/login?logout"/>

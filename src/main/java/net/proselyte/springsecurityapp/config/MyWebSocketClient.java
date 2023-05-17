@@ -1,36 +1,37 @@
 package net.proselyte.springsecurityapp.config;
 
-import java.net.URI;
 import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.handshake.ServerHandshake;
 
-public class MyWebSocketClient extends WebSocketClient {
+import javax.websocket.*;
+import java.io.IOException;
+import java.net.URI;
 
-    public MyWebSocketClient(URI serverUri) {
-        super(serverUri);
+@ClientEndpoint
+public class MyWebSocketClient {
+
+    private Session session;
+
+    @OnOpen
+    public void onOpen(Session session) {
+        this.session = session;
+        System.out.println("Connected to server: " + session.getId());
     }
 
-    @Override
-    public void onOpen(ServerHandshake handshakedata) {
-        // WebSocket соединение установлено
-        System.out.println("WebSocket соединение установлено:");
-    }
-
-    @Override
+    @OnMessage
     public void onMessage(String message) {
-        // Получено сообщение от WebSocket сервера
-        System.out.println("Получено сообщение от сервера: " + message);
+        System.out.println("Received message from server: " + message);
     }
 
-    @Override
-    public void onClose(int code, String reason, boolean remote) {
-        // WebSocket соединение закрыто
-        System.out.println("WebSocket соединение закрыто.");
+    @OnClose
+    public void onClose(Session session, CloseReason closeReason) {
+        System.out.println("Disconnected from server: " + closeReason.getReasonPhrase());
     }
 
-    @Override
-    public void onError(Exception ex) {
-        // Ошибка при работе с WebSocket соединением
-        System.err.println("Ошибка при работе с WebSocket соединением: " + ex);
+    public void sendMessage(String message) throws IOException {
+        this.session.getBasicRemote().sendText(message);
+    }
+
+    public static void main(String[] args) throws Exception {
+
     }
 }

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,6 +124,14 @@
                 <button class="show-user" type="submit">Показать данные пользователя</button>
             </form:form>
         </div>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="buttons">
+                <form:form method="GET" action="/ratings?${_csrf.parameterName}=${_csrf.token}">
+                    <button class="show-tasks" type="submit">Показать рейтинг списка задач</button>
+                </form:form>
+            </div>
+        </sec:authorize>
+        <sec:authorize access="hasRole('ROLE_USER')">
         <div class="buttons">
             <form:form method="GET" action="/tasks?${_csrf.parameterName}=${_csrf.token}">
                 <input type="hidden" name="Profile" value="${Profile}"/>
@@ -135,6 +144,7 @@
                 <button class="create-task" type="submit">Создать задачу</button>
             </form:form>
         </div>
+        </sec:authorize>
     </div>
 </div>
 

@@ -1,10 +1,12 @@
 package net.proselyte.springsecurityapp.controller;
 
 import com.google.gson.Gson;
+import jakarta.mail.MessagingException;
 import net.proselyte.springsecurityapp.config.MyWebSocketClient;
 import net.proselyte.springsecurityapp.config.Sender;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.ProfileService;
+import net.proselyte.springsecurityapp.service.RatingTaskService;
 import net.proselyte.springsecurityapp.service.SecurityService;
 import net.proselyte.springsecurityapp.service.UserService;
 import net.proselyte.springsecurityapp.validator.UserValidator;
@@ -16,6 +18,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.apache.http.util.EntityUtils;
+import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -56,6 +59,8 @@ public class UserController {
     private SecurityService securityService;
     @Autowired
     private ProfileService profileService;
+    @Autowired
+    private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
     private String ip="217.114.183.98";
@@ -173,7 +178,8 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) throws IOException {
+    public String welcome(@ModelAttribute("user")User user, Model model) throws IOException {
+        System.out.println(user.getUsername());
         return "welcome";
     }
 
@@ -231,10 +237,27 @@ public class UserController {
         modelAndView.addObject("chat",chat);
         return modelAndView;
     }
-
+    @RequestMapping(value = "/ratings", method = RequestMethod.GET)
+    public String showRatings(Model model)
+    {
+        List<RatingTask> listRatingTask = ratingTaskService.findAll();
+        System.out.println("ky");
+        model.addAttribute("rating",listRatingTask);
+        return "ratings";
+    }
+    @RequestMapping(value = "/rating", method = RequestMethod.GET)
+    public String ratingWork(String ratingg,String NameTasker,String uidDoc_8) {
+        System.out.println("Пользователь оценил работу на: "+ratingg);
+        RatingTask ratingTask = new RatingTask();
+        ratingTask.setRating(ratingg);
+        ratingTask.setUidDoc(uidDoc_8);
+        ratingTask.setNameTask(NameTasker);
+        ratingTaskService.save(ratingTask);
+        return "redirect:/tasks";
+    }
     @RequestMapping(value = "/change_status", method = RequestMethod.GET)
     public String changeStatus(@ModelAttribute("changeStatus")ChangeStatus changeStatus,Authentication authentication,
-                               String uidDoc_8,String uidDoc_5,String uidDoc_0,String TaskNumber) throws IOException {
+                               String uidDoc_8,String uidDoc_5,String uidDoc_0,String TaskNumber) throws IOException, MessagingException {
         HttpGet request = null;
         String doc="";
         String stateDoc="";
@@ -253,7 +276,7 @@ public class UserController {
         if(uidDoc_0!=null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
         {
 //            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
-//            doc=uidDoc_0;
+            doc=uidDoc_0;
             stateDoc="Отменено";
         }
         CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -273,8 +296,9 @@ public class UserController {
 //        }
 
 
-
-//        tlsSender.send("Изменение статуса заявки", "Документ №"+doc+"\n изменил свое состояние на "+stateDoc, prof.getUserMail());
+        Sender sender1 = new Sender();
+        sender1.send("rocke4max@gmail.com", "Изменение статуса заявки", "Статус заявки №"+doc+" изменился на "
+                +stateDoc);
 
         return "redirect:/tasks";
     }
@@ -350,21 +374,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void doChat(HttpServletRequest request) throws IOException {
+    public void doChat(HttpServletRequest request) {
         try {
             // Получаем данные из GET запроса
-            String message = request.getParameter("msg");
+            String uidDoc = request.getParameter("uidDoc");
+            String Name = request.getParameter("Name");
+            String message = request.getParameter("message");
+
 
             // Отправляем полученное сообщение через WebSocket
 
-            MyWebSocketClient client = new MyWebSocketClient(new URI("ws://194.67.111.29/chat"));
-            client.connect();
-            // Отправляем сообщение на сервер
-            client.send(message);
-        } catch (WebsocketNotConnectedException e) {
-            System.out.println("Не удалось установить соединение с сервером: " + e.getMessage());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+            String uri = "ws://194.67.111.29:80/chat";
+            MyWebSocketClient endpoint = new MyWebSocketClient();
+            Session session = container.connectToServer(endpoint, new URI(uri));
+            endpoint.sendMessage("{'uidDoc'='"+uidDoc+"','Name'='"+Name+"','message'='"+message+"'}");
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
     @RequestMapping(value = "/admin", method = RequestMethod.GET)

@@ -20,12 +20,6 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-/**
- * Implementation of {@link org.springframework.security.core.userdetails.UserDetailsService} interface.
- *
- * @author Eugene Suleimanov
- * @version 1.0
- */
 
 
 public class UserDetailsServiceImpl implements UserDetailsService {
