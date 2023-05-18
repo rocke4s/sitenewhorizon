@@ -7,7 +7,91 @@
 <head>
 
     <title>Задачи!</title>
+    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
+        body {
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: #555;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logout {
+            background-color: #449d44;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout:hover {
+            background-color: #3c8c3c;
+        }
+
+        .wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .buttons button {
+            background-color: #e7e7e7;
+            color: #555;
+            border: none;
+            border-radius: 10px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #ccc;
+        }
+        .btn {
+            display: inline-block; /* Строчно-блочный элемент */
+            background: #8C959D; /* Серый цвет фона */
+            color: #fff; /* Белый цвет текста */
+            padding: 1rem 1.5rem; /* Поля вокруг текста */
+            text-decoration: none; /* Убираем подчёркивание */
+            border-radius: 3px; /* Скругляем уголки */
+        }
         summary {
             background: #333;
             color: #FFF;
@@ -30,14 +114,7 @@
         #custom-marker summary::-webkit-details-marker {
             display: none;
         }
-        .btn {
-            display: inline-block; /* Строчно-блочный элемент */
-            background: #8C959D; /* Серый цвет фона */
-            color: #fff; /* Белый цвет текста */
-            padding: 1rem 1.5rem; /* Поля вокруг текста */
-            text-decoration: none; /* Убираем подчёркивание */
-            border-radius: 3px; /* Скругляем уголки */
-        }
+
         #custom-marker summary:before {
             display: inline-block;
             width: 18px;
@@ -84,24 +161,25 @@
             height: calc(100% - 150px);
         }
     </style>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div align="left">
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="post" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <img src="${contextPath}/resources/image/logo.png" alt="Логотип">
+            <h1>Список задач</h1>
+        </div>
+        <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
         </form>
-        <h2>Список задач пользователя ${pageContext.request.userPrincipal.name}
+        <a href="/welcome" class="btn">Назад</a>
+        <h2><a class="btn" onclick="document.forms['logoutForm'].submit()">Выйти</a>
         </h2>
-            <a href="/welcome" class="btn">Назад</a>
-        <input type="checkbox" name="a" value="checker" onchange="hideEnding(this)" checked>Скрыть/Показать завершенные задачи</p>
-    </c:if>
+    </div>
 </div>
+        <input type="checkbox" name="a" value="checker" onchange="hideEnding(this)" checked>Скрыть/Показать завершенные задачи</p>
 <c:forEach var="Task" items="${Tasks.getTasks()}">
     <details ><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
