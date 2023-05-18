@@ -362,9 +362,10 @@ public class UserController {
         }
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-        String q  = "http://194.67.111.29/data/"+newTask.getNameTask()+"/" + fileName;
          newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
          newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
+         fileName = fileName.replaceAll("\\s+","%20");
+        String q  = "http://194.67.111.29/data/"+newTask.getNameTask()+"/" + fileName;
         request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
                 +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
         CloseableHttpClient client = HttpClientBuilder.create().build();
