@@ -93,18 +93,17 @@
             border-radius: 3px; /* Скругляем уголки */
         }
         summary {
-            background: #333;
-            color: #FFF;
-            border-radius: 3px;
+            background: #145b04;
+            color: #FFFFFF;
+            border-radius: 7px;
             padding: 5px 10px;
         }
 
         /* Style the summary when details box is open */
         details[open] summary {
             background: #69c773;
-            color: #333;
+            color: #000000;
         }
-
         /* Custom Markers */
         #custom-marker summary {
             font-size: 17px;
@@ -160,6 +159,10 @@
             padding: 0 20px 0px 20px;
             height: calc(100% - 150px);
         }
+        .all-list-task {
+            border: 4px solid black;
+            padding: 13px;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -180,8 +183,9 @@
     </div>
 </div>
         <input type="checkbox" name="a" value="checker" onchange="hideEnding(this)" checked>Скрыть/Показать завершенные задачи</p>
+<div class="all-list-task">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
-    <details ><div class="layer1" margin-top="5px"  margin-bottom="5px">
+    <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
@@ -313,6 +317,7 @@
         </div>
     </div>
 </c:forEach>
+</div>
 <%--<h1>Тест скачки файла</h1>--%>
 <%--<div>--%>
 <%--    <a href="http://localhost/data/test.txt" download>--%>
@@ -383,7 +388,7 @@
     }
 
 
-    var socket = new WebSocket("ws://194.67.111.29/chat");
+    var socket = new WebSocket("ws://localhost/chat");
 
     socket.onopen = function(event) {
         console.log("WebSocket opened");

@@ -65,7 +65,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";
+    private String ip="192.168.1.224";
+    private String ip2="localhost";
 
     public UserController() throws IOException {
     }
@@ -365,7 +366,7 @@ public class UserController {
          newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
          newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
          fileName = fileName.replaceAll("\\s+","%20");
-        String q  = "http://194.67.111.29/data/"+newTask.getNameTask()+"/" + fileName;
+        String q  = "http://"+ip2+"/data/"+newTask.getNameTask()+"/" + fileName;
         request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
                 +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
         CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -399,7 +400,7 @@ public class UserController {
             // Отправляем полученное сообщение через WebSocket
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            String uri = "ws://194.67.111.29:80/chat";
+            String uri = "ws://"+ip2+":80/chat";
             MyWebSocketClient endpoint = new MyWebSocketClient();
             Session session = container.connectToServer(endpoint, new URI(uri));
             endpoint.sendMessage("{'uidDoc'='"+uidDoc+"','Name'='"+Name+"','message'='"+message+"'}");
