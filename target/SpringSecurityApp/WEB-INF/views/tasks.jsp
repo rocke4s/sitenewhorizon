@@ -99,7 +99,7 @@
         <h2>Список задач пользователя ${pageContext.request.userPrincipal.name}
         </h2>
             <a href="/welcome" class="btn">Назад</a>
-        <input type="checkbox" name="a" value="checker" onchange="hideEnding(this)">Скрыть/Показать завершенные задачи</p>
+        <input type="checkbox" name="a" value="checker" onchange="hideEnding(this)" checked>Скрыть/Показать завершенные задачи</p>
     </c:if>
 </div>
 <c:forEach var="Task" items="${Tasks.getTasks()}">
@@ -241,6 +241,24 @@
 <%--        <button>Download File</button></a>--%>
 <%--</div>--%>
 <script>
+    var tdElements = document.getElementsByTagName('td');
+
+    // перебираем каждый элемент td
+    for (var i = 0; i < tdElements.length; i++) {
+        var tdElement = tdElements[i];
+
+        // если значение элемента td равно 'Проверено'
+        if (tdElement.innerHTML === 'Проверено' || tdElement.innerHTML === 'Отменено') {
+            var detailsElement = tdElement.closest('details');
+            // скрываем тег Details, если он есть внутри найденного элемента td
+            if (detailsElement) {
+                    detailsElement.style.display = 'none';
+
+            }
+        }
+    }
+
+
     const forms = document.querySelectorAll('.myForm');
 
     // добавляем обработчик события submit для каждой формы

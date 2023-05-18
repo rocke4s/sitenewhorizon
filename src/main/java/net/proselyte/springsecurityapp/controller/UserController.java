@@ -47,6 +47,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
@@ -227,7 +229,23 @@ public class UserController {
             str = str.replaceAll("Дата", "TaskData");
             str = str.replaceAll("Сотрудник", "TaskEmployee");
             task = g.fromJson(str, Task.class);
-
+            ZonedDateTime zonedDateTime=null;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+            for(int x=0;x<task.getTasks().size();x++)
+            {
+                if(!task.getTasks().get(x).getTaskData().isEmpty()) {
+                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskData());
+                    task.getTasks().get(x).setTaskData(formatter.format(zonedDateTime));
+                }
+                if(!task.getTasks().get(x).getTaskDataDone().isEmpty()) {
+                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDataDone());
+                    task.getTasks().get(x).setTaskDataDone(formatter.format(zonedDateTime));
+                }
+                if(!task.getTasks().get(x).getTaskDeadline().isEmpty()) {
+                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDeadline());
+                    task.getTasks().get(x).setTaskDeadline(formatter.format(zonedDateTime));
+                }
+            }
         } finally {
             response.close();
         }
@@ -263,7 +281,7 @@ public class UserController {
         String stateDoc="";
         if(uidDoc_5!=null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
         {
-             request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5);
+             request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5");
             doc=uidDoc_5;
             stateDoc="На доработке";
         }
@@ -275,7 +293,7 @@ public class UserController {
         }
         if(uidDoc_0!=null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
         {
-            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/7?Reason=idk");
+            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
 //            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
             doc=uidDoc_0;
             stateDoc="Отменено";
@@ -330,23 +348,13 @@ public class UserController {
             default:
                 break;
         }
-//        File directory = new File("\\\\192.168.1.9\\billi\\"+newTask.getNameTask());
-//        directory.mkdir();
-//        String fileName = StringUtils.cleanPath(newTask.getFile().getOriginalFilename());
-//        try {
-//            Path path= Paths.get(directory+"\\"+ fileName);
-//            Files.copy(newTask.getFile().getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-       // File directory = new File(newTask.getNameTask());
-       // directory.mkdir();
         String fileName= "";
         if(!newTask.getFile().isEmpty()) {
             fileName = StringUtils.cleanPath(newTask.getFile().getOriginalFilename());
             try {
-                Path path = Paths.get("data/" + fileName);
+                File directory = new File("data/"+newTask.getNameTask());
+                directory.mkdir();
+                Path path = Paths.get("data/"+newTask.getNameTask()+"/" + fileName);
                 Files.copy(newTask.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -354,8 +362,9 @@ public class UserController {
         }
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-        String q  = newTask.getNameTask()+"\\" + fileName;
-
+        String q  = "http://194.67.111.29/data/"+newTask.getNameTask()+"/" + fileName;
+         newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
+         newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
         request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
                 +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
         CloseableHttpClient client = HttpClientBuilder.create().build();

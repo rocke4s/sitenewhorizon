@@ -108,7 +108,7 @@
 <div class="container">
     <div class="header">
         <div class="logo">
-            <img src="logo.png" alt="Логотип">
+            <img src="${contextPath}/resources/image/logo.png" alt="Логотип">
             <h1>Мой профиль</h1>
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
