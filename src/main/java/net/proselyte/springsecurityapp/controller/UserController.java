@@ -65,8 +65,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="192.168.1.224";
-    private String ip2="localhost";
+    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
+    private String ip2="194.67.111.29";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
