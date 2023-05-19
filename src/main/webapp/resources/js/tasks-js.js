@@ -50,7 +50,7 @@ function HideChat(ids)
 }
 
 
-var socket = new WebSocket("ws://localhost/chat");
+var socket = new WebSocket("ws://194.67.111.29/chat");
 
 socket.onopen = function(event) {
     console.log("WebSocket opened");
