@@ -261,7 +261,7 @@ public class UserController {
     }
     @RequestMapping(value = "/change_status", method = RequestMethod.GET)
     public String changeStatus(@ModelAttribute("changeStatus")ChangeStatus changeStatus,Authentication authentication,
-                               String uidDoc_8,String uidDoc_5,String uidDoc_0,String TaskNumber,String reason1) throws IOException, MessagingException {
+                               String uidDoc_8,String uidDoc_5,String uidDoc_0) throws IOException, MessagingException {
         HttpGet request = null;
         String doc="";
         String stateDoc="";
@@ -284,26 +284,26 @@ public class UserController {
             doc=uidDoc_0;
             stateDoc="Отменено";
         }
-        CloseableHttpClient client = HttpClientBuilder.create().build();
-        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-        String result;
-        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
-        CloseableHttpResponse response = client.execute(request);//выполняем запрос
-        try {
-            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
-            result = EntityUtils.toString(entity);//засовываем ответ в строку
-            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
-            System.out.println(result);
-            Gson g = new Gson();
-            //  userForm.setUidUser();
-        } finally {
-            response.close();
-        }
+//        CloseableHttpClient client = HttpClientBuilder.create().build();
+//        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+//        String result;
+//        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
+//        CloseableHttpResponse response = client.execute(request);//выполняем запрос
+//        try {
+//            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
+//            result = EntityUtils.toString(entity);//засовываем ответ в строку
+//            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
+//            System.out.println(result);
+//            Gson g = new Gson();
+//            //  userForm.setUidUser();
+//        } finally {
+//            response.close();
+//        }
 
 
-        Sender sender1 = new Sender();
-        sender1.send("rocke4max@gmail.com", "Изменение статуса заявки", "Статус заявки №"+doc+" изменился на "
-                +stateDoc);
+//        Sender sender1 = new Sender();
+//        sender1.send("rocke4max@gmail.com", "Изменение статуса заявки", "Статус заявки №"+doc+" изменился на "
+//                +stateDoc);
 
         return "redirect:/tasks";
     }

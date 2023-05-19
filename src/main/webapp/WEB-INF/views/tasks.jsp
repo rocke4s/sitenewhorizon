@@ -5,14 +5,12 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-
     <title>Задачи!</title>
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/tasks-css.css" rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="${contextPath}/resources/css/tasks-css.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
@@ -75,10 +73,10 @@
                                     <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_5">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <spring:bind path="causeChangeStatus">
-                                    <form:input type="text" path="causeChangeStatus" class="form-control" placeholder="Причина..."
+                                    <form:input type="text" path="causeChangeStatus" class="form-control" placeholder="Причина доработки"
                                                 autofocus="true"></form:input>
                                     </spring:bind>
-                                    <button class="btn btn-primary" type="submit">Доработка</button>
+                                    <button type="submit">Доработка</button>
                                 </form:form>
                             </div>
                         </c:if>
@@ -93,13 +91,13 @@
                                     </form>
                                 </div>
                             </c:if>
-                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланированно'}">
+                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланировано'}">
                                 <div>
                                     <form method="GET" action="/change_status">
                                         <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_0">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button class="btn btn-primary" type="submit">Отмена</button>
+                                        <button type="submit">Отмена</button>
                                     </form>
                                 </div>
                             </c:if>
