@@ -1,0 +1,106 @@
+var tdElements = document.getElementsByTagName('td');
+for (var i = 0; i < tdElements.length; i++) {
+    var tdElement = tdElements[i];
+    if (tdElement.innerHTML === 'Проверено' || tdElement.innerHTML === 'Отменено') {
+        var detailsElement = tdElement.closest('details');
+        if (detailsElement) {
+            detailsElement.style.display = 'none';
+
+        }
+    }
+}
+
+const forms = document.querySelectorAll('.myForm');
+forms.forEach(form => {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const uidDoc_8 = form.elements.uidDoc_8.value;
+        const myInput = document.getElementById("uidDoc_88");
+        myInput.value = uidDoc_8;
+        const saveNameTask = form.elements.NameTasks.value;
+        const myInput2 = document.getElementById("NameTasker");
+        myInput2.value = saveNameTask;
+        fetch('/change_status?uidDoc_8='+uidDoc_8, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+});
+
+let ul = null;
+let messageList = null;
+
+function ShowChat(ids)
+{
+    document.getElementById('id_'+ids).hidden= false;
+    document.getElementById('buttonShow'+ids).hidden = true;
+    document.getElementById('buttonHide'+ids).hidden = false;
+}
+function HideChat(ids)
+{
+    document.getElementById('id_'+ids).hidden= true;
+    document.getElementById('buttonShow'+ids).hidden = false;
+    document.getElementById('buttonHide'+ids).hidden = true;
+}
+
+
+var socket = new WebSocket("ws://localhost/chat");
+
+socket.onopen = function(event) {
+    console.log("WebSocket opened");
+};
+
+socket.onmessage = function(event) {
+    console.log("WebSocket message received: " + event.data);
+};
+
+socket.onclose = function(event) {
+    console.log("WebSocket closed");
+};
+
+socket.onerror = function(event) {
+    console.error("WebSocket error: " + event);
+};
+
+function hideEnding(stat)
+{
+    var tdElements = document.getElementsByTagName('td');
+    for (var i = 0; i < tdElements.length; i++) {
+        var tdElement = tdElements[i];
+        if (tdElement.innerHTML === 'Проверено' || tdElement.innerHTML === 'Отменено') {
+            var detailsElement = tdElement.closest('details');
+            if (detailsElement) {
+                if(stat.checked) {
+                    detailsElement.style.display = 'none';
+                }
+                else
+                {
+                    detailsElement.style.display = '';
+                }
+            }
+        }
+    }
+}
+function sendMessage(ids) {
+    ul = document.getElementById('messageArea'+ids);
+    socket.send("{'uidDoc':'"+ids+"','Name':'${pageContext.request.userPrincipal.name}','message':'"+document.querySelector('#id_'+ids+' input[type="text"]').value+"'}");
+    document.querySelector('#id_'+ids+' input[type="text"]').value = "";
+}
+setInterval(function() {
+    socket.onmessage = function(event) {
+        console.log(event.data);
+        var parsed= JSON.parse(event.data);
+        console.log(parsed.Docid)
+        var ull = document.getElementById("messageArea"+parsed.Docid);
+        const li = document.createElement('li');
+        li.innerHTML = parsed.Named+": "+parsed.messg;
+        messageList = event.data;
+        ull.appendChild(li);
+    };
+}, 1000);

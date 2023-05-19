@@ -65,8 +65,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
+    private String ip2="localhost";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -126,7 +126,7 @@ public class UserController {
         String test = userForm.getFIO().replaceAll("\\s+","%20");
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
         HttpGet request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
-                +"/"+userForm.getINN()+"/"+FIO+"/"+userForm.getPhone());
+                +"/"+userForm.getINN()+"/"+FIO+"/"+userForm.getPhone()+"/"+userForm.getUserMail());
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
         Profile profile = new Profile();
@@ -230,6 +230,8 @@ public class UserController {
             str = str.replaceAll("Дата", "TaskData");
             str = str.replaceAll("Сотрудник", "TaskEmployee");
             task = g.fromJson(str, Task.class);
+
+            Collections.sort(task.getTasks(), Comparator.comparing(Tasks::getTaskNumber).reversed());
             ZonedDateTime zonedDateTime=null;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
             for(int x=0;x<task.getTasks().size();x++)

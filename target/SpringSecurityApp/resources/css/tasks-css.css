@@ -1,0 +1,154 @@
+body {
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #555;
+    margin: 0;
+    padding: 0;
+}
+.header {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.logout {
+    background-color: #449d44;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout:hover {
+    background-color: #3c8c3c;
+}
+
+.wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+.buttons button {
+    background-color: #e7e7e7;
+    color: #555;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #ccc;
+}
+.btn {
+    display: inline-block; /* Строчно-блочный элемент */
+    background: #8C959D; /* Серый цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 3px; /* Скругляем уголки */
+}
+summary {
+    background: #145b04;
+    color: #FFFFFF;
+    border-radius: 7px;
+    padding: 5px 10px;
+}
+
+/* Style the summary when details box is open */
+details[open] summary {
+    background: #69c773;
+    color: #000000;
+}
+/* Custom Markers */
+#custom-marker summary {
+    font-size: 17px;
+    vertical-align: top;
+}
+
+#custom-marker summary::-webkit-details-marker {
+    display: none;
+}
+
+#custom-marker summary:before {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    content: "";
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/treehouse-icon-sprite.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+#custom-marker[open] summary:before {
+    background-position: -18px 0;
+}
+
+
+table {
+    border: 0;
+    width: 100%;
+}
+
+th, td {
+    vertical-align: top;
+    text-align: left;
+    padding: 0.5em;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+th {
+    width: 200px;
+}
+.layer1 {
+    color: white; /* Цвет текста */
+    padding: 10px; /* Поля вокруг текста */
+    margin-bottom: -7px; /* Отступ снизу */
+}
+#chat-page ul {
+    list-style-type: none;
+    background-color: #FFF;
+    margin: 0;
+    overflow: auto;
+    overflow-y: scroll;
+    padding: 0 20px 0px 20px;
+    height: calc(100% - 150px);
+}
+.all-list-task {
+    border: 4px solid black;
+    padding: 13px;
+}
