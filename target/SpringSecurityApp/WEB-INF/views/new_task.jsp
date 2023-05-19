@@ -51,12 +51,13 @@
       </spring:bind>
     <spring:bind path="file">
         <div class="file-input">
-            <form:input type="file" path="file" id="file" cssClass="file-input__input"></form:input>
-            <label for="file" class="file-input__label">Выбрать файл</label>
+            <form:input type="file" onchange="showFileName()" path="file" id="file" cssClass="file-input__input"></form:input>
+            <label id="file-selected" for="file" class="file-input__label">Выбрать файл</label>
         </div>
     </spring:bind>
     <input  class="bot-send-mail" value="Отправить" type="submit">
     </div>
 </form:form>
+<script src="${contextPath}/resources/js/new_task-js.js"></script>
 </body>
 </html>
