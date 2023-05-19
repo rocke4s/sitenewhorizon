@@ -52,7 +52,7 @@
     <spring:bind path="file">
         <div class="file-input">
             <form:input type="file" onchange="showFileName()" path="file" id="file" cssClass="file-input__input"></form:input>
-            <label id="file-selected" for="file" class="file-input__label">Выбрать файл</label>
+            <label id="file-selected" for="file" class="file-input__label" style="word-wrap: break-word; word-break: break-word; max-width: 200px;">Выбрать файл</label>
         </div>
     </spring:bind>
     <input  class="bot-send-mail" value="Отправить" type="submit">

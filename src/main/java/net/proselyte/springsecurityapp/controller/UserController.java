@@ -232,23 +232,6 @@ public class UserController {
             task = g.fromJson(str, Task.class);
 
             Collections.sort(task.getTasks(), Comparator.comparing(Tasks::getTaskNumber).reversed());
-//            ZonedDateTime zonedDateTime=null;
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-//            for(int x=0;x<task.getTasks().size();x++)
-//            {
-//                if(!task.getTasks().get(x).getTaskData().isEmpty()) {
-//                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskData());
-//                    task.getTasks().get(x).setTaskData(formatter.format(zonedDateTime));
-//                }
-//                if(!task.getTasks().get(x).getTaskDataDone().isEmpty()) {
-//                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDataDone());
-//                    task.getTasks().get(x).setTaskDataDone(formatter.format(zonedDateTime));
-//                }
-//                if(!task.getTasks().get(x).getTaskDeadline().isEmpty()) {
-//                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDeadline());
-//                    task.getTasks().get(x).setTaskDeadline(formatter.format(zonedDateTime));
-//                }
-//            }
         } finally {
             response.close();
         }
@@ -278,13 +261,14 @@ public class UserController {
     }
     @RequestMapping(value = "/change_status", method = RequestMethod.GET)
     public String changeStatus(@ModelAttribute("changeStatus")ChangeStatus changeStatus,Authentication authentication,
-                               String uidDoc_8,String uidDoc_5,String uidDoc_0,String TaskNumber) throws IOException, MessagingException {
+                               String uidDoc_8,String uidDoc_5,String uidDoc_0,String TaskNumber,String reason1) throws IOException, MessagingException {
         HttpGet request = null;
         String doc="";
         String stateDoc="";
         if(uidDoc_5!=null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
         {
-             request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5");
+            changeStatus.setCauseChangeStatus(changeStatus.getCauseChangeStatus().replaceAll("\\s+","%20"));
+             request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
             doc=uidDoc_5;
             stateDoc="На доработке";
         }
@@ -297,7 +281,6 @@ public class UserController {
         if(uidDoc_0!=null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
         {
             request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
-//            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
             doc=uidDoc_0;
             stateDoc="Отменено";
         }

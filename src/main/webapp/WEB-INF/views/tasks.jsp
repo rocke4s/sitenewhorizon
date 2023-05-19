@@ -75,10 +75,10 @@
                                     <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_5">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <spring:bind path="causeChangeStatus">
-                                    <form:input type="text" path="causeChangeStatus" class="form-control" placeholder="Причина доработки"
+                                    <form:input type="text" path="causeChangeStatus" class="form-control" placeholder="Причина..."
                                                 autofocus="true"></form:input>
                                     </spring:bind>
-                                    <button type="submit">Доработка</button>
+                                    <button class="btn btn-primary" type="submit">Доработка</button>
                                 </form:form>
                             </div>
                         </c:if>
@@ -93,13 +93,13 @@
                                     </form>
                                 </div>
                             </c:if>
-                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланировано'}">
+                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланированно'}">
                                 <div>
                                     <form method="GET" action="/change_status">
                                         <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_0">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button type="submit">Отмена</button>
+                                        <button class="btn btn-primary" type="submit">Отмена</button>
                                     </form>
                                 </div>
                             </c:if>
