@@ -284,21 +284,21 @@ public class UserController {
             doc=uidDoc_0;
             stateDoc="Отменено";
         }
-//        CloseableHttpClient client = HttpClientBuilder.create().build();
-//        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-//        String result;
-//        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
-//        CloseableHttpResponse response = client.execute(request);//выполняем запрос
-//        try {
-//            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
-//            result = EntityUtils.toString(entity);//засовываем ответ в строку
-//            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
-//            System.out.println(result);
-//            Gson g = new Gson();
-//            //  userForm.setUidUser();
-//        } finally {
-//            response.close();
-//        }
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+        String result;
+        request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
+        CloseableHttpResponse response = client.execute(request);//выполняем запрос
+        try {
+            HttpEntity entity = response.getEntity();//получаем ответ от АПИ
+            result = EntityUtils.toString(entity);//засовываем ответ в строку
+            EntityUtils.consume(entity);//ответ парсим и кидаем в бд уид и все остальные введенные данные
+            System.out.println(result);
+            Gson g = new Gson();
+            //  userForm.setUidUser();
+        } finally {
+            response.close();
+        }
 
 
 //        Sender sender1 = new Sender();
