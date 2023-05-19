@@ -107,7 +107,7 @@
                     </c:if>
                     <c:if test="${!Tasks.getTypeTask().isEmpty()}"><td>${Tasks.getTypeTask()}</td></c:if>
                     <c:if test="${!Tasks.getTaskImportance().isEmpty()}"><td>${Tasks.getTaskImportance()}</td></c:if>
-                    <c:if test="${!Tasks.getTaskContent().isEmpty()}"><td>${Tasks.getTaskContent()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskContent().isEmpty()}"><td style="word-wrap: break-word; word-break: break-word; max-width: 200px;">${Tasks.getTaskContent()}</td></c:if>
                     <c:if test="${!Tasks.getTaskDeadline().isEmpty()}"><td>${Tasks.getTaskDeadline()}</td></c:if>
                     <c:if test="${!Tasks.getTaskIntensity().isEmpty()}"><td>${Tasks.getTaskIntensity()}</td></c:if>
                     <c:if test="${!Tasks.getTaskId().isEmpty()}"><td>${Tasks.getTaskId()}</td></c:if>
