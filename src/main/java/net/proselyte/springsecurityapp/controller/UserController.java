@@ -228,27 +228,27 @@ public class UserController {
             str = str.replaceAll("\"СодержаниеЛУВР\"", "\"TaskContentLVR\"");
             str = str.replaceAll("Номер", "TaskNumber");
             str = str.replaceAll("Дата", "TaskData");
-            str = str.replaceAll("Сотрудник", "TaskEmployee");
+            str = str.replaceAll("\"Отдел\"", "TaskDepartment");
             task = g.fromJson(str, Task.class);
 
             Collections.sort(task.getTasks(), Comparator.comparing(Tasks::getTaskNumber).reversed());
-            ZonedDateTime zonedDateTime=null;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-            for(int x=0;x<task.getTasks().size();x++)
-            {
-                if(!task.getTasks().get(x).getTaskData().isEmpty()) {
-                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskData());
-                    task.getTasks().get(x).setTaskData(formatter.format(zonedDateTime));
-                }
-                if(!task.getTasks().get(x).getTaskDataDone().isEmpty()) {
-                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDataDone());
-                    task.getTasks().get(x).setTaskDataDone(formatter.format(zonedDateTime));
-                }
-                if(!task.getTasks().get(x).getTaskDeadline().isEmpty()) {
-                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDeadline());
-                    task.getTasks().get(x).setTaskDeadline(formatter.format(zonedDateTime));
-                }
-            }
+//            ZonedDateTime zonedDateTime=null;
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+//            for(int x=0;x<task.getTasks().size();x++)
+//            {
+//                if(!task.getTasks().get(x).getTaskData().isEmpty()) {
+//                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskData());
+//                    task.getTasks().get(x).setTaskData(formatter.format(zonedDateTime));
+//                }
+//                if(!task.getTasks().get(x).getTaskDataDone().isEmpty()) {
+//                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDataDone());
+//                    task.getTasks().get(x).setTaskDataDone(formatter.format(zonedDateTime));
+//                }
+//                if(!task.getTasks().get(x).getTaskDeadline().isEmpty()) {
+//                    zonedDateTime = ZonedDateTime.parse(task.getTasks().get(x).getTaskDeadline());
+//                    task.getTasks().get(x).setTaskDeadline(formatter.format(zonedDateTime));
+//                }
+//            }
         } finally {
             response.close();
         }

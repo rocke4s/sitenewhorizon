@@ -55,7 +55,7 @@
                     <c:if test="${!Task.getTaskDataDone().isEmpty()}"><th>Дата Выполнено</th></c:if>
                     <c:if test="${!Task.getTaskContentLVR().isEmpty()}"><th>Содержание ЛУВР</th></c:if>
                     <c:if test="${!Task.getTaskData().isEmpty()}"><th>Дата</th></c:if>
-                    <th>Отдел</th>
+                    <c:if test="${!Task.getTaskDepartment().isEmpty()}"><th>Отдел</th></c:if>
                 </tr>
                 </thead>
             <c:forEach var="Tasks" items="${Tasks.getTasks()}">
@@ -114,7 +114,7 @@
                     <c:if test="${!Tasks.getTaskDataDone().isEmpty()}"><td>${Tasks.getTaskDataDone()}</td></c:if>
                     <c:if test="${!Tasks.getTaskContentLVR().isEmpty()}"><td>${Tasks.getTaskContentLVR()}</td></c:if>
                     <c:if test="${!Tasks.getTaskData().isEmpty()}"><td>${Tasks.getTaskData()}</td></c:if>
-                    <td>Отдел по работе с клиентами</td>
+                    <c:if test="${!Tasks.getTaskDepartment().isEmpty()}"><td>${Tasks.getTaskDepartment()}</td></c:if>
                 </tr>
             </c:if>
             </c:forEach>

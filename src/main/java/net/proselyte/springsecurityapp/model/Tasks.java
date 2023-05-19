@@ -36,9 +36,9 @@ public class Tasks {
     @SerializedName("TaskDeadline")
     @Expose
     private String taskDeadline;
-    @SerializedName("TaskEmployee")
+    @SerializedName("TaskDepartment")
     @Expose
-    private String taskEmployee;
+    private String taskDepartment;
     @SerializedName("TaskId")
     @Expose
     private String taskId;
@@ -134,12 +134,12 @@ public class Tasks {
         this.taskDeadline = taskDeadline;
     }
 
-    public String getTaskEmployee() {
-        return taskEmployee;
+    public String getTaskDepartment() {
+        return taskDepartment;
     }
 
-    public void setTaskEmployee(String taskEmployee) {
-        this.taskEmployee = taskEmployee;
+    public void setTaskDepartment(String taskDepartment) {
+        this.taskDepartment = taskDepartment;
     }
 
     public String getTaskId() {
