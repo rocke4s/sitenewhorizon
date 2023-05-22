@@ -1,5 +1,6 @@
 package net.proselyte.springsecurityapp.controller;
 
+import net.proselyte.springsecurityapp.config.SecurityConfig;
 import com.google.gson.Gson;
 import jakarta.mail.MessagingException;
 import net.proselyte.springsecurityapp.config.MyWebSocketClient;
@@ -23,6 +24,7 @@ import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.*;
 import java.io.BufferedReader;
@@ -86,8 +89,10 @@ public class UserController {
         String[] str = new String[]{username,password,mailName,mailPass};
         return str;
     }
-    @RequestMapping(value = "/statuser", method = RequestMethod.GET)
-    public void doGet(HttpServletRequest request) throws IOException {
+    @RequestMapping(value = "/statuser", method = RequestMethod.POST)
+    @PermitAll
+    @Secured("permitAll")
+    public void doPost(HttpServletRequest request) throws IOException {
         BufferedReader reader = request.getReader();
         String line;
         line = reader.readLine();
