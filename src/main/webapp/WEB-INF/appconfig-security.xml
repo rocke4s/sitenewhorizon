@@ -22,7 +22,7 @@
         <intercept-url pattern="/worker" access="permitAll"/>
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>
-        <csrf disabled="true"></csrf>
+        <csrf disabled="true"/>
         <logout logout-success-url="/login?logout"/>
     </http>
     <authentication-manager alias="authenticationManager">
