@@ -31,24 +31,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.websocket.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
@@ -65,8 +60,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
+    private String ip2="localhost";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -122,11 +117,11 @@ public class UserController {
         userForm.setName(redName);
         userForm.setSurname(redSurname);
         userForm.setSecondSurname(redSecondSurname);
-        String FIO = userForm.getSurname()+"%20"+userForm.getName()+"%20"+userForm.getSecondSurname();
+        userForm.setFIO(userForm.getSurname()+"%20"+userForm.getName()+"%20"+userForm.getSecondSurname());
         String test = userForm.getFIO().replaceAll("\\s+","%20");
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
         HttpGet request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
-                +"/"+userForm.getINN()+"/"+FIO+"/"+userForm.getPhone()+"/"+userForm.getUserMail());
+                +"/"+userForm.getINN()+"/"+userForm.getFIO()+"/"+userForm.getPhone()+"/"+userForm.getUserMail());
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
         Profile profile = new Profile();
@@ -148,8 +143,8 @@ public class UserController {
             return "registration";
         }
         if (!profile.getUidUser().isEmpty()) {
-            userForm.setUidUser(profile.getUidUser());
-            User userokForm=null;
+            User userokForm=new User();
+            userokForm.setUidUser(profile.getUidUser());
             userokForm.setUsername(userForm.getUsername());
             userokForm.setUserMail(userForm.getUserMail());
             userokForm.setINN(userForm.getINN());

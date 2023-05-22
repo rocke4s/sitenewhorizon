@@ -3,10 +3,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=utf-8" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
-<html lang="ru">
+    <!DOCTYPE html>
+    <html lang="en">
 <head>
     <title>Новая заявка</title>
+    <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/new_task-css.css" rel="stylesheet">
 </head>
@@ -33,8 +34,6 @@
       <form:input type="text" path="nameTask" class="form-control"></form:input>
         </div>
     </spring:bind>
-          <spring:bind path="TaskContent">
-          </spring:bind>
       <spring:bind path="TaskContent">
     <label>Содержание</label>
       <div class="form-group">
@@ -43,8 +42,7 @@
           <div><label>Важность</label>
               <form:select class="select-css" path="TaskImportance" >
                   <c:forEach var="listImportance" items="${listImportance}">
-                      <option>
-                              ${listImportance}</option>
+                      <option>${listImportance}</option>
                   </c:forEach>
               </form:select>
           </div>
@@ -59,5 +57,5 @@
     </div>
 </form:form>
 <script src="${contextPath}/resources/js/new_task-js.js"></script>
-</body>
-</html>
+    </body>
+    </html>

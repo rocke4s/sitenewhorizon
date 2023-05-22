@@ -9,8 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <link href="${contextPath}/resources/css/tasks-css.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="${contextPath}/resources/css/tasks-css.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -26,14 +27,18 @@
         </h2>
     </div>
 </div>
-        <input type="checkbox" name="a" value="checker" onchange="hideEnding(this)" checked>Скрыть/Показать завершенные задачи</p>
+<div class="toggle-switch">
+    <input type="checkbox" id="toggle" class="toggle-checkbox" onchange="hideEnding(this)" checked>
+    <label for="toggle" class="toggle-label"></label>
+</div>
+<span>Показать задачи</span>
 <div class="all-list-task">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
     <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
-        <button id="buttonShow${Task.getTaskNumber()}" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
-        <button id="buttonHide${Task.getTaskNumber()}" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
+        <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
+        <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
             <table>
                 <thead>
                 <tr>
@@ -76,7 +81,7 @@
                                     <form:input type="text" path="causeChangeStatus" class="form-control" placeholder="Причина доработки"
                                                 autofocus="true"></form:input>
                                     </spring:bind>
-                                    <button type="submit">Доработка</button>
+                                    <button type="submit" class="btn btn-primary">Доработка</button>
                                 </form:form>
                             </div>
                         </c:if>
@@ -91,13 +96,13 @@
                                     </form>
                                 </div>
                             </c:if>
-                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланировано'}">
+                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланированно'}">
                                 <div>
                                     <form method="GET" action="/change_status">
                                         <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_0">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button type="submit">Отмена</button>
+                                        <button type="submit" class="btn btn-primary">Отмена</button>
                                     </form>
                                 </div>
                             </c:if>
@@ -162,6 +167,12 @@
     </div>
 </c:forEach>
 </div>
-<script src="${contextPath}/resources/js/tasks-js.js"></script>
+<script src="${contextPath}/resources/js/tasks-js.js">
+    function sendMessage(ids) {
+        ul = document.getElementById('messageArea'+ids);
+        socket.send("{'uidDoc':'"+ids+"','Name':'${pageContext.request.userPrincipal.name}','message':'"+document.querySelector('#id_'+ids+' input[type="text"]').value+"'}");
+        document.querySelector('#id_'+ids+' input[type="text"]').value = "";
+    }
+</script>
 </body>
 </html>

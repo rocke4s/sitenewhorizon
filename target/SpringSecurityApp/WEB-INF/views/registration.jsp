@@ -14,7 +14,7 @@
     <meta name="author" content="">
 
     <title>Регистрация</title>
-
+    <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 

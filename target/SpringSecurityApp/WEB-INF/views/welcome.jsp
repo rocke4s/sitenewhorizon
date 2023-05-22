@@ -14,8 +14,8 @@
     <meta name="author" content="">
 
     <title>Добро пожаловать!</title>
-
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="${contextPath}/resources/css/welcome-css.css" rel="stylesheet">
 </head>
 <body>

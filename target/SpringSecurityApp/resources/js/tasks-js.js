@@ -50,7 +50,7 @@ function HideChat(ids)
 }
 
 
-var socket = new WebSocket("ws://194.67.111.29/chat");
+var socket = new WebSocket("ws://localhost/chat");
 
 socket.onopen = function(event) {
     console.log("WebSocket opened");
@@ -87,11 +87,7 @@ function hideEnding(stat)
         }
     }
 }
-function sendMessage(ids) {
-    ul = document.getElementById('messageArea'+ids);
-    socket.send("{'uidDoc':'"+ids+"','Name':'${pageContext.request.userPrincipal.name}','message':'"+document.querySelector('#id_'+ids+' input[type="text"]').value+"'}");
-    document.querySelector('#id_'+ids+' input[type="text"]').value = "";
-}
+
 setInterval(function() {
     socket.onmessage = function(event) {
         console.log(event.data);
