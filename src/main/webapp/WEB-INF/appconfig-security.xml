@@ -6,7 +6,6 @@
 		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		http://www.springframework.org/schema/security
 		 http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-
     <http auto-config="true">
         <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
@@ -18,13 +17,12 @@
         <intercept-url pattern="/new_tasker" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/data/**" access="permitAll"/>
         <intercept-url pattern="/chat" access="permitAll"/>
-        <intercept-url pattern="/statuser" access="permitAll"/>
         <intercept-url pattern="/worker" access="permitAll"/>
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>
-        <csrf disabled="true"/>
         <logout logout-success-url="/login?logout"/>
     </http>
+    <http security="none" pattern="/statuser" />
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
             <password-encoder ref="encoder"></password-encoder>
