@@ -21,10 +21,6 @@
             <param-name>forceEncoding</param-name>
             <param-value>true</param-value>
         </init-param>
-        <init-param>
-            <param-name>csrfPrevention.excludedPaths</param-name>
-            <param-value>/statuser</param-value>
-        </init-param>
     </filter>
 
     <filter-mapping>

@@ -90,8 +90,6 @@ public class UserController {
         return str;
     }
     @RequestMapping(value = "/statuser", method = RequestMethod.POST)
-    @PermitAll
-    @Secured("permitAll")
     public void doPost(HttpServletRequest request) throws IOException {
         BufferedReader reader = request.getReader();
         String line;
