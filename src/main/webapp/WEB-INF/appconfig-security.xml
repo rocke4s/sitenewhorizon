@@ -6,7 +6,8 @@
 		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		http://www.springframework.org/schema/security
 		 http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-    <http auto-config="true">
+    <http security="none" pattern="/statuser" />
+    <http  auto-config="true">
         <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
@@ -22,7 +23,6 @@
                     username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout"/>
     </http>
-    <http security="none" pattern="/statuser" />
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
             <password-encoder ref="encoder"></password-encoder>
