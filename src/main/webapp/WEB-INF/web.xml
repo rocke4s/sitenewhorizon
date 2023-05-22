@@ -5,7 +5,6 @@
          version="2.5">
 
     <display-name>Spring Security Application</display-name>
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/appconfig-root.xml</param-value>
@@ -21,6 +20,10 @@
         <init-param>
             <param-name>forceEncoding</param-name>
             <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>csrfPrevention.excludedPaths</param-name>
+            <param-value>/statuser</param-value>
         </init-param>
     </filter>
 
