@@ -90,23 +90,27 @@ public class UserController {
         return str;
     }
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
-    @PermitAll
     public void doPost(HttpServletRequest request) throws IOException {
-        BufferedReader reader = request.getReader();
-        String line;
-        line = reader.readLine();
-        Gson g = new Gson();
-        Statuska task = g.fromJson(line, Statuska.class);
-        System.out.println(task.toString());
-        Sender sender1 = new Sender();
-        User user = userService.findByUsername(task.getUserName());
-        Profile prof = profileService.findByUidUser(user.getUidUser());
         try {
-            sender1.send(prof.getUserMail(), "Изменение статуса заявки", "Статус заявки '"+task.getNameTask()+"' №"+task.getNumberTask()+" изменился с "
-                    +task.getOldStatus()+" на "+task.getNewStatus());
-            System.out.println("Email sent successfully");
-        } catch ( jakarta.mail.MessagingException e) {
-            System.err.println("Email sending failed: " + e.getMessage());
+            // Получаем данные из GET запроса
+            String NameTask = request.getParameter("NameTask");
+            String NumberTask = request.getParameter("NumberTask");
+            String OldStatus = request.getParameter("message");
+            String NewStatus = request.getParameter("NewStatus");
+            String UserName = request.getParameter("UserName");
+
+            Sender sender1 = new Sender();
+            User user = userService.findByUsername(UserName);
+            Profile prof = profileService.findByUidUser(user.getUidUser());
+            try {
+                sender1.send(prof.getUserMail(), "Изменение статуса заявки", "Статус заявки '" + NameTask + "' №" + NumberTask + " изменился с "
+                        + OldStatus + " на " + NewStatus);
+                System.out.println("Email sent successfully");
+            } catch (jakarta.mail.MessagingException e) {
+                System.err.println("Email sending failed: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
