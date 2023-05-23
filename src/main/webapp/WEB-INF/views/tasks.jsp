@@ -42,7 +42,7 @@
             <table>
                 <thead>
                 <tr>
-                    <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
+                    <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылкааааа</th></c:if>
                     <c:if test="${!Task.getTaskPartner().isEmpty()}"><th>Контрагент</th></c:if>
                     <c:if test="${!Task.getTaskStatus().isEmpty()}"><th>Состояние заявки</th></c:if>
                     <c:if test="${Task.getTaskStatus()!='Отменено' && Task.getTaskStatus()!='Проверено'

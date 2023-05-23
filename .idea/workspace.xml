@@ -9,8 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="Good work2">
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="asd">
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,14 +363,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="3576000" />
-    </task>
-    <task id="LOCAL-00058" summary="Бархатные тяги">
-      <created>1683867123671</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1683867123671</updated>
+      <workItem from="1684836927069" duration="4378000" />
     </task>
     <task id="LOCAL-00059" summary="Бархатные тяги мои баленсиаги">
       <created>1683872344760</created>
@@ -708,14 +701,20 @@
       <option name="project" value="LOCAL" />
       <updated>1684840172756</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="asd">
+      <created>1684840897399</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1684840897399</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ChangeLog&#10;1) Добавление файлов к заявке&#10;2) Переработано изменение состояние заявок" />
     <MESSAGE value="Новая БД" />
     <MESSAGE value="Тест деплой" />
     <MESSAGE value="Проба убрать путь /SpringSecurityApp" />
@@ -740,7 +739,8 @@
     <MESSAGE value="Good work" />
     <MESSAGE value="Good work1" />
     <MESSAGE value="Good work2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Good work2" />
+    <MESSAGE value="asd" />
+    <option name="LAST_COMMIT_MESSAGE" value="asd" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
