@@ -271,7 +271,7 @@ public class UserController {
         if(uidDoc_5!=null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
         {
             changeStatus.setCauseChangeStatus(changeStatus.getCauseChangeStatus().replaceAll("\\s+","%20"));
-             request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
+            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
             doc=uidDoc_5;
             stateDoc="На доработке";
         }
@@ -351,9 +351,9 @@ public class UserController {
         }
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-         newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
-         newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
-         fileName = fileName.replaceAll("\\s+","%20");
+        newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
+        newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
+        fileName = fileName.replaceAll("\\s+","%20");
         String q  = "http://"+ip2+"/data/"+newTask.getNameTask()+"/" + fileName;
         request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
                 +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));

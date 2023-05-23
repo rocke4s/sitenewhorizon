@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="Good work2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -364,14 +363,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="2711000" />
-    </task>
-    <task id="LOCAL-00057" summary="Кефтеме уфффф2">
-      <created>1683790148728</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1683790148728</updated>
+      <workItem from="1684836927069" duration="3576000" />
     </task>
     <task id="LOCAL-00058" summary="Бархатные тяги">
       <created>1683867123671</created>
@@ -709,7 +701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684837863464</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="Good work2">
+      <created>1684840172756</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1684840172756</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
