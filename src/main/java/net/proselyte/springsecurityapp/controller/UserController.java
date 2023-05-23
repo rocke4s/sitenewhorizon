@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -93,12 +94,12 @@ public class UserController {
         try {
             // Получаем данные из GET запроса
             String NameTask = request.getHeader("NameTask");
-            NameTask = NameTask.getBytes(StandardCharsets.UTF_8).toString();
+            NameTask = NameTask.getBytes(Charset.forName("windows-1251")).toString();
             String NumberTask = request.getHeader("NumberTask");
             String OldStatus = request.getHeader("OldStatus");
-            OldStatus = OldStatus.getBytes(StandardCharsets.UTF_8).toString();
+            OldStatus = OldStatus.getBytes(Charset.forName("windows-1251")).toString();
             String NewStatus = request.getHeader("NewStatus");
-            NewStatus = NewStatus.getBytes(StandardCharsets.UTF_8).toString();
+            NewStatus = NewStatus.getBytes(Charset.forName("windows-1251")).toString();
             String UserName = request.getHeader("UserName");
 
             Sender sender1 = new Sender();

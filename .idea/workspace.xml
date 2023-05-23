@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="asddd">
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="dasd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,21 +364,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="5726000" />
-    </task>
-    <task id="LOCAL-00061" summary="ПОбеда близко и я к ней иду">
-      <created>1684318251842</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1684318251842</updated>
-    </task>
-    <task id="LOCAL-00062" summary="ПОбеда близко и я к ней иду">
-      <created>1684326068880</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1684326068880</updated>
+      <workItem from="1684836927069" duration="7174000" />
     </task>
     <task id="LOCAL-00063" summary="ПОбеда близко и я к ней иду">
       <created>1684326187711</created>
@@ -708,7 +695,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684842299838</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="dasd">
+      <created>1684845520450</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1684845520450</updated>
+    </task>
+    <task id="LOCAL-00111" summary="dasd">
+      <created>1684845546300</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1684845546300</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -726,7 +727,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Тест деплой" />
     <MESSAGE value="Проба убрать путь /SpringSecurityApp" />
     <MESSAGE value="Запрос к серверу" />
     <MESSAGE value="Кефтеме" />
@@ -751,7 +751,8 @@
     <MESSAGE value="Good work2" />
     <MESSAGE value="asd" />
     <MESSAGE value="asddd" />
-    <option name="LAST_COMMIT_MESSAGE" value="asddd" />
+    <MESSAGE value="dasd" />
+    <option name="LAST_COMMIT_MESSAGE" value="dasd" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
