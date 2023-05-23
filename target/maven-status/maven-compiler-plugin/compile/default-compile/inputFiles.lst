@@ -4,7 +4,6 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\RatingTaskServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\UserService.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ProfileServiceImpl.java
-C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\MyAuthenticationSuccessHandler.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Chat.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\validator\UserValidator.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Task.java
@@ -20,7 +19,6 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\SecurityServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\Sender.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\RatingTaskDao.java
-C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\WebSocketConfig.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\User.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ProfileService.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\RatingTask.java
