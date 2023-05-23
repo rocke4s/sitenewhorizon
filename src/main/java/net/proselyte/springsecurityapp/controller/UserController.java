@@ -63,7 +63,7 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
     private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.292
+    private String ip2="194.67.111.29";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -89,25 +89,14 @@ public class UserController {
         return str;
     }
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
-    public void doGets(HttpServletRequest request) {
+    public void doGets(HttpServletRequest request) throws IOException {
         try {
             // Получаем данные из GET запроса
-            System.out.println("asdfqwe");
-            System.out.println("asdfqwe");
-            System.out.println("asdfqwe");
-            System.out.println("asdfqwe");
-            System.out.println("asdfqwe");
-            System.out.println("asdfqwe");
-            System.out.println("asdfqwe");
-
-
-
-
-            String NameTask = request.getParameter("NameTask");
-            String NumberTask = request.getParameter("NumberTask");
-            String OldStatus = request.getParameter("OldStatus");
-            String NewStatus = request.getParameter("NewStatus");
-            String UserName = request.getParameter("UserName");
+            String NameTask = request.getHeader("NameTask");
+            String NumberTask = request.getHeader("NumberTask");
+            String OldStatus = request.getHeader("OldStatus");
+            String NewStatus = request.getHeader("NewStatus");
+            String UserName = request.getHeader("UserName");
 
             Sender sender1 = new Sender();
             User user = userService.findByUsername(UserName);
