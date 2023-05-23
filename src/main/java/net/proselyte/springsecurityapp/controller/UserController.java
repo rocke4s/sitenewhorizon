@@ -62,8 +62,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
+    private String ip2="localhost";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -194,6 +194,7 @@ public class UserController {
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
         model.addAttribute("Profile",prof);
+        System.out.println("sad");
         return "profile";
     }
 
