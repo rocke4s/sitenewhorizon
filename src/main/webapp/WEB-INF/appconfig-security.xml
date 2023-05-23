@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -6,24 +7,26 @@
 		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		http://www.springframework.org/schema/security
 		 http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-    <http security="none" pattern="/statuser" />
-    <http  auto-config="true">
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/rating" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/profile" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/tasks" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/new_task" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/new_tasker" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/data/**" access="permitAll"/>
-        <intercept-url pattern="/statuser/**" access="permitAll"/>
-        <intercept-url pattern="/chat" access="permitAll"/>
-        <intercept-url pattern="/worker" access="permitAll"/>
-        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
-                    username-parameter="username" password-parameter="password"/>
-        <logout logout-success-url="/login?logout"/>
-    </http>
+<!--    <http security="none" pattern="/statuser" />-->
+    <beans:bean id="securityConfig" class="net.proselyte.springsecurityapp.config.SecurityConfig">
+    </beans:bean>
+<!--    <http  auto-config="true">-->
+<!--        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/rating" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/profile" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/tasks" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/new_task" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/new_tasker" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
+<!--        <intercept-url pattern="/data/**" access="permitAll"/>-->
+<!--        <intercept-url pattern="/statuser" access="permitAll"/>-->
+<!--        <intercept-url pattern="/chat" access="permitAll"/>-->
+<!--        <intercept-url pattern="/worker" access="permitAll"/>-->
+<!--        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"-->
+<!--                    username-parameter="username" password-parameter="password"/>-->
+<!--        <logout logout-success-url="/login?logout"/>-->
+<!--    </http>-->
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
             <password-encoder ref="encoder"></password-encoder>

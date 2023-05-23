@@ -22,7 +22,6 @@ import java.util.Base64;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
