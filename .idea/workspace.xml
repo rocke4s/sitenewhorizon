@@ -9,7 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="asd" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="asddd">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -361,14 +363,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="4722000" />
-    </task>
-    <task id="LOCAL-00060" summary="ПОбеда близко и я к ней иду">
-      <created>1684317983558</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1684317983558</updated>
+      <workItem from="1684836927069" duration="5726000" />
     </task>
     <task id="LOCAL-00061" summary="ПОбеда близко и я к ней иду">
       <created>1684318251842</created>
@@ -706,7 +701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684841623589</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="asddd">
+      <created>1684842299838</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1684842299838</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +726,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Новая БД" />
     <MESSAGE value="Тест деплой" />
     <MESSAGE value="Проба убрать путь /SpringSecurityApp" />
     <MESSAGE value="Запрос к серверу" />
@@ -749,7 +750,8 @@
     <MESSAGE value="Good work1" />
     <MESSAGE value="Good work2" />
     <MESSAGE value="asd" />
-    <option name="LAST_COMMIT_MESSAGE" value="asd" />
+    <MESSAGE value="asddd" />
+    <option name="LAST_COMMIT_MESSAGE" value="asddd" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

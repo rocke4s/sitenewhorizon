@@ -93,9 +93,12 @@ public class UserController {
         try {
             // Получаем данные из GET запроса
             String NameTask = request.getHeader("NameTask");
+            NameTask = NameTask.getBytes(StandardCharsets.UTF_8).toString();
             String NumberTask = request.getHeader("NumberTask");
             String OldStatus = request.getHeader("OldStatus");
+            OldStatus = OldStatus.getBytes(StandardCharsets.UTF_8).toString();
             String NewStatus = request.getHeader("NewStatus");
+            NewStatus = NewStatus.getBytes(StandardCharsets.UTF_8).toString();
             String UserName = request.getHeader("UserName");
 
             Sender sender1 = new Sender();
