@@ -1,6 +1,5 @@
 package net.proselyte.springsecurityapp.controller;
 
-import net.proselyte.springsecurityapp.config.SecurityConfig;
 import com.google.gson.Gson;
 import jakarta.mail.MessagingException;
 import net.proselyte.springsecurityapp.config.MyWebSocketClient;
@@ -90,12 +89,12 @@ public class UserController {
         return str;
     }
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
-    public void doPost(HttpServletRequest request) throws IOException {
+    public void doGets(HttpServletRequest request) {
         try {
             // Получаем данные из GET запроса
             String NameTask = request.getParameter("NameTask");
             String NumberTask = request.getParameter("NumberTask");
-            String OldStatus = request.getParameter("message");
+            String OldStatus = request.getParameter("OldStatus");
             String NewStatus = request.getParameter("NewStatus");
             String UserName = request.getParameter("UserName");
 
