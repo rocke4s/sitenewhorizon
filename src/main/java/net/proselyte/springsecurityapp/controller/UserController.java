@@ -89,7 +89,7 @@ public class UserController {
         String[] str = new String[]{username,password,mailName,mailPass};
         return str;
     }
-    @RequestMapping(value = "/statuser", method = RequestMethod.POST)
+    @RequestMapping(value = "/statuser", method = RequestMethod.GET)
     @PermitAll
     public void doPost(HttpServletRequest request) throws IOException {
         BufferedReader reader = request.getReader();
