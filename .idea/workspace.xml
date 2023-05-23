@@ -10,13 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="Good work2">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -369,14 +364,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="692000" />
-    </task>
-    <task id="LOCAL-00055" summary="Кефтеме уфффф">
-      <created>1683790065505</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1683790065505</updated>
+      <workItem from="1684836927069" duration="896000" />
     </task>
     <task id="LOCAL-00056" summary="Кефтеме уфффф2">
       <created>1683790125731</created>
@@ -714,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684836203250</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="Good work2">
+      <created>1684837654331</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1684837654331</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
