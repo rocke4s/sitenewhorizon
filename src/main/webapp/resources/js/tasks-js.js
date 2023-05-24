@@ -92,11 +92,19 @@ setInterval(function() {
     socket.onmessage = function(event) {
         console.log(event.data);
         var parsed= JSON.parse(event.data);
-        console.log(parsed.Docid)
-        var ull = document.getElementById("messageArea"+parsed.Docid);
-        const li = document.createElement('li');
-        li.innerHTML = parsed.Named+": "+parsed.messg;
-        messageList = event.data;
-        ull.appendChild(li);
+        if(parsed.message!=undefined)
+        {
+            var ull = document.getElementById("messageArea"+parsed.NumberTask);
+            const li = document.createElement('li');
+            li.innerHTML = parsed.Name+": "+parsed.message;
+            messageList = event.data;
+            ull.appendChild(li);
+        }
+        if(parsed.Until!=undefined)
+        {
+            var tdnumb = document.getElementById("deadline"+parsed.NumberTask);
+            tdnumb.innerHTML = parsed.Until+"- [Срок изменился]";
+            alert("Срок у документа "+parsed.TaskName+" изменился с "+tdnumb.innerHTML+" на "+parsed.Until);
+        }
     };
 }, 1000);

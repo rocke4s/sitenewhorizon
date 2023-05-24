@@ -1,16 +1,16 @@
 package net.proselyte.springsecurityapp.model;
 
 public class Message {
-    private String uidDoc;
+    private String NumberTask;
     private String Name;
     private String message;
 
-    public String getUidDoc() {
-        return uidDoc;
+    public String getNumberTask() {
+        return NumberTask;
     }
 
-    public void setUidDoc(String uidDoc) {
-        this.uidDoc = uidDoc;
+    public void setNumberTask(String numberTask) {
+        NumberTask = numberTask;
     }
 
     public String getName() {

@@ -377,9 +377,9 @@ public class UserController {
     public void doChat(HttpServletRequest request) {
         try {
             // Получаем данные из GET запроса
-            String uidDoc = request.getParameter("uidDoc");
-            String Name = request.getParameter("Name");
-            String message = request.getParameter("message");
+            String NumberTask = decodRequest(request.getHeader("NumberTask"));
+            String Name = decodRequest(request.getHeader("Name"));
+            String message = decodRequest(request.getHeader("message"));
 
 
             // Отправляем полученное сообщение через WebSocket
@@ -388,7 +388,27 @@ public class UserController {
             String uri = "ws://"+ip2+":80/chat";
             MyWebSocketClient endpoint = new MyWebSocketClient();
             Session session = container.connectToServer(endpoint, new URI(uri));
-            endpoint.sendMessage("{'uidDoc'='"+uidDoc+"','Name'='"+Name+"','message'='"+message+"'}");
+            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','Name'='"+Name+"','message'='"+message+"'}");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    @RequestMapping(value = "/untiluser", method = RequestMethod.GET)
+    public void doUntil(HttpServletRequest request) {
+        try {
+            // Получаем данные из GET запроса
+            String NumberTask = decodRequest(request.getHeader("NumberTask"));
+            String NameTask = decodRequest(request.getHeader("NameTask"));
+            String Until = decodRequest(request.getHeader("Until"));
+
+
+            // Отправляем полученное сообщение через WebSocket
+
+            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+            String uri = "ws://"+ip2+":80/chat";
+            MyWebSocketClient endpoint = new MyWebSocketClient();
+            Session session = container.connectToServer(endpoint, new URI(uri));
+            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','NameTask'='"+NameTask+"','Until'='"+Until+"'}");
         } catch (Exception e) {
             System.out.println(e);
         }

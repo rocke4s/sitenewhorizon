@@ -15,6 +15,7 @@ net\proselyte\springsecurityapp\config\Sender$1.class
 net\proselyte\springsecurityapp\service\SecurityService.class
 net\proselyte\springsecurityapp\service\RatingTaskService.class
 net\proselyte\springsecurityapp\model\ChangeStatus.class
+net\proselyte\springsecurityapp\model\Until.class
 net\proselyte\springsecurityapp\service\SecurityServiceImpl.class
 net\proselyte\springsecurityapp\service\UserDetailsServiceImpl.class
 net\proselyte\springsecurityapp\model\Role.class

@@ -42,7 +42,7 @@
             <table>
                 <thead>
                 <tr>
-                    <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылкааааа</th></c:if>
+                    <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
                     <c:if test="${!Task.getTaskPartner().isEmpty()}"><th>Контрагент</th></c:if>
                     <c:if test="${!Task.getTaskStatus().isEmpty()}"><th>Состояние заявки</th></c:if>
                     <c:if test="${Task.getTaskStatus()!='Отменено' && Task.getTaskStatus()!='Проверено'
@@ -111,7 +111,7 @@
                     <c:if test="${!Tasks.getTypeTask().isEmpty()}"><td>${Tasks.getTypeTask()}</td></c:if>
                     <c:if test="${!Tasks.getTaskImportance().isEmpty()}"><td>${Tasks.getTaskImportance()}</td></c:if>
                     <c:if test="${!Tasks.getTaskContent().isEmpty()}"><td style="word-wrap: break-word; word-break: break-word; max-width: 200px;">${Tasks.getTaskContent()}</td></c:if>
-                    <c:if test="${!Tasks.getTaskDeadline().isEmpty()}"><td>${Tasks.getTaskDeadline()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskDeadline().isEmpty()}"><td id="deadline${Tasks.getTaskNumber()}">${Tasks.getTaskDeadline()}</td></c:if>
                     <c:if test="${!Tasks.getTaskIntensity().isEmpty()}"><td>${Tasks.getTaskIntensity()}</td></c:if>
                     <c:if test="${!Tasks.getTaskId().isEmpty()}"><td>${Tasks.getTaskId()}</td></c:if>
                     <c:if test="${!Tasks.getTaskDataDone().isEmpty()}"><td>${Tasks.getTaskDataDone()}</td></c:if>
@@ -167,10 +167,13 @@
     </div>
 </c:forEach>
 </div>
+<div id="notification"></div>
 <script src="${contextPath}/resources/js/tasks-js.js">
+</script>
+<script>
     function sendMessage(ids) {
         ul = document.getElementById('messageArea'+ids);
-        socket.send("{'uidDoc':'"+ids+"','Name':'${pageContext.request.userPrincipal.name}','message':'"+document.querySelector('#id_'+ids+' input[type="text"]').value+"'}");
+        socket.send("{'NumberTask':'"+ids+"','Name':'${pageContext.request.userPrincipal.name}','message':'"+document.querySelector('#id_'+ids+' input[type="text"]').value+"'}");
         document.querySelector('#id_'+ids+' input[type="text"]').value = "";
     }
 </script>
