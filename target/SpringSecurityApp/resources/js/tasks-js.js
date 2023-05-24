@@ -103,8 +103,8 @@ setInterval(function() {
         if(parsed.Until!=undefined)
         {
             var tdnumb = document.getElementById("deadline"+parsed.NumberTask);
-            tdnumb.innerHTML = parsed.Until+"- [Срок изменился]";
             alert("Срок у документа "+parsed.TaskName+" изменился с "+tdnumb.innerHTML+" на "+parsed.Until);
+            tdnumb.innerHTML = parsed.Until+"- [Срок изменился]";
         }
     };
 }, 1000);
