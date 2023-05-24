@@ -34,21 +34,21 @@
     </div>
     <div class="wrapper">
         <div class="buttons">
-            <form:form method="GET" action="/profile?${_csrf.parameterName}=${_csrf.token}">
+            <form:form method="POST" action="/profile?${_csrf.parameterName}=${_csrf.token}">
 
                 <button class="show-user" type="submit">Показать данные пользователя</button>
             </form:form>
         </div>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
             <div class="buttons">
-                <form:form method="GET" action="/ratings?${_csrf.parameterName}=${_csrf.token}">
+                <form:form method="POST" action="/ratings?${_csrf.parameterName}=${_csrf.token}">
                     <button class="show-tasks" type="submit">Показать рейтинг списка задач</button>
                 </form:form>
             </div>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_USER')">
         <div class="buttons">
-            <form:form method="GET" action="/tasks?${_csrf.parameterName}=${_csrf.token}">
+            <form:form method="POST" action="/tasks?${_csrf.parameterName}=${_csrf.token}">
                 <input type="hidden" name="Profile" value="${Profile}"/>
                 <button class="show-tasks" type="submit">Показать список задач</button>
             </form:form>

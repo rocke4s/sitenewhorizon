@@ -191,7 +191,7 @@ public class UserController {
         return "welcome";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String profile(Model model, Authentication authentication) {
         System.out.println(authentication.getName());
         User user = userService.findByUsername(authentication.getName());
@@ -251,7 +251,6 @@ public class UserController {
     public String showRatings(Model model)
     {
         List<RatingTask> listRatingTask = ratingTaskService.findAll();
-        System.out.println("ky");
         model.addAttribute("rating",listRatingTask);
         return "ratings";
     }
@@ -305,11 +304,6 @@ public class UserController {
         } finally {
             response.close();
         }
-
-
-//        Sender sender1 = new Sender();
-//        sender1.send("rocke4max@gmail.com", "Изменение статуса заявки", "Статус заявки №"+doc+" изменился на "
-//                +stateDoc);
 
         return "redirect:/tasks";
     }
