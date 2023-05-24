@@ -9,8 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(3) 24.05.2023&#10;Проверка работы чата и смены срока">
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(3) 24.05.2023&#10;Мини комит">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/MyWebSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/MyWebSocketServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,14 +365,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="22707000" />
-    </task>
-    <task id="LOCAL-00068" summary="Итог 18.05.2023">
-      <created>1684413886587</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1684413886587</updated>
+      <workItem from="1684836927069" duration="26578000" />
     </task>
     <task id="LOCAL-00069" summary="(1) 19.05.2023">
       <created>1684475227464</created>
@@ -708,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684914185913</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="(3) 24.05.2023&#10;Мини комит">
+      <created>1684922592911</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1684922592911</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -726,7 +728,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Бархатные тяги" />
     <MESSAGE value="Бархатные тяги мои баленсиаги" />
     <MESSAGE value="ПОбеда близко и я к ней иду" />
     <MESSAGE value="А че случилось" />
@@ -751,7 +752,8 @@
     <MESSAGE value="(1) 24.05.2023&#10;Заменил некоторые методы на POST" />
     <MESSAGE value="(2) 24.05.2023&#10;Заменил некоторые методы на POST" />
     <MESSAGE value="(3) 24.05.2023&#10;Проверка работы чата и смены срока" />
-    <option name="LAST_COMMIT_MESSAGE" value="(3) 24.05.2023&#10;Проверка работы чата и смены срока" />
+    <MESSAGE value="(3) 24.05.2023&#10;Мини комит" />
+    <option name="LAST_COMMIT_MESSAGE" value="(3) 24.05.2023&#10;Мини комит" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
