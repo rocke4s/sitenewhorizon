@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 24.05.2023&#10;декодинг заголовков запроса">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 24.05.2023&#10;Заменил некоторые методы на POST">
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/welcome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/welcome.jsp" afterDir="false" />
     </list>
@@ -365,14 +364,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="12113000" />
-    </task>
-    <task id="LOCAL-00065" summary="А че случилось">
-      <created>1684402592048</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1684402592048</updated>
+      <workItem from="1684836927069" duration="12510000" />
     </task>
     <task id="LOCAL-00066" summary="А че случилось">
       <created>1684411215951</created>
@@ -710,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684902704823</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="(1) 24.05.2023&#10;Заменил некоторые методы на POST">
+      <created>1684905725674</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1684905725674</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -728,7 +727,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Кефтеме" />
     <MESSAGE value="Кефтеме уфффф" />
     <MESSAGE value="Кефтеме уфффф2" />
     <MESSAGE value="Бархатные тяги" />
@@ -753,7 +751,8 @@
     <MESSAGE value="dasd" />
     <MESSAGE value="dasd1" />
     <MESSAGE value="(1) 24.05.2023&#10;декодинг заголовков запроса" />
-    <option name="LAST_COMMIT_MESSAGE" value="(1) 24.05.2023&#10;декодинг заголовков запроса" />
+    <MESSAGE value="(1) 24.05.2023&#10;Заменил некоторые методы на POST" />
+    <option name="LAST_COMMIT_MESSAGE" value="(1) 24.05.2023&#10;Заменил некоторые методы на POST" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

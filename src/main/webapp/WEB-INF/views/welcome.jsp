@@ -26,7 +26,8 @@
             <img src="${contextPath}/resources/image/logo.png" alt="Логотип">
             <h1>Мой профиль</h1>
         </div>
-        <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
         <h2><a class="btn" onclick="document.forms['logoutForm'].submit()">Выйти</a>
@@ -34,27 +35,30 @@
     </div>
     <div class="wrapper">
         <div class="buttons">
-            <form:form method="POST" action="/profile?${_csrf.parameterName}=${_csrf.token}">
-
+            <form:form method="POST" action="/profile">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button class="show-user" type="submit">Показать данные пользователя</button>
             </form:form>
         </div>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
             <div class="buttons">
-                <form:form method="POST" action="/ratings?${_csrf.parameterName}=${_csrf.token}">
+                <form:form method="POST" action="/ratings">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button class="show-tasks" type="submit">Показать рейтинг списка задач</button>
                 </form:form>
             </div>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_USER')">
         <div class="buttons">
-            <form:form method="POST" action="/tasks?${_csrf.parameterName}=${_csrf.token}">
+            <form:form method="POST" action="/tasks">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <input type="hidden" name="Profile" value="${Profile}"/>
                 <button class="show-tasks" type="submit">Показать список задач</button>
             </form:form>
         </div>
         <div class="buttons">
-            <form:form method="POST" action="/new_task?${_csrf.parameterName}=${_csrf.token}">
+            <form:form method="POST" action="/new_task">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <input type="hidden" name="Profile" value="${User}"/>
                 <button class="create-task" type="submit">Создать задачу</button>
             </form:form>

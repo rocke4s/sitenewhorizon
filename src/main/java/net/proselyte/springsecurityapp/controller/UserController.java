@@ -201,7 +201,7 @@ public class UserController {
         return "profile";
     }
 
-    @RequestMapping(value = "/tasks", method = RequestMethod.GET)
+    @RequestMapping(value = "/tasks", method = RequestMethod.POST)
     public ModelAndView tasks(Model model, Authentication authentication,ChangeStatus changeStatus)  throws IOException{
         CloseableHttpClient client = HttpClientBuilder.create().build();
         User user = userService.findByUsername(authentication.getName());
