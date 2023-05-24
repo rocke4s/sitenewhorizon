@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="dasd">
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="dasd1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
     </list>
@@ -364,14 +364,7 @@
       <workItem from="1684150496294" duration="17060000" />
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
-      <workItem from="1684836927069" duration="7174000" />
-    </task>
-    <task id="LOCAL-00063" summary="ПОбеда близко и я к ней иду">
-      <created>1684326187711</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1684326187711</updated>
+      <workItem from="1684836927069" duration="9972000" />
     </task>
     <task id="LOCAL-00064" summary="А че случилось">
       <created>1684400075653</created>
@@ -709,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684845546300</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="dasd1">
+      <created>1684846242242</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1684846242242</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -727,7 +727,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Проба убрать путь /SpringSecurityApp" />
     <MESSAGE value="Запрос к серверу" />
     <MESSAGE value="Кефтеме" />
     <MESSAGE value="Кефтеме уфффф" />
@@ -752,7 +751,8 @@
     <MESSAGE value="asd" />
     <MESSAGE value="asddd" />
     <MESSAGE value="dasd" />
-    <option name="LAST_COMMIT_MESSAGE" value="dasd" />
+    <MESSAGE value="dasd1" />
+    <option name="LAST_COMMIT_MESSAGE" value="dasd1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

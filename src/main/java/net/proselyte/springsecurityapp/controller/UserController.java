@@ -35,10 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -85,22 +82,24 @@ public class UserController {
         String username = props.getProperty("username");//Переменные для
         String password = props.getProperty("password");//basic auth
         String mailName = props.getProperty("mail.username");
-        String mailPass = props.getProperty("mail.password");
+        String mailPass = props.getProperty("mail.password");//Íîâ' Â ðàáîòå Çàïëàíèðîâàííî
         String[] str = new String[]{username,password,mailName,mailPass};
         return str;
+    }
+    public String decodRequest(String text) throws UnsupportedEncodingException {
+        byte[] symb = text.getBytes("cp1252");
+        text=new String(symb,"cp1251");
+        return text;
     }
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
     public void doGets(HttpServletRequest request) throws IOException {
         try {
             // Получаем данные из GET запроса
-            String NameTask = request.getHeader("NameTask");
-            NameTask = NameTask.getBytes(Charset.forName("windows-1251")).toString();
-            String NumberTask = request.getHeader("NumberTask");
-            String OldStatus = request.getHeader("OldStatus");
-            OldStatus = OldStatus.getBytes(Charset.forName("windows-1251")).toString();
-            String NewStatus = request.getHeader("NewStatus");
-            NewStatus = NewStatus.getBytes(Charset.forName("windows-1251")).toString();
-            String UserName = request.getHeader("UserName");
+            String NameTask = decodRequest(request.getHeader("NameTask"));
+            String NumberTask = decodRequest(request.getHeader("NumberTask"));
+            String OldStatus = decodRequest(request.getHeader("OldStatus"));
+            String NewStatus = decodRequest(request.getHeader("NewStatus"));
+            String UserName = decodRequest(request.getHeader("UserName"));
 
             Sender sender1 = new Sender();
             User user = userService.findByUsername(UserName);
