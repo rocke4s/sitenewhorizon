@@ -55,8 +55,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
+    private String ip2="localhost";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -196,7 +196,7 @@ public class UserController {
         return "profile";
     }
 
-    @RequestMapping(value = "/tasks", method = RequestMethod.POST)
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET)
     public ModelAndView tasks(Model model, Authentication authentication,ChangeStatus changeStatus)  throws IOException{
         CloseableHttpClient client = HttpClientBuilder.create().build();
         User user = userService.findByUsername(authentication.getName());
@@ -249,7 +249,7 @@ public class UserController {
         model.addAttribute("rating",listRatingTask);
         return "ratings";
     }
-    @RequestMapping(value = "/rating", method = RequestMethod.GET)
+    @RequestMapping(value = "/rating", method = RequestMethod.POST)
     public String ratingWork(String ratingg,String NameTasker,String uidDoc_8) {
         System.out.println("Пользователь оценил работу на: "+ratingg);
         RatingTask ratingTask = new RatingTask();
@@ -259,7 +259,7 @@ public class UserController {
         ratingTaskService.save(ratingTask);
         return "redirect:/tasks";
     }
-    @RequestMapping(value = "/change_status", method = RequestMethod.GET)
+    @RequestMapping(value = "/change_status", method = RequestMethod.POST)
     public String changeStatus(@ModelAttribute("changeStatus")ChangeStatus changeStatus,Authentication authentication,
                                String uidDoc_8,String uidDoc_5,String uidDoc_0) throws IOException, MessagingException {
         HttpGet request = null;
@@ -371,13 +371,9 @@ public class UserController {
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
     public void doChat(HttpServletRequest request) {
         try {
-            // Получаем данные из GET запроса
             String NumberTask = decodRequest(request.getHeader("NumberTask"));
             String Name = decodRequest(request.getHeader("Name"));
             String message = decodRequest(request.getHeader("message"));
-
-
-            // Отправляем полученное сообщение через WebSocket
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
             String uri = "ws://"+ip2+":80/chat";
@@ -391,13 +387,9 @@ public class UserController {
     @RequestMapping(value = "/untiluser", method = RequestMethod.GET)
     public void doUntil(HttpServletRequest request) {
         try {
-            // Получаем данные из GET запроса
             String NumberTask = decodRequest(request.getHeader("NumberTask"));
             String NameTask = decodRequest(request.getHeader("NameTask"));
             String Until = decodRequest(request.getHeader("Until"));
-
-
-            // Отправляем полученное сообщение через WebSocket
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
             String uri = "ws://"+ip2+":80/chat";

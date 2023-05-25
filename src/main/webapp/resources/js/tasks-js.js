@@ -21,7 +21,7 @@ forms.forEach(form => {
         const myInput2 = document.getElementById("NameTasker");
         myInput2.value = saveNameTask;
         fetch('/change_status?uidDoc_8='+uidDoc_8, {
-            method: 'GET'
+            method: 'POST'
         })
             .then(response => response.json())
             .then(data => {
@@ -50,7 +50,7 @@ function HideChat(ids)
 }
 
 
-var socket = new WebSocket("ws://194.67.111.29/chat");
+var socket = new WebSocket("ws://localhost/chat");
 
 socket.onopen = function(event) {
     console.log("WebSocket opened");

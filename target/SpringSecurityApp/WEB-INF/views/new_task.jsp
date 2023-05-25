@@ -6,7 +6,7 @@
     <!DOCTYPE html>
     <html lang="en">
 <head>
-    <title>Новая заявка</title>
+    <title>Rit.Новая заявка</title>
     <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/new_task-css.css" rel="stylesheet">

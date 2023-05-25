@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Добро пожаловать!</title>
+    <title>Rit.Добро пожаловать</title>
     <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="${contextPath}/resources/css/welcome-css.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <div class="header">
         <div class="logo">
             <img src="${contextPath}/resources/image/logo.png" alt="Логотип">
-            <h1>Мой профиль</h1>
+            <h1>Рит.Мой профиль</h1>
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -50,7 +50,7 @@
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_USER')">
         <div class="buttons">
-            <form:form method="POST" action="/tasks">
+            <form:form method="GET" action="/tasks">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <input type="hidden" name="Profile" value="${Profile}"/>
                 <button class="show-tasks" type="submit">Показать список задач</button>

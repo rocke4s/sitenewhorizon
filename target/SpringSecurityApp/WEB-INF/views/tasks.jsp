@@ -5,7 +5,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>Задачи!</title>
+    <title>Rit.Задачи</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -73,7 +73,7 @@
                         <td>
                             <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
                             <div>
-                                <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="get" modelAttribute="changeStatus">
+                                <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="POST" modelAttribute="changeStatus">
                                     <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                     <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_5">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -87,7 +87,7 @@
                         </c:if>
                             <c:if test="${Tasks.getTaskStatus()=='Выполнена' || Tasks.getTaskStatus()=='На тестировании'}">
                                 <div>
-                                    <form class="myForm" method="GET" action="/change_status">
+                                    <form class="myForm" method="POST" action="/change_status">
                                         <input id="TaskNumber" type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input id="uidDoc_8" type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_8">
                                         <input id="NameTasks" type="hidden" value="${Tasks.getNameTask()}" name="NameTasks">
@@ -98,7 +98,7 @@
                             </c:if>
                             <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланированно'}">
                                 <div>
-                                    <form method="GET" action="/change_status">
+                                    <form method="POST" action="/change_status">
                                         <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_0">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -144,12 +144,13 @@
                 </div>
 
                 <!-- Modal Body -->
-                <form class="rating" method="GET" action="/rating">
+                <form class="rating" method="POST" action="/rating">
                 <div class="modal-body">
                     <p>Оставьте свою оценку:</p>
                     <div class="btn-group" role="group" aria-label="Оценить">
                         <input id="uidDoc_88" type="hidden" name="uidDoc_8">
                         <input id="NameTasker" type="hidden" name="NameTasker">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <button type="submit" class="btn btn-success" name="ratingg" value="Хорошо">Хорошо</button>
                         <button type="submit" class="btn btn-warning" name="ratingg" value="Удовлетворительно">Удовлетворительно</button>
                         <button type="submit" class="btn btn-danger" name="ratingg" value="Плохо">Плохо</button>

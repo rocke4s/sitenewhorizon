@@ -6,7 +6,7 @@
 <html>
 <head>
 
-  <title>Рейтинг задач!</title>
+  <title>Rit.Рейтинг задач</title>
   <style type="text/css">
   </style>
   <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">

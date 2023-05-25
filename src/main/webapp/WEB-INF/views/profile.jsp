@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Profile</title>
+    <title>Rit.Профиль</title>
     <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/profile-css.css" rel="stylesheet">
