@@ -20,6 +20,7 @@
         <intercept-url pattern="/statuser" access="permitAll"/>
         <intercept-url pattern="/chat" access="permitAll"/>
         <intercept-url pattern="/worker" access="permitAll"/>
+        <intercept-url pattern="/comet" access="permitAll()"/>
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout"/>
