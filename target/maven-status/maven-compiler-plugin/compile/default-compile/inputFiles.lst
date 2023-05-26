@@ -1,3 +1,5 @@
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\ChangeLogTask.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ChangeLogTaskServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\controller\UserController.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\UserDetailsServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Message.java
@@ -8,7 +10,9 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Chat.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\validator\UserValidator.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Task.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\ChangeLogTaskDao.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\RoleDao.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\ListChangeLogTask.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Statuska.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\ChangeStatus.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\UserServiceImpl.java
@@ -24,6 +28,7 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ProfileService.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\RatingTask.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\RatingTaskService.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ChangeLogTaskService.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\SecurityConfig.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Role.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\UserReg.java

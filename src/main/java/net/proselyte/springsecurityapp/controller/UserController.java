@@ -5,10 +5,7 @@ import jakarta.mail.MessagingException;
 import net.proselyte.springsecurityapp.config.MyWebSocketClient;
 import net.proselyte.springsecurityapp.config.Sender;
 import net.proselyte.springsecurityapp.model.*;
-import net.proselyte.springsecurityapp.service.ProfileService;
-import net.proselyte.springsecurityapp.service.RatingTaskService;
-import net.proselyte.springsecurityapp.service.SecurityService;
-import net.proselyte.springsecurityapp.service.UserService;
+import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
 
 import org.apache.http.HttpEntity;
@@ -18,6 +15,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.apache.http.util.EntityUtils;
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -52,11 +50,13 @@ public class UserController {
     @Autowired
     private ProfileService profileService;
     @Autowired
+    private ChangeLogTaskService changeLogTaskService;
+    @Autowired
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
+    private String ip2="localhost";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -86,30 +86,7 @@ public class UserController {
         text=new String(symb,"cp1251");
         return text;
     }
-    @RequestMapping(value = "/statuser", method = RequestMethod.GET)
-    public void doGets(HttpServletRequest request) throws IOException {
-        try {
-            // Получаем данные из GET запроса
-            String NameTask = decodRequest(request.getHeader("NameTask"));
-            String NumberTask = decodRequest(request.getHeader("NumberTask"));
-            String OldStatus = decodRequest(request.getHeader("OldStatus"));
-            String NewStatus = decodRequest(request.getHeader("NewStatus"));
-            String UserName = decodRequest(request.getHeader("UserName"));
 
-            Sender sender1 = new Sender();
-            User user = userService.findByUsername(UserName);
-            Profile prof = profileService.findByUidUser(user.getUidUser());
-            try {
-                sender1.send(prof.getUserMail(), "Изменение статуса заявки", "Статус заявки '" + NameTask + "' №" + NumberTask + " изменился с "
-                        + OldStatus + " на " + NewStatus);
-                System.out.println("Email sent successfully");
-            } catch (jakarta.mail.MessagingException e) {
-                System.err.println("Email sending failed: " + e.getMessage());
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") UserReg userForm, BindingResult bindingResult, Model model) throws IOException {
         CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -236,10 +213,17 @@ public class UserController {
         } finally {
             response.close();
         }
+        List<ChangeLogTask> changeLogTask = new ArrayList<>();
+        try {
+            changeLogTask = changeLogTaskService.findByUidUser(user.getUidUser());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         ModelAndView modelAndView = new ModelAndView("tasks");
         modelAndView.addObject("Tasks", task);
         modelAndView.addObject("changeStatus",changeStatus);
         modelAndView.addObject("chat",chat);
+        modelAndView.addObject("changeLogTask",changeLogTask);
         return modelAndView;
     }
     @RequestMapping(value = "/ratings", method = RequestMethod.POST)
@@ -369,7 +353,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void doChat(HttpServletRequest request) {
+    public void doChat(HttpServletRequest request,Authentication authentication) {
         try {
             String NumberTask = decodRequest(request.getHeader("NumberTask"));
             String Name = decodRequest(request.getHeader("Name"));
@@ -384,18 +368,66 @@ public class UserController {
             System.out.println(e);
         }
     }
-    @RequestMapping(value = "/untiluser", method = RequestMethod.GET)
-    public void doUntil(HttpServletRequest request) {
+    @RequestMapping(value = "/statuser", method = RequestMethod.GET)
+    public void doGets(HttpServletRequest request) throws IOException {
         try {
-            String NumberTask = decodRequest(request.getHeader("NumberTask"));
+            // Получаем данные из GET запроса
             String NameTask = decodRequest(request.getHeader("NameTask"));
-            String Until = decodRequest(request.getHeader("Until"));
+            String NumberTask = decodRequest(request.getHeader("NumberTask"));
+            String OldStatus = decodRequest(request.getHeader("OldStatus"));
+            String NewStatus = decodRequest(request.getHeader("NewStatus"));
+            String UserName = decodRequest(request.getHeader("UserName"));
 
+            Sender sender1 = new Sender();
+            User user = userService.findByUsername(UserName);
+            Profile prof = profileService.findByUidUser(user.getUidUser());
+            try {
+                sender1.send(prof.getUserMail(), "Изменение статуса заявки", "Статус заявки '" + NameTask + "' №" + NumberTask + " изменился с "
+                        + OldStatus + " на " + NewStatus);
+                System.out.println("Email sent successfully");
+            } catch (jakarta.mail.MessagingException e) {
+                System.err.println("Email sending failed: " + e.getMessage());
+            }
+            ChangeLogTask changeLogTask = new ChangeLogTask();
+            changeLogTask.setChangetype("Изменение статуса");
+            changeLogTask.setChange("Статус изменен с "+OldStatus+" на "+NewStatus);
+            changeLogTask.setNameTask(NameTask);
+            Calendar currentCalendar = Calendar.getInstance();
+            changeLogTask.setTime(currentCalendar.getTime().toString());
+            changeLogTask.setUidUser(user.getUidUser());
+            changeLogTaskService.save(changeLogTask);
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
             String uri = "ws://"+ip2+":80/chat";
             MyWebSocketClient endpoint = new MyWebSocketClient();
             Session session = container.connectToServer(endpoint, new URI(uri));
-            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','NameTask'='"+NameTask+"','Until'='"+Until+"'}");
+            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','NameTask'='"+NameTask+"','Until'='Статус изменен с "+OldStatus+" на "+NewStatus+"','ChangeType':'"+
+                    changeLogTask.getChangetype()+"','Time':'"+changeLogTask.getTime()+"'}");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    @RequestMapping(value = "/untiluser", method = RequestMethod.GET)
+    public void doUntil(HttpServletRequest request,Authentication authentication) {
+        try {
+            String NumberTask = decodRequest(request.getHeader("NumberTask"));
+            String NameTask = decodRequest(request.getHeader("NameTask"));
+            String Until = decodRequest(request.getHeader("Until"));
+            String Login = decodRequest(request.getHeader("Login"));
+            User user = userService.findByUsername(Login);
+            ChangeLogTask changeLogTask = new ChangeLogTask();
+            changeLogTask.setChangetype("Изменение срока");
+            changeLogTask.setChange(Until);
+            changeLogTask.setNameTask(NameTask);
+            Calendar currentCalendar = Calendar.getInstance();
+            changeLogTask.setTime(currentCalendar.getTime().toString());
+            changeLogTask.setUidUser(user.getUidUser());
+            changeLogTaskService.save(changeLogTask);
+            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+            String uri = "ws://"+ip2+":80/chat";
+            MyWebSocketClient endpoint = new MyWebSocketClient();
+            Session session = container.connectToServer(endpoint, new URI(uri));
+            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','NameTask'='"+NameTask+"','Until'='"+Until+"','ChangeType':'"+
+                    changeLogTask.getChangetype()+"','Time':'"+changeLogTask.getTime()+"'}");
         } catch (Exception e) {
             System.out.println(e);
         }

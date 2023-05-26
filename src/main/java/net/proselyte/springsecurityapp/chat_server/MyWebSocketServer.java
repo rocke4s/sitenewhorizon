@@ -67,7 +67,8 @@ public class MyWebSocketServer  {
             for (Map.Entry<Session, String> entry : clients.entrySet()) {
                 if (entry.getValue().equals(message2.getNumberTask())) {
                     entry.getKey().getBasicRemote().sendText("{ \"NumberTask\":\""+message2.getNumberTask()+"\",\"NameTask\":\""+message2.getNameTask()
-                            +"\",\"Until\":\""+message2.getUntil()+"\" }");
+                            +"\",\"Until\":\""+message2.getUntil()+"\",\"ChangeType\":\""+message2.getChangeType()+"\"," +
+                            "\"Time\":\""+message2.getTime()+"\" }");
                 }
             }
         }

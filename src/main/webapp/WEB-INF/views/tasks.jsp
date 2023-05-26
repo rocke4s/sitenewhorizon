@@ -31,7 +31,8 @@
     <input type="checkbox" id="toggle" class="toggle-checkbox" onchange="hideEnding(this)" checked>
     <label for="toggle" class="toggle-label"></label>
 </div>
-<span>Показать задачи</span>
+<label id="togLabel" >Показать задачи</label>
+<button class="sidebar-toggle">Список изменений</button>
 <div class="all-list-task">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
     <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
@@ -96,7 +97,7 @@
                                     </form>
                                 </div>
                             </c:if>
-                            <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='На расмотрении' || Tasks.getTaskStatus()=='Запланированно'}">
+                            <c:if test="${Tasks.getTaskStatus()=='Новая'}">
                                 <div>
                                     <form method="POST" action="/change_status">
                                         <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
@@ -168,7 +169,19 @@
     </div>
 </c:forEach>
 </div>
-<div id="notification"></div>
+<div class="sidebar">
+    <h2>Журнал изменений</h2>
+    <ul id="sidebar-ul">
+<c:forEach var="changeLogTask" items="${changeLogTask}">
+        <li>
+            <span class="change-type"><u>${changeLogTask.getChangetype()}</u></span><br>
+            <span class="task-title">${changeLogTask.getNameTask()}</span><br>
+            <span class="change">${changeLogTask.getChange()}</span>
+            <hr><span class="time">${changeLogTask.getTime()}</span><br>
+        </li>
+</c:forEach>
+    </ul>
+</div>
 <script src="${contextPath}/resources/js/tasks-js.js">
 </script>
 <script>

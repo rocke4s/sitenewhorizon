@@ -4,6 +4,24 @@ public class Until {
     private String NumberTask;
     private String NameTask;
     private String Until;
+    private String ChangeType;
+    private String Time;
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
+    }
+
+    public String getChangeType() {
+        return ChangeType;
+    }
+
+    public void setChangeType(String changeType) {
+        ChangeType = changeType;
+    }
 
     public String getNumberTask() {
         return NumberTask;

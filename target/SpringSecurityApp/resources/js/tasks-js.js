@@ -50,7 +50,7 @@ function HideChat(ids)
 }
 
 
-var socket = new WebSocket("ws://194.67.111.29/chat");
+var socket = new WebSocket("ws://localhost/chat");
 
 socket.onopen = function(event) {
     console.log("WebSocket opened");
@@ -71,16 +71,19 @@ socket.onerror = function(event) {
 function hideEnding(stat)
 {
     var tdElements = document.getElementsByTagName('td');
+    var togLabel = document.getElementById("togLabel");
     for (var i = 0; i < tdElements.length; i++) {
         var tdElement = tdElements[i];
         if (tdElement.innerHTML === 'Проверено' || tdElement.innerHTML === 'Отменено') {
             var detailsElement = tdElement.closest('details');
             if (detailsElement) {
                 if(stat.checked) {
+                    togLabel.innerHTML = 'Показать все задачи';
                     detailsElement.style.display = 'none';
                 }
                 else
                 {
+                    togLabel.innerHTML = 'Скрыть неактивные задачи';
                     detailsElement.style.display = '';
                 }
             }
@@ -100,11 +103,34 @@ setInterval(function() {
             messageList = event.data;
             ull.appendChild(li);
         }
-        if(parsed.Until!=undefined)
+        if(parsed.ChangeType=="Изменение срока")
         {
-            var tdnumb = document.getElementById("deadline"+parsed.NumberTask);
-            alert("Срок у документа "+parsed.TaskName+" изменился с "+tdnumb.innerHTML+" на "+parsed.Until);
-            tdnumb.innerHTML = parsed.Until+"- [Срок изменился]";
+            var sidebarUl = document.getElementById("sidebar-ul");
+            const li = document.createElement('li');
+            li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
+                ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
+                ' <span class="change">Срок изменился на '+parsed.Until+'</span>' +
+                ' <hr><span class="time">'+parsed.Time+'</span>';
+            sidebarUl.appendChild(li);
+            sidebar.classList.toggle('active')
+        }
+        if(parsed.ChangeType=="Изменение статуса")
+        {
+            var sidebarUl = document.getElementById("sidebar-ul");
+            const li = document.createElement('li');
+            li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
+                ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
+                ' <span class="change">'+parsed.Until+'</span>' +
+                ' <hr><span class="time">'+parsed.Time+'</span>';
+            sidebarUl.appendChild(li);
+            sidebar.classList.toggle('active')
         }
     };
 }, 1000);
+
+const sidebarToggle = document.querySelector('.sidebar-toggle')
+const sidebar = document.querySelector('.sidebar')
+
+sidebarToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('active')
+})

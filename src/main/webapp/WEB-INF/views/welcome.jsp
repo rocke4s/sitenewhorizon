@@ -24,7 +24,7 @@
     <div class="header">
         <div class="logo">
             <img src="${contextPath}/resources/image/logo.png" alt="Логотип">
-            <h1>Рит.Мой профиль</h1>
+            <h1>Мой профиль</h1>
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
