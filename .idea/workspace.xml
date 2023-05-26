@@ -9,14 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(2) 26.05.2023&#10;WSS">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java" afterDir="false" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(3) 26.05.2023&#10;Cometa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-security.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-security.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,14 +284,7 @@
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
-      <workItem from="1685073130574" duration="19873000" />
-    </task>
-    <task id="LOCAL-00075" summary="(3) 19.05.2023">
-      <created>1684500052715</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1684500052715</updated>
+      <workItem from="1685073130574" duration="21613000" />
     </task>
     <task id="LOCAL-00076" summary="(3) 19.05.2023">
       <created>1684500307401</created>
@@ -633,7 +622,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685095104079</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="(3) 26.05.2023&#10;Cometa">
+      <created>1685098058601</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1685098058601</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +647,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="(2) 19.05.2023" />
     <MESSAGE value="(3) 19.05.2023" />
     <MESSAGE value="(1) 22.05.2023" />
     <MESSAGE value="(2) 22.05.2023" />
@@ -676,7 +671,19 @@
     <MESSAGE value="(1) 26.05.2023&#10;GGWP" />
     <MESSAGE value="(1) 26.05.2023&#10;Хотел как лучше получилось как всегда" />
     <MESSAGE value="(2) 26.05.2023&#10;WSS" />
-    <option name="LAST_COMMIT_MESSAGE" value="(2) 26.05.2023&#10;WSS" />
+    <MESSAGE value="(3) 26.05.2023&#10;Cometa" />
+    <option name="LAST_COMMIT_MESSAGE" value="(3) 26.05.2023&#10;Cometa" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

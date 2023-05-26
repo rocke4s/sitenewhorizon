@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 
-    @WebServlet("/comet")
+    @WebServlet("/chat")
     public class CometaAndRocketa extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             response.setHeader("Access-Control-Allow-Origin", "*");

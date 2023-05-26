@@ -46,8 +46,8 @@
                     <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
                     <c:if test="${!Task.getTaskPartner().isEmpty()}"><th>Контрагент</th></c:if>
                     <c:if test="${!Task.getTaskStatus().isEmpty()}"><th>Состояние заявки</th></c:if>
-                    <c:if test="${Task.getTaskStatus()!='Отменено' && Task.getTaskStatus()!='Проверено'
-                     && Task.getTaskStatus()!='В работе' && Task.getTaskStatus()!='На доработке'}">
+                    <c:if test="${Task.getTaskStatus()=='Новая' && Task.getTaskStatus()=='Выполнена'
+                     && Task.getTaskStatus()=='На тестировании'}">
                         <th>Изменить состояние</th>
                     </c:if>
                     <c:if test="${!Task.getTypeTask().isEmpty()}"><th>Тип задачи</th></c:if>
