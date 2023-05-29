@@ -49,25 +49,6 @@ function HideChat(ids)
     document.getElementById('buttonHide'+ids).hidden = true;
 }
 
-
-var socket = new WebSocket("ws://194.67.111.29:80/chat");
-
-socket.onopen = function(event) {
-    console.log("WebSocket opened");
-};
-
-socket.onmessage = function(event) {
-    console.log("WebSocket message received: " + event.data);
-};
-
-socket.onclose = function(event) {
-    console.log("WebSocket closed");
-};
-
-socket.onerror = function(event) {
-    console.error("WebSocket error: " + event);
-};
-
 function hideEnding(stat)
 {
     var tdElements = document.getElementsByTagName('td');
@@ -92,41 +73,58 @@ function hideEnding(stat)
 }
 
 setInterval(function() {
-    socket.onmessage = function(event) {
-        console.log(event.data);
-        var parsed= JSON.parse(event.data);
-        if(parsed.message!=undefined)
-        {
-            var ull = document.getElementById("messageArea"+parsed.NumberTask);
+    $.getJSON("/client", function(messages) {
+    messages.forEach(function(object) {
+        // var parsed = JSON.parse(object);
+        if (object.message != undefined) {
+            var ull = document.getElementById("messageArea" + object.numberDoc);
             const li = document.createElement('li');
-            li.innerHTML = parsed.Name+": "+parsed.message;
-            messageList = event.data;
+            li.innerHTML = object.userRecipient + ": " + object.message;
+            messageList = object.data;
             ull.appendChild(li);
         }
-        if(parsed.ChangeType=="Изменение срока")
-        {
-            var sidebarUl = document.getElementById("sidebar-ul");
-            const li = document.createElement('li');
-            li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
-                ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
-                ' <span class="change">Срок изменился на '+parsed.Until+'</span>' +
-                ' <hr><span class="time">'+parsed.Time+'</span>';
-            sidebarUl.appendChild(li);
-            sidebar.classList.toggle('active')
-        }
-        if(parsed.ChangeType=="Изменение статуса")
-        {
-            var sidebarUl = document.getElementById("sidebar-ul");
-            const li = document.createElement('li');
-            li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
-                ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
-                ' <span class="change">'+parsed.Until+'</span>' +
-                ' <hr><span class="time">'+parsed.Time+'</span>';
-            sidebarUl.appendChild(li);
-            sidebar.classList.toggle('active')
-        }
-    };
+    });
+    });
 }, 1000);
+
+
+
+// setInterval(function() {
+//     socket.onmessage = function(event) {
+//         console.log(event.data);
+//         var parsed= JSON.parse(event.data);
+//         if(parsed.message!=undefined)
+//         {
+//             var ull = document.getElementById("messageArea"+parsed.NumberTask);
+//             const li = document.createElement('li');
+//             li.innerHTML = parsed.Name+": "+parsed.message;
+//             messageList = event.data;
+//             ull.appendChild(li);
+//         }
+//         if(parsed.ChangeType=="Изменение срока")
+//         {
+//             var sidebarUl = document.getElementById("sidebar-ul");
+//             const li = document.createElement('li');
+//             li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
+//                 ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
+//                 ' <span class="change">Срок изменился на '+parsed.Until+'</span>' +
+//                 ' <hr><span class="time">'+parsed.Time+'</span>';
+//             sidebarUl.appendChild(li);
+//             sidebar.classList.toggle('active')
+//         }
+//         if(parsed.ChangeType=="Изменение статуса")
+//         {
+//             var sidebarUl = document.getElementById("sidebar-ul");
+//             const li = document.createElement('li');
+//             li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
+//                 ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
+//                 ' <span class="change">'+parsed.Until+'</span>' +
+//                 ' <hr><span class="time">'+parsed.Time+'</span>';
+//             sidebarUl.appendChild(li);
+//             sidebar.classList.toggle('active')
+//         }
+//     };
+// }, 1000);
 
 const sidebarToggle = document.querySelector('.sidebar-toggle')
 const sidebar = document.querySelector('.sidebar')

@@ -9,10 +9,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(3) 26.05.2023&#10;Cometa">
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(4) 26.05.2023">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/dao/ChatUserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/ChatUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChatUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChatUserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/jquery.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/MyWebSocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/MyWebSocketServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-security.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-security.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/chat_server/MyWebSocketServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/chat_server/MyWebSocketServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,32 +93,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User_RIT/Desktop/projects_max/ver1/sitenewhorizon-a85046a3f16e3031b5e314af8b985b349ff2d055&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;service.view.auto.scroll.from.source&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;dc2c5d9394c854fdc17580c8ead4d299&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/User_RIT/Desktop/projects_max/ver2(zapaska)/SpringSecurityApp-master/src/main/webapp/resources/js",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "service.view.auto.scroll.from.source": "true",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "spring.configuration.checksum": "dc2c5d9394c854fdc17580c8ead4d299",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\webapp\resources\js" />
       <recent name="C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\webapp\resources" />
       <recent name="C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\resources\data" />
       <recent name="C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\webapp\data" />
@@ -284,14 +306,7 @@
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
-      <workItem from="1685073130574" duration="21613000" />
-    </task>
-    <task id="LOCAL-00076" summary="(3) 19.05.2023">
-      <created>1684500307401</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1684500307401</updated>
+      <workItem from="1685073130574" duration="55660000" />
     </task>
     <task id="LOCAL-00077" summary="(1) 22.05.2023">
       <created>1684740338786</created>
@@ -629,7 +644,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685098058601</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="(4) 26.05.2023">
+      <created>1685099646423</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1685099646423</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -647,7 +669,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="(3) 19.05.2023" />
     <MESSAGE value="(1) 22.05.2023" />
     <MESSAGE value="(2) 22.05.2023" />
     <MESSAGE value="(3) 22.05.2023" />
@@ -672,18 +693,8 @@
     <MESSAGE value="(1) 26.05.2023&#10;Хотел как лучше получилось как всегда" />
     <MESSAGE value="(2) 26.05.2023&#10;WSS" />
     <MESSAGE value="(3) 26.05.2023&#10;Cometa" />
-    <option name="LAST_COMMIT_MESSAGE" value="(3) 26.05.2023&#10;Cometa" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/chat_server/CometaAndRocketa.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="(4) 26.05.2023" />
+    <option name="LAST_COMMIT_MESSAGE" value="(4) 26.05.2023" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

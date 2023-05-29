@@ -129,7 +129,7 @@
             <ul id="messageArea${Task.getTaskNumber()}">
             </ul>
                                  <input type="text" id="messageForUser" placeholder="Введите сообщение...">
-                            <button onclick="sendMessage('${Task.getTaskNumber()}')" type="submit">send</button>
+                            <button onclick="sendMessage1('${Task.getTaskNumber()}','${Task.getTaskDepartment()}')" type="submit">send</button>
         </div>
     </details>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -185,10 +185,38 @@
 <script src="${contextPath}/resources/js/tasks-js.js">
 </script>
 <script>
-    function sendMessage(ids) {
-        ul = document.getElementById('messageArea'+ids);
-        socket.send("{'NumberTask':'"+ids+"','Name':'${pageContext.request.userPrincipal.name}','message':'"+document.querySelector('#id_'+ids+' input[type="text"]').value+"'}");
-        document.querySelector('#id_'+ids+' input[type="text"]').value = "";
+    function sendMessage1(numberDoc,recipient) {
+        var date = new Date();
+
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        const time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        var newDate = day+"."+month+"."+year+" "+time;
+       console.log(newDate);
+        var message = {
+            numberDoc: numberDoc,
+            userSender: "${Profile.getName()}",
+            userRecipient: recipient,
+            message: document.querySelector('#id_'+numberDoc+' input[type="text"]').value,
+            dataSend: newDate
+        };
+        var queryString = '';
+        for (var key in message) {
+            queryString += encodeURIComponent(key) + '=' + encodeURIComponent(message[key]) + '&';
+        }
+        queryString = queryString.slice(0, -1);
+        $.ajax({
+            type: "GET",
+            url: "http://194.67.111.29/worker?"+queryString,
+            contentType: "application/json",
+            success: function() {
+                // сообщение успешно отправлено
+            },
+            error: function() {
+                // ошибка отправки сообщения
+            }
+        });
     }
 </script>
 </body>

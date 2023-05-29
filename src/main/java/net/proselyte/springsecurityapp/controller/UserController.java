@@ -9,13 +9,14 @@ import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.apache.http.util.EntityUtils;
-import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,7 +28,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.PermitAll;
+import javax.persistence.Access;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.websocket.*;
 import java.io.*;
 import java.net.URI;
@@ -43,6 +47,8 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    @Autowired
+    private ChatUserServiceImpl chatUserServiceImpl;
     @Autowired
     private UserService userService;
     @Autowired
@@ -223,6 +229,7 @@ public class UserController {
         modelAndView.addObject("Tasks", task);
         modelAndView.addObject("changeStatus",changeStatus);
         modelAndView.addObject("chat",chat);
+        modelAndView.addObject("Profile",prof);
         modelAndView.addObject("changeLogTask",changeLogTask);
         return modelAndView;
     }
@@ -352,22 +359,56 @@ public class UserController {
         return "welcome";
     }
 
-    @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void doChat(HttpServletRequest request,Authentication authentication) {
-        try {
-            String NumberTask = decodRequest(request.getHeader("NumberTask"));
-            String Name = decodRequest(request.getHeader("Name"));
-            String message = decodRequest(request.getHeader("message"));
+//    @RequestMapping(value = "/worker", method = RequestMethod.GET)
+//    public void doChat(HttpServletRequest request,Authentication authentication) {
+//        try {
+//            String NumberTask = decodRequest(request.getHeader("NumberTask"));
+//            String Name = decodRequest(request.getHeader("Name"));
+//            String message = decodRequest(request.getHeader("message"));
+//
+//            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+//            String uri = "ws://"+ip2+":80/chat";
+//            MyWebSocketClient endpoint = new MyWebSocketClient();
+//            Session session = container.connectToServer(endpoint, new URI(uri));
+//            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','Name'='"+Name+"','message'='"+message+"'}");
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
 
-            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            String uri = "ws://"+ip2+":80/chat";
-            MyWebSocketClient endpoint = new MyWebSocketClient();
-            Session session = container.connectToServer(endpoint, new URI(uri));
-            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','Name'='"+Name+"','message'='"+message+"'}");
+    @RequestMapping(value = "/worker", method = RequestMethod.GET)
+    @PermitAll
+    public void sendMessage(String numberDoc,String userSender,String userRecipient,String message,String dataSend) {
+        ChatUser chatUser = new ChatUser();
+        try {
+            chatUser.setNumberDoc(numberDoc);
+            chatUser.setUserSender(userSender);
+            chatUser.setUserRecipient(userRecipient);
+            chatUser.setMessage(message);
+            chatUser.setDateSend(dataSend);
+            chatUser.setIsNewMessage("new");
         } catch (Exception e) {
             System.out.println(e);
         }
+        // сохраняем сообщение в базе данных
+        chatUserServiceImpl.save(chatUser);
     }
+
+    @RequestMapping(value = "/client",method = RequestMethod.GET)
+    @ResponseBody
+    public List<ChatUser> getMessages() {
+        Date date = new Date();
+        String newDate = date.getDate()+"."+date.getMonth()+"."+ date.getYear()+" "+date.getHours()+":"+date.getMinutes();
+        List<ChatUser> listChatUser = chatUserServiceImpl.findByisNewMessage("new");
+        for(ChatUser chuser: chatUserServiceImpl.findByisNewMessage("new"))
+        {
+            chuser.setIsNewMessage("old");
+            chatUserServiceImpl.save(chuser);
+        }
+        // получаем все сообщения из базы данных
+        return listChatUser;
+    }
+
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
     public void doGets(HttpServletRequest request) throws IOException {
         try {
