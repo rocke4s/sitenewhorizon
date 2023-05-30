@@ -5,7 +5,6 @@ import net.proselyte.springsecurityapp.model.ChatUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 @Service
 public class ChatUserServiceImpl  implements ChatUserService{
@@ -14,7 +13,8 @@ public class ChatUserServiceImpl  implements ChatUserService{
 
     @Override
     public void save(ChatUser chatUser) {
-        chatUser.setUserSender(chatUser.getUserSender());
+        chatUser.setNumberDoc(chatUser.getNumberDoc());
+        chatUser.setUserSenders(chatUser.getUserSenders());
         chatUser.setUserRecipient(chatUser.getUserRecipient());
         chatUser.setMessage(chatUser.getMessage());
         chatUser.setDateSend(chatUser.getDateSend());

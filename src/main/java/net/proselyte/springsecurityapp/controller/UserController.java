@@ -2,15 +2,12 @@ package net.proselyte.springsecurityapp.controller;
 
 import com.google.gson.Gson;
 import jakarta.mail.MessagingException;
-import net.proselyte.springsecurityapp.config.MyWebSocketClient;
 import net.proselyte.springsecurityapp.config.Sender;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -28,13 +25,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.security.PermitAll;
-import javax.persistence.Access;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.websocket.*;
 import java.io.*;
-import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -44,11 +36,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.List;
 
-
 @Controller
 public class UserController {
     @Autowired
-    private ChatUserServiceImpl chatUserServiceImpl;
+    private ChatUserService chatUserService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -359,30 +350,12 @@ public class UserController {
         return "welcome";
     }
 
-//    @RequestMapping(value = "/worker", method = RequestMethod.GET)
-//    public void doChat(HttpServletRequest request,Authentication authentication) {
-//        try {
-//            String NumberTask = decodRequest(request.getHeader("NumberTask"));
-//            String Name = decodRequest(request.getHeader("Name"));
-//            String message = decodRequest(request.getHeader("message"));
-//
-//            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-//            String uri = "ws://"+ip2+":80/chat";
-//            MyWebSocketClient endpoint = new MyWebSocketClient();
-//            Session session = container.connectToServer(endpoint, new URI(uri));
-//            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','Name'='"+Name+"','message'='"+message+"'}");
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//    }
-
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    @PermitAll
     public void sendMessage(String numberDoc,String userSender,String userRecipient,String message,String dataSend) {
         ChatUser chatUser = new ChatUser();
         try {
             chatUser.setNumberDoc(numberDoc);
-            chatUser.setUserSender(userSender);
+            chatUser.setUserSenders(userSender);
             chatUser.setUserRecipient(userRecipient);
             chatUser.setMessage(message);
             chatUser.setDateSend(dataSend);
@@ -391,22 +364,39 @@ public class UserController {
             System.out.println(e);
         }
         // сохраняем сообщение в базе данных
-        chatUserServiceImpl.save(chatUser);
+        chatUserService.save(chatUser);
     }
 
     @RequestMapping(value = "/client",method = RequestMethod.GET)
     @ResponseBody
     public List<ChatUser> getMessages() {
-        Date date = new Date();
-        String newDate = date.getDate()+"."+date.getMonth()+"."+ date.getYear()+" "+date.getHours()+":"+date.getMinutes();
-        List<ChatUser> listChatUser = chatUserServiceImpl.findByisNewMessage("new");
-        for(ChatUser chuser: chatUserServiceImpl.findByisNewMessage("new"))
+        List<ChatUser> listChatUser = chatUserService.findByisNewMessage("new");
+        for(ChatUser chuser: chatUserService.findByisNewMessage("new"))
         {
             chuser.setIsNewMessage("old");
-            chatUserServiceImpl.save(chuser);
+            chatUserService.save(chuser);
         }
         // получаем все сообщения из базы данных
         return listChatUser;
+    }
+    @RequestMapping(value = "/clientall",method = RequestMethod.GET)
+    @ResponseBody
+    public List<ChatUser> getAllMessages() {
+
+        return chatUserService.findByisNewMessage("old");
+    }
+
+    @RequestMapping(value = "/newchanges",method = RequestMethod.GET)
+    @ResponseBody
+    public List<ChangeLogTask> getNewChanges() {
+        List<ChangeLogTask> changeLogTask = changeLogTaskService.findByisNewChanges("new");
+        for(ChangeLogTask chtask: changeLogTaskService.findByisNewChanges("new"))
+        {
+            chtask.setIsNewChanges("old");
+            changeLogTaskService.save(chtask);
+        }
+        // получаем все сообщения из базы данных
+        return changeLogTask;
     }
 
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
@@ -436,13 +426,8 @@ public class UserController {
             Calendar currentCalendar = Calendar.getInstance();
             changeLogTask.setTime(currentCalendar.getTime().toString());
             changeLogTask.setUidUser(user.getUidUser());
+            changeLogTask.setIsNewChanges("new");
             changeLogTaskService.save(changeLogTask);
-            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            String uri = "ws://"+ip2+":80/chat";
-            MyWebSocketClient endpoint = new MyWebSocketClient();
-            Session session = container.connectToServer(endpoint, new URI(uri));
-            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','NameTask'='"+NameTask+"','Until'='Статус изменен с "+OldStatus+" на "+NewStatus+"','ChangeType':'"+
-                    changeLogTask.getChangetype()+"','Time':'"+changeLogTask.getTime()+"'}");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -462,13 +447,8 @@ public class UserController {
             Calendar currentCalendar = Calendar.getInstance();
             changeLogTask.setTime(currentCalendar.getTime().toString());
             changeLogTask.setUidUser(user.getUidUser());
+            changeLogTask.setIsNewChanges("new");
             changeLogTaskService.save(changeLogTask);
-            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            String uri = "ws://"+ip2+":80/chat";
-            MyWebSocketClient endpoint = new MyWebSocketClient();
-            Session session = container.connectToServer(endpoint, new URI(uri));
-            endpoint.sendMessage("{'NumberTask'='"+NumberTask+"','NameTask'='"+NameTask+"','Until'='"+Until+"','ChangeType':'"+
-                    changeLogTask.getChangetype()+"','Time':'"+changeLogTask.getTime()+"'}");
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -12,7 +12,7 @@ public class ChatUser {
     @Column(name = "numberDoc")
     private String numberDoc;
     @Column(name = "userSender")
-    private String userSender;
+    private String userSenders;
     @Column(name = "userRecipient")
     private String userRecipient;
     @Column(name = "message")
@@ -47,12 +47,12 @@ public class ChatUser {
         this.id = id;
     }
 
-    public String getUserSender() {
-        return userSender;
+    public String getUserSenders() {
+        return userSenders;
     }
 
-    public void setUserSender(String userSender) {
-        this.userSender = userSender;
+    public void setUserSenders(String userSenders) {
+        this.userSenders = userSenders;
     }
 
     public String getUserRecipient() {

@@ -15,7 +15,6 @@ net\proselyte\springsecurityapp\controller\UserController.class
 net\proselyte\springsecurityapp\config\Sender.class
 net\proselyte\springsecurityapp\service\ChatUserServiceImpl.class
 net\proselyte\springsecurityapp\service\UserServiceImpl.class
-net\proselyte\springsecurityapp\model\ListChangeLogTask.class
 net\proselyte\springsecurityapp\model\Task.class
 net\proselyte\springsecurityapp\model\Message.class
 net\proselyte\springsecurityapp\service\ChatUserService.class

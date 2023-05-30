@@ -1,3 +1,23 @@
+$.getJSON("/clientall", function(messages) {
+    messages.forEach(function(object) {
+        // var parsed = JSON.parse(object);
+        if (object.message != undefined) {
+            var ull = document.getElementById("messageArea" + object.numberDoc);
+            const li = document.createElement('li');
+            if(object.userRecipient != undefined)
+            {
+                li.innerHTML = object.userRecipient + ": " + object.message;
+            } else if (object.userSenders != undefined)
+            {
+                li.innerHTML = object.userSenders + ": " + object.message;
+            }
+            messageList = object.data;
+            ull.appendChild(li);
+        }
+    });
+});
+
+
 var tdElements = document.getElementsByTagName('td');
 for (var i = 0; i < tdElements.length; i++) {
     var tdElement = tdElements[i];
@@ -9,7 +29,6 @@ for (var i = 0; i < tdElements.length; i++) {
         }
     }
 }
-
 const forms = document.querySelectorAll('.myForm');
 forms.forEach(form => {
     form.addEventListener('submit', function(event) {
@@ -74,57 +93,26 @@ function hideEnding(stat)
 
 setInterval(function() {
     $.getJSON("/client", function(messages) {
-    messages.forEach(function(object) {
-        // var parsed = JSON.parse(object);
-        if (object.message != undefined) {
-            var ull = document.getElementById("messageArea" + object.numberDoc);
-            const li = document.createElement('li');
-            li.innerHTML = object.userRecipient + ": " + object.message;
-            messageList = object.data;
-            ull.appendChild(li);
-        }
-    });
+        messages.forEach(function(object) {
+            // var parsed = JSON.parse(object);
+            if (object.message != undefined) {
+                var ull = document.getElementById("messageArea" + object.numberDoc);
+                const li = document.createElement('li');
+                if(object.userSenders != undefined)
+                {
+                    li.innerHTML = object.userSenders + ": " + object.message;
+                }
+                if(object.userRecipient != undefined)
+                {
+                    li.innerHTML = object.userRecipient + ": " + object.message;
+                }
+                messageList = object.data;
+                ull.appendChild(li);
+            }
+        });
     });
 }, 1000);
 
-
-
-// setInterval(function() {
-//     socket.onmessage = function(event) {
-//         console.log(event.data);
-//         var parsed= JSON.parse(event.data);
-//         if(parsed.message!=undefined)
-//         {
-//             var ull = document.getElementById("messageArea"+parsed.NumberTask);
-//             const li = document.createElement('li');
-//             li.innerHTML = parsed.Name+": "+parsed.message;
-//             messageList = event.data;
-//             ull.appendChild(li);
-//         }
-//         if(parsed.ChangeType=="Изменение срока")
-//         {
-//             var sidebarUl = document.getElementById("sidebar-ul");
-//             const li = document.createElement('li');
-//             li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
-//                 ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
-//                 ' <span class="change">Срок изменился на '+parsed.Until+'</span>' +
-//                 ' <hr><span class="time">'+parsed.Time+'</span>';
-//             sidebarUl.appendChild(li);
-//             sidebar.classList.toggle('active')
-//         }
-//         if(parsed.ChangeType=="Изменение статуса")
-//         {
-//             var sidebarUl = document.getElementById("sidebar-ul");
-//             const li = document.createElement('li');
-//             li.innerHTML = '<span class="change-type"><u>'+parsed.ChangeType+'</u></span><br>' +
-//                 ' <span class="task-title">'+parsed.NameTask+'</span><br>' +
-//                 ' <span class="change">'+parsed.Until+'</span>' +
-//                 ' <hr><span class="time">'+parsed.Time+'</span>';
-//             sidebarUl.appendChild(li);
-//             sidebar.classList.toggle('active')
-//         }
-//     };
-// }, 1000);
 
 const sidebarToggle = document.querySelector('.sidebar-toggle')
 const sidebar = document.querySelector('.sidebar')
@@ -132,3 +120,32 @@ const sidebar = document.querySelector('.sidebar')
 sidebarToggle.addEventListener('click', function() {
     sidebar.classList.toggle('active')
 })
+setInterval(function() {
+    $.getJSON("/newchanges", function(mess) {
+        console.log(mess);
+        mess.forEach(function(object) {
+            console.log(object);
+            if (object.changetype=="Изменение срока") {
+                var sidebarUl = document.getElementById("sidebar-ul");
+                const li = document.createElement('li');
+                li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
+                    ' <span class="task-title">'+object.nameTask+'</span><br>' +
+                    ' <span class="change">Срок изменился на '+object.change+'</span>' +
+                    ' <hr><span class="time">'+object.time+'</span>';
+                sidebarUl.appendChild(li);
+                sidebar.classList.toggle('active')
+            }
+            if (object.changetype=="Изменение статуса")
+            {
+                var sidebarUl = document.getElementById("sidebar-ul");
+                const li = document.createElement('li');
+                li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
+                    ' <span class="task-title">'+object.nameTask+'</span><br>' +
+                    ' <span class="change">'+object.change+'</span>' +
+                    ' <hr><span class="time">'+object.time+'</span>';
+                sidebarUl.appendChild(li);
+                sidebar.classList.toggle('active')
+            }
+        });
+    });
+}, 1000);

@@ -8,5 +8,6 @@ public interface ChangeLogTaskService {
     void save(ChangeLogTask changeLogTask);
     List<ChangeLogTask> findAll();
     List<ChangeLogTask> findByUidUser(String uidUser);
+    List<ChangeLogTask> findByisNewChanges(String isNewChanges);
 
 }

@@ -18,6 +18,16 @@ public class ChangeLogTask {
     private String time;
     @Column(name="uiduser")
     private String uidUser;
+    @Column(name="isNewChanges")
+    private String isNewChanges;
+
+    public String getIsNewChanges() {
+        return isNewChanges;
+    }
+
+    public void setIsNewChanges(String isNewChanges) {
+        this.isNewChanges = isNewChanges;
+    }
 
     public Long getId() {
         return id;

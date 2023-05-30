@@ -129,7 +129,7 @@
             <ul id="messageArea${Task.getTaskNumber()}">
             </ul>
                                  <input type="text" id="messageForUser" placeholder="Введите сообщение...">
-                            <button onclick="sendMessage1('${Task.getTaskNumber()}','${Task.getTaskDepartment()}')" type="submit">send</button>
+                            <button onclick="sendMessage1('${Task.getTaskNumber()}')" type="submit">send</button>
         </div>
     </details>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -185,7 +185,7 @@
 <script src="${contextPath}/resources/js/tasks-js.js">
 </script>
 <script>
-    function sendMessage1(numberDoc,recipient) {
+    function sendMessage1(numberDoc) {
         var date = new Date();
 
         const day = date.getDate().toString().padStart(2, '0');
@@ -193,11 +193,10 @@
         const year = date.getFullYear();
         const time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         var newDate = day+"."+month+"."+year+" "+time;
-       console.log(newDate);
+        console.log(newDate);
         var message = {
             numberDoc: numberDoc,
             userSender: "${Profile.getName()}",
-            userRecipient: recipient,
             message: document.querySelector('#id_'+numberDoc+' input[type="text"]').value,
             dataSend: newDate
         };

@@ -14,13 +14,21 @@ public class ChangeLogTaskServiceImpl implements ChangeLogTaskService{
 
     @Override
     public void save(ChangeLogTask changeLogTask) {
+        changeLogTask.setUidUser(changeLogTask.getUidUser());
+        changeLogTask.setChangetype(changeLogTask.getChangetype());
         changeLogTask.setNameTask(changeLogTask.getNameTask());
         changeLogTask.setChange(changeLogTask.getChange());
-        changeLogTask.setChangetype(changeLogTask.getChangetype());
         changeLogTask.setTime(changeLogTask.getTime());
+        changeLogTask.setIsNewChanges(changeLogTask.getIsNewChanges());
         changeLogTaskDao.save(changeLogTask);
+        System.out.println("???");
     }
 
+    @Override
+    public List<ChangeLogTask> findByisNewChanges(String isNewChanges)
+    {
+        return changeLogTaskDao.findByisNewChanges(isNewChanges);
+    }
     public List<ChangeLogTask> findAll() {
         return changeLogTaskDao.findAll();
     }
