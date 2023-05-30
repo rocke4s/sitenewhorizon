@@ -74,7 +74,7 @@ public class UserController {
         String username = props.getProperty("username");//Переменные для
         String password = props.getProperty("password");//basic auth
         String mailName = props.getProperty("mail.username");
-        String mailPass = props.getProperty("mail.password");//Íîâ' Â ðàáîòå Çàïëàíèðîâàííî
+        String mailPass = props.getProperty("mail.password");
         String[] str = new String[]{username,password,mailName,mailPass};
         return str;
     }
@@ -241,7 +241,7 @@ public class UserController {
         ratingTaskService.save(ratingTask);
         return "redirect:/tasks";
     }
-    @RequestMapping(value = "/change_status", method = RequestMethod.POST)
+    @RequestMapping(value = "/change_status", method = RequestMethod.GET)
     public String changeStatus(@ModelAttribute("changeStatus")ChangeStatus changeStatus,Authentication authentication,
                                String uidDoc_8,String uidDoc_5,String uidDoc_0) throws IOException, MessagingException {
         HttpGet request = null;

@@ -9,46 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 29.05.2023&#10;чат без сокетов в0.0000001">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 30.05.2023&#10;чат без сокетов в0.0000002">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/dao/ChangeLogTaskDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/dao/ChangeLogTaskDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/ChangeLogTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/ChangeLogTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/ChatUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/ChatUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/ListChangeLogTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChangeLogTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChangeLogTaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChangeLogTaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChangeLogTaskServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChatUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChatUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChatUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/ChatUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-mvc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/tasks-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/tasks-css.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-mvc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/dao/ChangeLogTaskDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/dao/ChangeLogTaskDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/model/ChangeLogTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/model/ChangeLogTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/model/ChatUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/model/ChatUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/model/ListChangeLogTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/ChatUserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/ChatUserServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/tasks-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/tasks-css.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/dao/ChangeLogTaskDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/dao/ChangeLogTaskDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/model/ChangeLogTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/model/ChangeLogTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/model/ChatUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/model/ChatUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/model/ListChangeLogTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/ChangeLogTaskServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/ChatUserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/ChatUserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -321,21 +293,7 @@
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
-      <workItem from="1685073130574" duration="79332000" />
-    </task>
-    <task id="LOCAL-00078" summary="(1) 22.05.2023">
-      <created>1684740384371</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1684740384371</updated>
-    </task>
-    <task id="LOCAL-00079" summary="(1) 22.05.2023">
-      <created>1684740563147</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1684740563147</updated>
+      <workItem from="1685073130574" duration="89364000" />
     </task>
     <task id="LOCAL-00080" summary="(1) 22.05.2023">
       <created>1684741684760</created>
@@ -666,7 +624,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685356885731</updated>
     </task>
-    <option name="localTasksCounter" value="127" />
+    <task id="LOCAL-00127" summary="(1) 30.05.2023&#10;чат без сокетов в0.0000002">
+      <created>1685434491066</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1685434491066</updated>
+    </task>
+    <task id="LOCAL-00128" summary="(1) 30.05.2023&#10;чат без сокетов в0.0000002">
+      <created>1685434592733</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1685434592733</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -684,7 +656,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="(2) 22.05.2023" />
     <MESSAGE value="(3) 22.05.2023" />
     <MESSAGE value="(4) 22.05.2023" />
     <MESSAGE value="(1) 24.05.2023" />
@@ -709,7 +680,8 @@
     <MESSAGE value="(3) 26.05.2023&#10;Cometa" />
     <MESSAGE value="(4) 26.05.2023" />
     <MESSAGE value="(1) 29.05.2023&#10;чат без сокетов в0.0000001" />
-    <option name="LAST_COMMIT_MESSAGE" value="(1) 29.05.2023&#10;чат без сокетов в0.0000001" />
+    <MESSAGE value="(1) 30.05.2023&#10;чат без сокетов в0.0000002" />
+    <option name="LAST_COMMIT_MESSAGE" value="(1) 30.05.2023&#10;чат без сокетов в0.0000002" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

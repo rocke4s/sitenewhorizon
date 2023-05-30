@@ -40,7 +40,7 @@ forms.forEach(form => {
         const myInput2 = document.getElementById("NameTasker");
         myInput2.value = saveNameTask;
         fetch('/change_status?uidDoc_8='+uidDoc_8, {
-            method: 'POST'
+            method: 'GET'
         })
             .then(response => response.json())
             .then(data => {
@@ -114,17 +114,22 @@ setInterval(function() {
 }, 1000);
 
 
-const sidebarToggle = document.querySelector('.sidebar-toggle')
 const sidebar = document.querySelector('.sidebar')
-
-sidebarToggle.addEventListener('click', function() {
+function ShowModal(ids)
+{
     sidebar.classList.toggle('active')
-})
+    document.getElementById('buttonShowM'+ids).hidden = true;
+    document.getElementById('buttonHideM'+ids).hidden = false;
+}
+function HideModal(ids)
+{
+    sidebar.classList.toggle('active')
+    document.getElementById('buttonShowM'+ids).hidden = false;
+    document.getElementById('buttonHideM'+ids).hidden = true;
+}
 setInterval(function() {
     $.getJSON("/newchanges", function(mess) {
-        console.log(mess);
         mess.forEach(function(object) {
-            console.log(object);
             if (object.changetype=="Изменение срока") {
                 var sidebarUl = document.getElementById("sidebar-ul");
                 const li = document.createElement('li');

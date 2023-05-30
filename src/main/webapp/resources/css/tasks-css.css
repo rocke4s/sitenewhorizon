@@ -206,17 +206,18 @@ th {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -300px;
+    left: auto;
+    right: -300px;
     width: 300px;
     height: 100vh;
     background: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    transition: left ease 0.3s;
+    transition: right ease 0.3s;
     overflow: auto;
 }
 
 .sidebar.active {
-    left: 0;
+    right: 0;
 }
 
 .sidebar ul {
@@ -237,7 +238,7 @@ th {
 .sidebar-toggle {
     position: fixed;
     top: 50%;
-    right: 0;
+    left: 0;
     transform: translateY(-50%);
     background: #000;
     color: #fff;

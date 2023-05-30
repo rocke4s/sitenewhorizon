@@ -32,7 +32,6 @@
     <label for="toggle" class="toggle-label"></label>
 </div>
 <label id="togLabel" >Показать задачи</label>
-<button class="sidebar-toggle">Список изменений</button>
 <div class="all-list-task">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
     <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
@@ -40,14 +39,16 @@
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
         <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
+        <button id="buttonShowM${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowModal('${Task.getTaskNumber()}')">Жизненный цикл заявки</button>
+        <button id="buttonHideM${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideModal('${Task.getTaskNumber()}')" hidden="true">Скрыть жизненный цикл</button>
             <table>
                 <thead>
                 <tr>
                     <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
                     <c:if test="${!Task.getTaskPartner().isEmpty()}"><th>Контрагент</th></c:if>
                     <c:if test="${!Task.getTaskStatus().isEmpty()}"><th>Состояние заявки</th></c:if>
-                    <c:if test="${Task.getTaskStatus()=='Новая' && Task.getTaskStatus()=='Выполнена'
-                     && Task.getTaskStatus()=='На тестировании'}">
+                    <c:if test="${Task.getTaskStatus()=='Новая' || Task.getTaskStatus()=='Выполнена'
+                     || Task.getTaskStatus()=='На тестировании'}">
                         <th>Изменить состояние</th>
                     </c:if>
                     <c:if test="${!Task.getTypeTask().isEmpty()}"><th>Тип задачи</th></c:if>
@@ -69,12 +70,12 @@
                     <c:if test="${!Tasks.getTaskUrl().isEmpty()}"><td>${Tasks.getTaskUrl()}</td></c:if>
                     <c:if test="${!Tasks.getTaskPartner().isEmpty()}"><td>${Tasks.getTaskPartner()}</td></c:if>
                     <c:if test="${!Tasks.getTaskStatus().isEmpty()}"><td>${Tasks.getTaskStatus()}</td></c:if>
-                    <c:if test="${ Tasks.getTaskStatus()!='Проверено'
-                    && Tasks.getTaskStatus()!='В работе' && Tasks.getTaskStatus()!='На доработке'}">
+                    <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='Выполнена'
+                     || Tasks.getTaskStatus()=='На тестировании'}">
                         <td>
                             <c:if test="${Tasks.getTaskStatus()=='На тестировании' || Tasks.getTaskStatus()=='Выполнена'}">
                             <div>
-                                <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="POST" modelAttribute="changeStatus">
+                                <form:form action="/change_status?${_csrf.parameterName}=${_csrf.token}" method="GET" modelAttribute="changeStatus">
                                     <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                     <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_5">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -88,18 +89,18 @@
                         </c:if>
                             <c:if test="${Tasks.getTaskStatus()=='Выполнена' || Tasks.getTaskStatus()=='На тестировании'}">
                                 <div>
-                                    <form class="myForm" method="POST" action="/change_status">
+                                    <form class="myForm" method="GET" action="/change_status">
                                         <input id="TaskNumber" type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input id="uidDoc_8" type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_8">
                                         <input id="NameTasks" type="hidden" value="${Tasks.getNameTask()}" name="NameTasks">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Проверено</button>
+                                        <button id="modalbutton" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Проверено</button>
                                     </form>
                                 </div>
                             </c:if>
                             <c:if test="${Tasks.getTaskStatus()=='Новая'}">
                                 <div>
-                                    <form method="POST" action="/change_status">
+                                    <form method="GET" action="/change_status">
                                         <input type="hidden" value="${Tasks.getTaskNumber()}" name="TaskNumber">
                                         <input type="hidden" value="${Tasks.getUidDoc()}" name="uidDoc_0">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -193,7 +194,6 @@
         const year = date.getFullYear();
         const time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         var newDate = day+"."+month+"."+year+" "+time;
-        console.log(newDate);
         var message = {
             numberDoc: numberDoc,
             userSender: "${Profile.getName()}",
@@ -217,6 +217,9 @@
             }
         });
     }
+    $('#exampleModal').on('hidden.bs.modal', function () {
+        location.reload();
+    });
 </script>
 </body>
 </html>
