@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -52,8 +53,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
-    private String ip2="localhost";//localhost || 194.67.111.29
+    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
+    private String ip2="194.67.111.29";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -351,14 +352,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void sendMessage(HttpServletRequest request) {
+    public void sendMessage(@RequestHeader("numberDoc") String numberDoc,@RequestHeader(value = "userSender",required = false) String userSender,
+                            @RequestHeader(value = "userRecipient",required = false) String userRecipient,
+                            @RequestHeader("message") String message,@RequestHeader("dataSend") String dataSend) {
         ChatUser chatUser = new ChatUser();
         try {
-            chatUser.setNumberDoc(decodRequest(request.getHeader("NumberTask")));
-            chatUser.setUserSenders(decodRequest(request.getHeader("userSender")));
-            chatUser.setUserRecipient(decodRequest(request.getHeader("userRecipient")));
-            chatUser.setMessage(decodRequest(request.getHeader("message")));
-            chatUser.setDateSend(decodRequest(request.getHeader("dataSend")));
+            chatUser.setNumberDoc(URLDecoder.decode(numberDoc, "UTF-8"));
+            if(userSender!=null){
+                chatUser.setUserSenders(URLDecoder.decode(userSender, "UTF-8"));
+            }
+            if(userRecipient!=null) {
+                chatUser.setUserRecipient(URLDecoder.decode(userRecipient, "UTF-8"));
+            }
+            chatUser.setMessage(URLDecoder.decode(message, "UTF-8"));
+            chatUser.setDateSend(URLDecoder.decode(dataSend, "UTF-8"));
             chatUser.setIsNewMessage("new");
         } catch (Exception e) {
             System.out.println(e);

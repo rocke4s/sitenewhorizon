@@ -194,29 +194,19 @@
         const year = date.getFullYear();
         const time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         var newDate = day+"."+month+"."+year+" "+time;
-        var message = {
-            numberDoc: numberDoc,
-            userSender: "${Profile.getName()}",
-            message: document.querySelector('#id_'+numberDoc+' input[type="text"]').value,
-            dataSend: newDate
-        };
-        var queryString = '';
-        for (var key in message) {
-            queryString += encodeURIComponent(key) + '=' + encodeURIComponent(message[key]) + '&';
-        }
-        queryString = queryString.slice(0, -1);
         $.ajax({
-            type: "GET",
-            url: "http://localhost/worker?"+queryString,
-            contentType: "application/json",
-            'Message': JSON.stringify(message),
-            success: function() {
-                // сообщение успешно отправлено
-            },
-            error: function() {
-                // ошибка отправки сообщения
-            }
-        });
+            method: 'GET',
+            url: 'http://194.67.111.29/worker',
+            headers: {
+                "numberDoc": encodeURIComponent(""+numberDoc),
+            "userSender": encodeURIComponent("${Profile.getName()}"),
+            "message": encodeURIComponent(""+document.querySelector('#id_' + numberDoc + ' input[type="text"]').value),
+            "dataSend": encodeURIComponent(""+newDate)
+        }})
+            .then(function(response) {
+                console.log(response);})
+            .catch(function(error) {
+                console.error(error);});
     }
 </script>
 </body>
