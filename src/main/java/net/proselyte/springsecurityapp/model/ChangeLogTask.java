@@ -18,8 +18,18 @@ public class ChangeLogTask {
     private String time;
     @Column(name="uiduser")
     private String uidUser;
+    @Column(name="numberTask")
+    private String numberTask;
     @Column(name="isNewChanges")
     private String isNewChanges;
+
+    public String getNumberTask() {
+        return numberTask;
+    }
+
+    public void setNumberTask(String numberTask) {
+        this.numberTask = numberTask;
+    }
 
     public String getIsNewChanges() {
         return isNewChanges;

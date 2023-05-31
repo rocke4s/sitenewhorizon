@@ -52,8 +52,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
+    private String ip2="localhost";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -210,18 +210,18 @@ public class UserController {
         } finally {
             response.close();
         }
-        List<ChangeLogTask> changeLogTask = new ArrayList<>();
-        try {
-            changeLogTask = changeLogTaskService.findByUidUser(user.getUidUser());
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        List<ChangeLogTask> changeLogTask = new ArrayList<>();
+//        try {
+//            changeLogTask = changeLogTaskService.findByUidUser(user.getUidUser());
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
         ModelAndView modelAndView = new ModelAndView("tasks");
         modelAndView.addObject("Tasks", task);
         modelAndView.addObject("changeStatus",changeStatus);
         modelAndView.addObject("chat",chat);
         modelAndView.addObject("Profile",prof);
-        modelAndView.addObject("changeLogTask",changeLogTask);
+//        modelAndView.addObject("changeLogTask",changeLogTask);
         return modelAndView;
     }
     @RequestMapping(value = "/ratings", method = RequestMethod.POST)
@@ -351,14 +351,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void sendMessage(String numberDoc,String userSender,String userRecipient,String message,String dataSend) {
+    public void sendMessage(HttpServletRequest request) {
         ChatUser chatUser = new ChatUser();
         try {
-            chatUser.setNumberDoc(numberDoc);
-            chatUser.setUserSenders(userSender);
-            chatUser.setUserRecipient(userRecipient);
-            chatUser.setMessage(message);
-            chatUser.setDateSend(dataSend);
+            chatUser.setNumberDoc(decodRequest(request.getHeader("NumberTask")));
+            chatUser.setUserSenders(decodRequest(request.getHeader("userSender")));
+            chatUser.setUserRecipient(decodRequest(request.getHeader("userRecipient")));
+            chatUser.setMessage(decodRequest(request.getHeader("message")));
+            chatUser.setDateSend(decodRequest(request.getHeader("dataSend")));
             chatUser.setIsNewMessage("new");
         } catch (Exception e) {
             System.out.println(e);
@@ -398,7 +398,18 @@ public class UserController {
         // получаем все сообщения из базы данных
         return changeLogTask;
     }
-
+    @RequestMapping(value = "/changesall",method = RequestMethod.GET)
+    @ResponseBody
+    public List<ChangeLogTask> getAllMessages(Authentication authentication) {
+        User user = userService.findByUsername(authentication.getName());
+        List<ChangeLogTask> changeLogTask = new ArrayList<>();
+        try {
+            changeLogTask = changeLogTaskService.findByUidUser(user.getUidUser());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return changeLogTaskService.findByUidUser(user.getUidUser());
+    }
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
     public void doGets(HttpServletRequest request) throws IOException {
         try {
@@ -420,6 +431,7 @@ public class UserController {
                 System.err.println("Email sending failed: " + e.getMessage());
             }
             ChangeLogTask changeLogTask = new ChangeLogTask();
+            changeLogTask.setNumberTask(NumberTask);
             changeLogTask.setChangetype("Изменение статуса");
             changeLogTask.setChange("Статус изменен с "+OldStatus+" на "+NewStatus);
             changeLogTask.setNameTask(NameTask);
@@ -444,6 +456,7 @@ public class UserController {
             changeLogTask.setChangetype("Изменение срока");
             changeLogTask.setChange(Until);
             changeLogTask.setNameTask(NameTask);
+            changeLogTask.setNumberTask(NumberTask);
             Calendar currentCalendar = Calendar.getInstance();
             changeLogTask.setTime(currentCalendar.getTime().toString());
             changeLogTask.setUidUser(user.getUidUser());

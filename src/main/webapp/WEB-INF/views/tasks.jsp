@@ -32,15 +32,15 @@
     <label for="toggle" class="toggle-label"></label>
 </div>
 <label id="togLabel" >Показать задачи</label>
-<div class="all-list-task">
+<div class="all-list-task" id="all-list-task">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
     <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
         <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
-        <button id="buttonShowM${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowModal('${Task.getTaskNumber()}')">Жизненный цикл заявки</button>
-        <button id="buttonHideM${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideModal('${Task.getTaskNumber()}')" hidden="true">Скрыть жизненный цикл</button>
+        <button class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}')">Жизненный цикл заявки</button>
+        <button class="btn btn-primary buttonHideM" onclick="HideModal()" hidden="true">Скрыть жизненный цикл</button>
             <table>
                 <thead>
                 <tr>
@@ -69,7 +69,7 @@
                 <tr>
                     <c:if test="${!Tasks.getTaskUrl().isEmpty()}"><td>${Tasks.getTaskUrl()}</td></c:if>
                     <c:if test="${!Tasks.getTaskPartner().isEmpty()}"><td>${Tasks.getTaskPartner()}</td></c:if>
-                    <c:if test="${!Tasks.getTaskStatus().isEmpty()}"><td>${Tasks.getTaskStatus()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskStatus().isEmpty()}"><td id="statusid${Tasks.getTaskNumber()}">${Tasks.getTaskStatus()}</td></c:if>
                     <c:if test="${Tasks.getTaskStatus()=='Новая' || Tasks.getTaskStatus()=='Выполнена'
                      || Tasks.getTaskStatus()=='На тестировании'}">
                         <td>
@@ -207,8 +207,9 @@
         queryString = queryString.slice(0, -1);
         $.ajax({
             type: "GET",
-            url: "http://194.67.111.29/worker?"+queryString,
+            url: "http://localhost/worker?"+queryString,
             contentType: "application/json",
+            'Message': JSON.stringify(message),
             success: function() {
                 // сообщение успешно отправлено
             },
@@ -217,9 +218,6 @@
             }
         });
     }
-    $('#exampleModal').on('hidden.bs.modal', function () {
-        location.reload();
-    });
 </script>
 </body>
 </html>

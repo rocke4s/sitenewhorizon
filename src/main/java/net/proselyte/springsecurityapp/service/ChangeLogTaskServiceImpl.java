@@ -19,9 +19,9 @@ public class ChangeLogTaskServiceImpl implements ChangeLogTaskService{
         changeLogTask.setNameTask(changeLogTask.getNameTask());
         changeLogTask.setChange(changeLogTask.getChange());
         changeLogTask.setTime(changeLogTask.getTime());
+        changeLogTask.setNumberTask(changeLogTask.getNumberTask());
         changeLogTask.setIsNewChanges(changeLogTask.getIsNewChanges());
         changeLogTaskDao.save(changeLogTask);
-        System.out.println("???");
     }
 
     @Override

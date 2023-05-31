@@ -97,7 +97,7 @@ setInterval(function() {
             // var parsed = JSON.parse(object);
             if (object.message != undefined) {
                 var ull = document.getElementById("messageArea" + object.numberDoc);
-                const li = document.createElement('li');
+                var li = document.createElement('li');
                 if(object.userSenders != undefined)
                 {
                     li.innerHTML = object.userSenders + ": " + object.message;
@@ -111,46 +111,77 @@ setInterval(function() {
             }
         });
     });
-}, 1000);
-
-
-const sidebar = document.querySelector('.sidebar')
-function ShowModal(ids)
-{
-    sidebar.classList.toggle('active')
-    document.getElementById('buttonShowM'+ids).hidden = true;
-    document.getElementById('buttonHideM'+ids).hidden = false;
-}
-function HideModal(ids)
-{
-    sidebar.classList.toggle('active')
-    document.getElementById('buttonShowM'+ids).hidden = false;
-    document.getElementById('buttonHideM'+ids).hidden = true;
-}
-setInterval(function() {
     $.getJSON("/newchanges", function(mess) {
+        console.log(mess);
         mess.forEach(function(object) {
+            var sidebarUl = document.getElementById('sidebar-ul');
+            var statusid = document.getElementById('statusid'+object.numberTask);
+            var deadline = document.getElementById('deadline'+object.numberTask);
+            const li = document.createElement('li');
             if (object.changetype=="Изменение срока") {
-                var sidebarUl = document.getElementById("sidebar-ul");
-                const li = document.createElement('li');
                 li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
                     ' <span class="task-title">'+object.nameTask+'</span><br>' +
                     ' <span class="change">Срок изменился на '+object.change+'</span>' +
                     ' <hr><span class="time">'+object.time+'</span>';
-                sidebarUl.appendChild(li);
-                sidebar.classList.toggle('active')
+                deadline.style.backgroundColor = "#FF6347";
+
             }
             if (object.changetype=="Изменение статуса")
             {
-                var sidebarUl = document.getElementById("sidebar-ul");
-                const li = document.createElement('li');
+                statusid.style.backgroundColor = "#FF6347";
                 li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
                     ' <span class="task-title">'+object.nameTask+'</span><br>' +
                     ' <span class="change">'+object.change+'</span>' +
                     ' <hr><span class="time">'+object.time+'</span>';
-                sidebarUl.appendChild(li);
-                sidebar.classList.toggle('active')
             }
+            li.style.backgroundColor = "#FF6347";
+            sidebarUl.appendChild(li);
+            sidebar.classList.toggle('active');
         });
     });
-}, 1000);
+}, 500);
+
+
+const sidebar = document.querySelector('.sidebar')
+var sidebarUl = document.getElementById("sidebar-ul");
+function ShowModal(ids)
+{
+    var elementsShow = document.getElementsByClassName("buttonShowM");
+    var elementsHide = document.getElementsByClassName('buttonHideM');
+    for (var i = 0; i < elementsShow.length; i++) {
+        elementsShow[i].hidden = true;
+        elementsHide[i].hidden = false;
+    }
+    $.getJSON("/changesall", function(mess) {
+        sidebarUl.innerHTML="";
+        mess.forEach(function(object) {
+            var lii = document.createElement('li');
+        if(object.numberTask===ids) {
+            if (object.changetype === 'Изменение срока') {
+                lii.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+                    ' <span class="task-title">' + object.nameTask + '</span><br>' +
+                    ' <span class="change">Срок изменился на ' + object.change + '</span>' +
+                    ' <hr><span class="time">' + object.time + '</span>';
+            }
+            if (object.changetype === 'Изменение статуса') {
+                lii.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+                    ' <span class="task-title">' + object.nameTask + '</span><br>' +
+                    ' <span class="change">' + object.change + '</span>' +
+                    ' <hr><span class="time">' + object.time + '</span>';
+            }
+            sidebarUl.appendChild(lii);
+        }
+        });
+        sidebar.classList.toggle('active');
+    });
+}
+function HideModal()
+{
+    sidebar.classList.toggle('active')
+    var elementsShow = document.getElementsByClassName("buttonShowM");
+    var elementsHide = document.getElementsByClassName('buttonHideM');
+    for (var i = 0; i < elementsShow.length; i++) {
+        elementsShow[i].hidden = false;
+        elementsHide[i].hidden = true;
+    }
+}
