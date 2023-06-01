@@ -369,15 +369,17 @@ public class UserController {
     public void sendMessage(@RequestHeader("NumberTask") String NumberTask,@RequestHeader(value = "userSender",required = false) String userSender,
                             @RequestHeader(value = "userRecipient",required = false) String userRecipient,
                             @RequestHeader("message") String message,@RequestHeader("dataSend") String dataSend,
-                            @RequestHeader(value = "userName",required = false) String userName) {
+                            @RequestHeader(value = "userName",required = false) String userName) throws IOException {
         HttpPost request = null;
         HttpClient httpClient = HttpClientBuilder.create().build();
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
         User user = userService.findByUsername(userName);
         ChatUser chatUser = new ChatUser();
         try {
             chatUser.setNumberTask(URLDecoder.decode(NumberTask, "UTF-8"));
             if(userSender!=null){
                 request = new HttpPost("http://"+ip+"/franrit/hs/RitExchange/discussion/"+NumberTask+"/"+user.getUidUser());
+                request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
                 StringEntity requestBodyEntity = new StringEntity("{'message':"+message+"'}");
                 request.setEntity(requestBodyEntity);
                 HttpResponse httpResponse = httpClient.execute(request);
