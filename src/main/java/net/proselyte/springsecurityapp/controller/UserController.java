@@ -369,7 +369,8 @@ public class UserController {
     public void sendMessage(@RequestHeader("NumberTask") String NumberTask,@RequestHeader(value = "userSender",required = false) String userSender,
                             @RequestHeader(value = "userRecipient",required = false) String userRecipient,
                             @RequestHeader("message") String message,@RequestHeader("dataSend") String dataSend,
-                            @RequestHeader(value = "userName",required = false) String userName) throws IOException {
+                            @RequestHeader(value = "userName",required = false) String userName,
+                            @RequestHeader(value = "uidDoc",required = false) String uidDoc) throws IOException {
         HttpPost request = null;
         HttpClient httpClient = HttpClientBuilder.create().build();
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
@@ -378,9 +379,9 @@ public class UserController {
         try {
             chatUser.setNumberTask(URLDecoder.decode(NumberTask, "UTF-8"));
             if(userSender!=null){
-                request = new HttpPost("http://"+ip+"/franrit/hs/RitExchange/discussion/"+NumberTask+"/"+user.getUidUser());
+                request = new HttpPost("http://"+ip+"/franrit/hs/RitExchange/discussion/"+uidDoc+"/"+user.getUidUser());
                 request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
-                StringEntity requestBodyEntity = new StringEntity("{'message':"+message+"'}");
+                StringEntity requestBodyEntity = new StringEntity(URLDecoder.decode(message, "UTF-8"));
                 request.setEntity(requestBodyEntity);
                 HttpResponse httpResponse = httpClient.execute(request);
                 chatUser.setUserSenders(URLDecoder.decode(userSender, "UTF-8"));

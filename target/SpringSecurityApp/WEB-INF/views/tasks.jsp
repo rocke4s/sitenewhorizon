@@ -37,8 +37,8 @@
     <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
-        <button id="buttonShow${Task.getUidDoc()}" class="btn btn-primary" onclick="ShowChat('${Task.getUidDoc()}')">Показать чат</button>
-        <button id="buttonHide${Task.getUidDoc()}" class="btn btn-primary" onclick="HideChat('${Task.getUidDoc()}')" hidden="true">Скрыть чат</button>
+        <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
+        <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
         <button class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}')">Жизненный цикл заявки</button>
         <button class="btn btn-primary buttonHideM" onclick="HideModal()" hidden="true">Скрыть жизненный цикл</button>
             <table>
@@ -126,11 +126,11 @@
 
             </tr>
         </table>
-        <div id="id_${Task.getUidDoc()}" hidden="true">
-            <ul id="messageArea${Task.getUidDoc()}">
+        <div id="id_${Task.getTaskNumber()}" hidden="true">
+            <ul id="messageArea${Task.getTaskNumber()}">
             </ul>
                                  <input type="text" id="messageForUser" placeholder="Введите сообщение...">
-                            <button onclick="sendMessage1('${Task.getUidDoc()}')" type="submit">send</button>
+                            <button onclick="sendMessage1('${Task.getTaskNumber()}','${Task.getUidDoc()}')" type="submit">send</button>
         </div>
     </details>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -186,9 +186,8 @@
 <script src="${contextPath}/resources/js/tasks-js.js">
 </script>
 <script>
-    function sendMessage1(numberDoc) {
+    function sendMessage1(numberDoc,uidDoc) {
         var date = new Date();
-        console.log(numberDoc);
         const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
@@ -199,6 +198,7 @@
             url: 'http://194.67.111.29/worker',
             headers: {
                 "NumberTask": encodeURIComponent(numberDoc),
+                "uidDoc": encodeURIComponent(uidDoc),
             "userSender": encodeURIComponent("${Profile.getName()}"),
             "message": encodeURIComponent(""+document.querySelector('#id_' + numberDoc + ' input[type="text"]').value),
             "dataSend": encodeURIComponent(""+newDate),

@@ -12,6 +12,7 @@
           <option value="userRecipient" />
           <option value="NumberTask" />
           <option value="userName" />
+          <option value="uidDoc" />
         </set>
       </option>
     </inspection_tool>
