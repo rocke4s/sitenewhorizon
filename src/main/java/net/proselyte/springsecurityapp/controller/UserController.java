@@ -381,7 +381,8 @@ public class UserController {
             if(userSender!=null){
                 request = new HttpPost("http://"+ip+"/franrit/hs/RitExchange/discussion/"+uidDoc+"/"+user.getUidUser());
                 request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
-                StringEntity requestBodyEntity = new StringEntity(URLDecoder.decode(message, "UTF-8"));
+                request.setHeader("Content-Type", "charset=UTF-8");
+                StringEntity requestBodyEntity = new StringEntity(URLDecoder.decode(message, "UTF-8"),"UTF-8");
                 request.setEntity(requestBodyEntity);
                 HttpResponse httpResponse = httpClient.execute(request);
                 chatUser.setUserSenders(URLDecoder.decode(userSender, "UTF-8"));

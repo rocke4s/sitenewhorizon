@@ -1,6 +1,5 @@
 $.getJSON("/clientall", function(messages){
     messages.forEach(function(objects){
-        console.log(objects);
         if (objects.message !== undefined) {
             var ul = document.getElementById("messageArea" + objects.numberTask);
             var li = document.createElement('li');
@@ -96,7 +95,6 @@ function hideEnding(stat)
 setInterval(function() {
     $.getJSON("/client", function(messages2){
         messages2.forEach(function(objects) {
-            console.log(objects);
             if (objects.message !== undefined) {
                 var ul = document.getElementById("messageArea" + objects.numberTask);
                 var li = document.createElement('li');
@@ -115,7 +113,6 @@ setInterval(function() {
         });
     });
     $.getJSON("/newchanges", function(mess) {
-        console.log(mess);
         mess.forEach(function(object) {
             var sidebarUl = document.getElementById('sidebar-ul');
             var statusid = document.getElementById('statusid'+object.numberTask);

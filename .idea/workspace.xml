@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(2) 01.06.2023&#10;исправил ошибку с утра у чата&#10;чат без сокетов">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(3) 01.06.2023&#10;ну это же еще не все&#10;чат без сокетов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
@@ -291,14 +290,7 @@
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
-      <workItem from="1685073130574" duration="150954000" />
-    </task>
-    <task id="LOCAL-00086" summary="(4) 22.05.2023">
-      <created>1684760001807</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1684760001807</updated>
+      <workItem from="1685073130574" duration="152751000" />
     </task>
     <task id="LOCAL-00087" summary="(4) 22.05.2023">
       <created>1684772327397</created>
@@ -636,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685604774918</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="(3) 01.06.2023&#10;ну это же еще не все&#10;чат без сокетов">
+      <created>1685611018195</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1685611018195</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Good work2" />
     <MESSAGE value="asd" />
     <MESSAGE value="asddd" />
     <MESSAGE value="dasd" />
@@ -679,15 +677,16 @@
     <MESSAGE value="(1) 01.06.2023&#10;чутка поменяли&#10;чат без сокетов" />
     <MESSAGE value="(1) 01.06.2023&#10;исправил ошибку с утра у чата&#10;чат без сокетов" />
     <MESSAGE value="(2) 01.06.2023&#10;исправил ошибку с утра у чата&#10;чат без сокетов" />
-    <option name="LAST_COMMIT_MESSAGE" value="(2) 01.06.2023&#10;исправил ошибку с утра у чата&#10;чат без сокетов" />
+    <MESSAGE value="(3) 01.06.2023&#10;ну это же еще не все&#10;чат без сокетов" />
+    <option name="LAST_COMMIT_MESSAGE" value="(3) 01.06.2023&#10;ну это же еще не все&#10;чат без сокетов" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java</url>
-          <line>376</line>
-          <option name="timeStamp" value="80" />
+          <line>385</line>
+          <option name="timeStamp" value="81" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
