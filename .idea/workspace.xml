@@ -10,11 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(4) 01.06.2023&#10;заработал и с 1с и с сайта&#10;чат без сокетов">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -289,21 +292,7 @@
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
-      <workItem from="1685073130574" duration="154037000" />
-    </task>
-    <task id="LOCAL-00088" summary="(4) 22.05.2023">
-      <created>1684821006063</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1684821006063</updated>
-    </task>
-    <task id="LOCAL-00089" summary="(4) 22.05.2023">
-      <created>1684824962967</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1684824962967</updated>
+      <workItem from="1685073130574" duration="155643000" />
     </task>
     <task id="LOCAL-00090" summary="(4) 22.05.2023">
       <created>1684825115313</created>
@@ -634,7 +623,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685614050003</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="(4) 01.06.2023&#10;заработал и с 1с и с сайта&#10;чат без сокетов">
+      <created>1685614858353</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1685614858353</updated>
+    </task>
+    <task id="LOCAL-00138" summary="(4) 01.06.2023&#10;заработал и с 1с и с сайта&#10;чат без сокетов">
+      <created>1685615177240</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1685615177240</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

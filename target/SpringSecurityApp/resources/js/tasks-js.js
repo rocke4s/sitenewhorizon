@@ -2,18 +2,21 @@ $.getJSON("/clientall", function(messages){
     messages.forEach(function(objects){
         if (objects.message !== undefined) {
             var ul = document.getElementById("messageArea" + objects.numberTask);
-            var li = document.createElement('li');
-            if(!(objects.userSenders === null || objects.userSenders ===undefined))
+            if(ul!=null)
             {
-                li.innerHTML = objects.userSenders + ": " + objects.message;
-                ul.appendChild(li);
+                var li = document.createElement('li');
+                if(!(objects.userSenders === null || objects.userSenders ===undefined))
+                {
+                    li.innerHTML = objects.userSenders + ": " + objects.message;
+                    ul.appendChild(li);
+                }
+                if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
+                {
+                    li.innerHTML = objects.userRecipient + ": " + objects.message;
+                    ul.appendChild(li);
+                }
+                messageList = objects.data;
             }
-            if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
-            {
-                li.innerHTML = objects.userRecipient + ": " + objects.message;
-                ul.appendChild(li);
-            }
-            messageList = objects.data;
         }
     });
 });
@@ -97,18 +100,21 @@ setInterval(function() {
         messages2.forEach(function(objects) {
             if (objects.message !== undefined) {
                 var ul = document.getElementById("messageArea" + objects.numberTask);
-                var li = document.createElement('li');
-                if(!(objects.userSenders === null || objects.userSenders ===undefined))
+                if(ul!=null)
                 {
-                    li.innerHTML = objects.userSenders + ": " + objects.message;
-                    ul.appendChild(li);
-                }
+                    var li = document.createElement('li');
+                    if(!(objects.userSenders === null || objects.userSenders ===undefined))
+                    {
+                        li.innerHTML = objects.userSenders + ": " + objects.message;
+                        ul.appendChild(li);
+                    }
                     if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
-                {
-                    li.innerHTML = objects.userRecipient + ": " + objects.message;
-                    ul.appendChild(li);
+                    {
+                        li.innerHTML = objects.userRecipient + ": " + objects.message;
+                        ul.appendChild(li);
+                    }
+                    messageList = objects.data;
                 }
-                messageList = objects.data;
             }
         });
     });
