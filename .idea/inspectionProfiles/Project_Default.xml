@@ -11,6 +11,7 @@
           <option value="dataSend" />
           <option value="userRecipient" />
           <option value="NumberTask" />
+          <option value="userName" />
         </set>
       </option>
     </inspection_tool>

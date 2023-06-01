@@ -13,7 +13,7 @@ public class ChatUserServiceImpl  implements ChatUserService{
 
     @Override
     public void save(ChatUser chatUser) {
-        chatUser.setNumberDoc(chatUser.getNumberDoc());
+        chatUser.setNumberTask(chatUser.getNumberTask());
         chatUser.setUserSenders(chatUser.getUserSenders());
         chatUser.setUserRecipient(chatUser.getUserRecipient());
         chatUser.setMessage(chatUser.getMessage());

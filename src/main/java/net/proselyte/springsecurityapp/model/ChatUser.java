@@ -10,7 +10,7 @@ public class ChatUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(name = "numberDoc")
-    private String numberDoc;
+    private String NumberTask;
     @Column(name = "userSender")
     private String userSenders;
     @Column(name = "userRecipient")
@@ -30,12 +30,12 @@ public class ChatUser {
         this.isNewMessage = isNewMessage;
     }
 
-    public String getNumberDoc() {
-        return numberDoc;
+    public String getNumberTask() {
+        return NumberTask;
     }
 
-    public void setNumberDoc(String numberDoc) {
-        this.numberDoc = numberDoc;
+    public void setNumberTask(String numberTask) {
+        NumberTask = numberTask;
     }
 
     public long getId() {

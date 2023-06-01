@@ -9,8 +9,12 @@ import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
@@ -226,6 +230,7 @@ public class UserController {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
+        System.out.println("sadasdqweqwe"+task.getTasks().get(0).getUidDoc());
         ModelAndView modelAndView = new ModelAndView("tasks");
         modelAndView.addObject("Tasks", task);
         modelAndView.addObject("changeStatus",changeStatus);
@@ -361,19 +366,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void sendMessage(@RequestHeader("NumberTask") String numberDoc,@RequestHeader(value = "userSender",required = false) String userSender,
+    public void sendMessage(@RequestHeader("NumberTask") String NumberTask,@RequestHeader(value = "userSender",required = false) String userSender,
                             @RequestHeader(value = "userRecipient",required = false) String userRecipient,
-                            @RequestHeader("message") String message,@RequestHeader("dataSend") String dataSend) {
+                            @RequestHeader("message") String message,@RequestHeader("dataSend") String dataSend,
+                            @RequestHeader(value = "userName",required = false) String userName) {
+        HttpPost request = null;
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        User user = userService.findByUsername(userName);
         ChatUser chatUser = new ChatUser();
         try {
-            chatUser.setNumberDoc(URLDecoder.decode(numberDoc, "UTF-8"));
+            chatUser.setNumberTask(URLDecoder.decode(NumberTask, "UTF-8"));
             if(userSender!=null){
+                request = new HttpPost("http://"+ip+"/franrit/hs/RitExchange/discussion/"+NumberTask+"/"+user.getUidUser());
+                StringEntity requestBodyEntity = new StringEntity("{'message':"+message+"'}");
+                request.setEntity(requestBodyEntity);
+                HttpResponse httpResponse = httpClient.execute(request);
                 chatUser.setUserSenders(URLDecoder.decode(userSender, "UTF-8"));
+                chatUser.setMessage(URLDecoder.decode(message, "UTF-8"));
             }
             if(userRecipient!=null) {
-                chatUser.setUserRecipient(URLDecoder.decode(userRecipient, "UTF-8"));
+                chatUser.setUserRecipient(URLDecoder.decode(decodRequest(userRecipient), "UTF-8"));
+                chatUser.setMessage(URLDecoder.decode(decodRequest(message), "UTF-8"));
             }
-            chatUser.setMessage(URLDecoder.decode(message, "UTF-8"));
             chatUser.setDateSend(URLDecoder.decode(dataSend, "UTF-8"));
             chatUser.setIsNewMessage("new");
         } catch (Exception e) {

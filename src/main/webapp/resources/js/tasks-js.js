@@ -1,18 +1,20 @@
-$.getJSON("/clientall", function(messages) {
-    messages.forEach(function(object) {
-        // var parsed = JSON.parse(object);
-        if (object.message != undefined) {
-            var ull = document.getElementById("messageArea" + object.numberDoc);
-            const li = document.createElement('li');
-            if(object.userRecipient != undefined)
+$.getJSON("/clientall", function(messages){
+    messages.forEach(function(objects){
+        console.log(objects);
+        if (objects.message !== undefined) {
+            var ul = document.getElementById("messageArea" + objects.numberTask);
+            var li = document.createElement('li');
+            if(!(objects.userSenders === null || objects.userSenders ===undefined))
             {
-                li.innerHTML = object.userRecipient + ": " + object.message;
-            } else if (object.userSenders != undefined)
-            {
-                li.innerHTML = object.userSenders + ": " + object.message;
+                li.innerHTML = objects.userSenders + ": " + objects.message;
+                ul.appendChild(li);
             }
-            messageList = object.data;
-            ull.appendChild(li);
+            if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
+            {
+                li.innerHTML = objects.userRecipient + ": " + objects.message;
+                ul.appendChild(li);
+            }
+            messageList = objects.data;
         }
     });
 });
@@ -92,22 +94,23 @@ function hideEnding(stat)
 }
 
 setInterval(function() {
-    $.getJSON("/client", function(messages) {
-        messages.forEach(function(object) {
-            // var parsed = JSON.parse(object);
-            if (object.message != undefined) {
-                var ull = document.getElementById("messageArea" + object.numberDoc);
+    $.getJSON("/client", function(messages2){
+        messages2.forEach(function(objects) {
+            console.log(objects);
+            if (objects.message !== undefined) {
+                var ul = document.getElementById("messageArea" + objects.numberTask);
                 var li = document.createElement('li');
-                if(object.userSenders != undefined)
+                if(!(objects.userSenders === null || objects.userSenders ===undefined))
                 {
-                    li.innerHTML = object.userSenders + ": " + object.message;
+                    li.innerHTML = objects.userSenders + ": " + objects.message;
+                    ul.appendChild(li);
                 }
-                if(object.userRecipient != undefined)
+                    if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
                 {
-                    li.innerHTML = object.userRecipient + ": " + object.message;
+                    li.innerHTML = objects.userRecipient + ": " + objects.message;
+                    ul.appendChild(li);
                 }
-                messageList = object.data;
-                ull.appendChild(li);
+                messageList = objects.data;
             }
         });
     });
@@ -117,7 +120,7 @@ setInterval(function() {
             var sidebarUl = document.getElementById('sidebar-ul');
             var statusid = document.getElementById('statusid'+object.numberTask);
             var deadline = document.getElementById('deadline'+object.numberTask);
-            const li = document.createElement('li');
+            var li = document.createElement('li');
             if (object.changetype=="Изменение срока") {
                 li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
                     ' <span class="task-title">'+object.nameTask+'</span><br>' +
@@ -155,21 +158,21 @@ function ShowModal(ids)
     $.getJSON("/changesall", function(mess) {
         sidebarUl.innerHTML="";
         mess.forEach(function(object) {
-            var lii = document.createElement('li');
+            var li = document.createElement('li');
         if(object.numberTask===ids) {
             if (object.changetype === 'Изменение срока') {
-                lii.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+                li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
                     ' <span class="task-title">' + object.nameTask + '</span><br>' +
                     ' <span class="change">Срок изменился на ' + object.change + '</span>' +
                     ' <hr><span class="time">' + object.time + '</span>';
             }
             if (object.changetype === 'Изменение статуса') {
-                lii.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+                li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
                     ' <span class="task-title">' + object.nameTask + '</span><br>' +
                     ' <span class="change">' + object.change + '</span>' +
                     ' <hr><span class="time">' + object.time + '</span>';
             }
-            sidebarUl.appendChild(lii);
+            sidebarUl.appendChild(li);
         }
         });
         sidebar.classList.toggle('active');
