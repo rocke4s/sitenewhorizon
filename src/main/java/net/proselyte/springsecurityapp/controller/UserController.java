@@ -60,8 +60,8 @@ public class UserController {
     private UserValidator userValidator;
 //    @Autowired
 //    private TaskListService taskListService;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip="192.168.1.224";//192.168.1.224 || 217.114.183.98
+    private String ip2="Localhost";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
