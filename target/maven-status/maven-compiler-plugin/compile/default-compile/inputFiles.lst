@@ -1,6 +1,7 @@
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\ChangeLogTask.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ChangeLogTaskServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\controller\UserController.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\TaskList.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\UserDetailsServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Message.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\RatingTaskServiceImpl.java
@@ -15,10 +16,12 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\RoleDao.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Statuska.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\ChangeStatus.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\TaskListService.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\UserServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\ProfileDao.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\SecurityService.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\MyWebSocketClient.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\TaskListUserDao.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\dao\UserDao.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\chat_server\MyWebSocketServer.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\SecurityServiceImpl.java
@@ -33,6 +36,7 @@ C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\sr
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\ChatUserServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\config\SecurityConfig.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Role.java
+C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\service\TaskListServiceImpl.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\UserReg.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\ChatUser.java
 C:\Users\User_RIT\Desktop\projects_max\ver2(zapaska)\SpringSecurityApp-master\src\main\java\net\proselyte\springsecurityapp\model\Profile.java

@@ -10,6 +10,7 @@
           <option value="message" />
           <option value="dataSend" />
           <option value="userRecipient" />
+          <option value="NumberTask" />
         </set>
       </option>
     </inspection_tool>

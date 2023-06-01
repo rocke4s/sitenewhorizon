@@ -198,7 +198,7 @@
             method: 'GET',
             url: 'http://194.67.111.29/worker',
             headers: {
-                "numberDoc": encodeURIComponent(""+numberDoc),
+                "NumberTask": encodeURIComponent(""+numberDoc),
             "userSender": encodeURIComponent("${Profile.getName()}"),
             "message": encodeURIComponent(""+document.querySelector('#id_' + numberDoc + ' input[type="text"]').value),
             "dataSend": encodeURIComponent(""+newDate)

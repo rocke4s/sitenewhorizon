@@ -9,15 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 31.05.2023&#10;чек чат&#10;чат без сокетов">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(2) 31.05.2023&#10;раунд побежден с чатом теперь отправляется со страницы&#10;чат без сокетов">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/dao/TaskListUserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/TaskList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/TaskListService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/TaskListServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,14 +290,7 @@
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
-      <workItem from="1685073130574" duration="128694000" />
-    </task>
-    <task id="LOCAL-00082" summary="(3) 22.05.2023">
-      <created>1684756601188</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1684756601189</updated>
+      <workItem from="1685073130574" duration="139273000" />
     </task>
     <task id="LOCAL-00083" summary="(3) 22.05.2023">
       <created>1684757572345</created>
@@ -636,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685534441888</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="(2) 31.05.2023&#10;раунд побежден с чатом теперь отправляется со страницы&#10;чат без сокетов">
+      <created>1685551718504</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1685551718504</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="(1) 24.05.2023" />
     <MESSAGE value="(1) 23.05.2023" />
     <MESSAGE value="Good work" />
     <MESSAGE value="Good work1" />
@@ -679,7 +677,8 @@
     <MESSAGE value="(1) 30.05.2023&#10;чат без сокетов в0.0000002" />
     <MESSAGE value="(2) 30.05.2023&#10;жизненый цикл по каждой заявке пока только кнопка&#10;чат без сокетов" />
     <MESSAGE value="(1) 31.05.2023&#10;чек чат&#10;чат без сокетов" />
-    <option name="LAST_COMMIT_MESSAGE" value="(1) 31.05.2023&#10;чек чат&#10;чат без сокетов" />
+    <MESSAGE value="(2) 31.05.2023&#10;раунд побежден с чатом теперь отправляется со страницы&#10;чат без сокетов" />
+    <option name="LAST_COMMIT_MESSAGE" value="(2) 31.05.2023&#10;раунд побежден с чатом теперь отправляется со страницы&#10;чат без сокетов" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

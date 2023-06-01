@@ -3,6 +3,7 @@ package net.proselyte.springsecurityapp.controller;
 import com.google.gson.Gson;
 import jakarta.mail.MessagingException;
 import net.proselyte.springsecurityapp.config.Sender;
+//import net.proselyte.springsecurityapp.dao.TaskListUserDao;
 import net.proselyte.springsecurityapp.model.*;
 import net.proselyte.springsecurityapp.service.*;
 import net.proselyte.springsecurityapp.validator.UserValidator;
@@ -53,6 +54,8 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
+//    @Autowired
+//    private TaskListService taskListService;
     private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
     private String ip2="194.67.111.29";//localhost || 194.67.111.29
 
@@ -206,11 +209,17 @@ public class UserController {
             str = str.replaceAll("Дата", "TaskData");
             str = str.replaceAll("\"Отдел\"", "TaskDepartment");
             task = g.fromJson(str, Task.class);
+//            TaskList taskList = new TaskList(); //TODO: на случай если обновление будет на нас.
+//            taskListService.findByisUidUser(user.getUidUser(), taskList);
+//            if (taskListService == null){
+//                System.out.println("отработал save");
+//            }
 
             Collections.sort(task.getTasks(), Comparator.comparing(Tasks::getTaskNumber).reversed());
         } finally {
             response.close();
         }
+
 //        List<ChangeLogTask> changeLogTask = new ArrayList<>();
 //        try {
 //            changeLogTask = changeLogTaskService.findByUidUser(user.getUidUser());
@@ -352,7 +361,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void sendMessage(@RequestHeader("numberDoc") String numberDoc,@RequestHeader(value = "userSender",required = false) String userSender,
+    public void sendMessage(@RequestHeader("NumberTask") String numberDoc,@RequestHeader(value = "userSender",required = false) String userSender,
                             @RequestHeader(value = "userRecipient",required = false) String userRecipient,
                             @RequestHeader("message") String message,@RequestHeader("dataSend") String dataSend) {
         ChatUser chatUser = new ChatUser();
