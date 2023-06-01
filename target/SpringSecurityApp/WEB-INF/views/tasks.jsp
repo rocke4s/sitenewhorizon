@@ -195,7 +195,7 @@
         var newDate = day+"."+month+"."+year+" "+time;
         $.ajax({
             method: 'GET',
-            url: 'http://Localhost/worker',
+            url: 'http://194.67.111.29/worker',
             headers: {
                 "NumberTask": encodeURIComponent(numberDoc),
                 "uidDoc": encodeURIComponent(uidDoc),
