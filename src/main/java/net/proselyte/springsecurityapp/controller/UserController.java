@@ -488,12 +488,13 @@ public class UserController {
         try {
             String NumberTask = decodRequest(request.getHeader("NumberTask"));
             String NameTask = decodRequest(request.getHeader("NameTask"));
-            String Until = decodRequest(request.getHeader("Until"));
+            String OldUntil = decodRequest(request.getHeader("OldUntil"));
+            String NewUntil = decodRequest(request.getHeader("NewUntil"));
             String Login = decodRequest(request.getHeader("UserName"));
             User user = userService.findByUsername(Login);
             ChangeLogTask changeLogTask = new ChangeLogTask();
             changeLogTask.setChangetype("Изменение срока");
-            changeLogTask.setChange(Until);
+            changeLogTask.setChange("Срок изменен с "+OldUntil+" на "+NewUntil);
             changeLogTask.setNameTask(NameTask);
             changeLogTask.setNumberTask(NumberTask);
             Calendar currentCalendar = Calendar.getInstance();

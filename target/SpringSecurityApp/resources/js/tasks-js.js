@@ -132,7 +132,7 @@ setInterval(function() {
                 if (object.changetype=="Изменение срока") {
                     li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
                         ' <span class="task-title">'+object.nameTask+'</span><br>' +
-                        ' <span class="change">Срок изменился на '+object.change+'</span>' +
+                        ' <span class="change">'+object.change+'</span>' +
                         ' <hr><span class="time">'+object.time+'</span>';
 
                 }
@@ -178,7 +178,7 @@ function ShowModal(ids,nametask)
             if (object.changetype === 'Изменение срока') {
                 li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
                     ' <span class="task-title">' + object.nameTask + '</span><br>' +
-                    ' <span class="change">Срок изменился на ' + object.change + '</span>' +
+                    ' <span class="change">' + object.change + '</span>' +
                     ' <hr><span class="time">' + object.time + '</span>';
             }
             if (object.changetype === 'Изменение статуса') {
