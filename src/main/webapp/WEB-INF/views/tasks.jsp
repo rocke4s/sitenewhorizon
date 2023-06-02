@@ -27,6 +27,7 @@
         </h2>
     </div>
 </div>
+<c:if test="${Tasks.getTasks().size()!=0}">
 <div class="toggle-switch">
     <input type="checkbox" id="toggle" class="toggle-checkbox" onchange="hideEnding(this)" checked>
     <label for="toggle" class="toggle-label"></label>
@@ -211,5 +212,8 @@
         document.querySelector('#id_' + numberDoc + ' input[type="text"]').value = "";
     }
 </script>
+</c:if>
+<c:if test="${Tasks.getTasks().size()==0}">
+    <h2 style="text-align:center; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);">Список задач пуст!</h2></c:if>
 </body>
 </html>

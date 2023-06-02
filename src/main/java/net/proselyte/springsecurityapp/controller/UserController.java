@@ -231,7 +231,6 @@ public class UserController {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
-        System.out.println("sadasdqweqwe"+task.getTasks().get(0).getUidDoc());
         ModelAndView modelAndView = new ModelAndView("tasks");
         modelAndView.addObject("Tasks", task);
         modelAndView.addObject("changeStatus",changeStatus);
@@ -343,10 +342,15 @@ public class UserController {
         Profile prof = profileService.findByUidUser(user.getUidUser());
         newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
         newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
-        fileName = fileName.replaceAll("\\s+","%20");
-        String q  = "http://"+ip2+"/data/"+newTask.getNameTask()+"/" + fileName;
-        request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetCreateTask/"+ prof.getUidUser()+"/"
-                +newTask.getNameTask()+"/"+newTask.getTaskContent()+"/"+newTask.getTaskImportance()+"?File="+ URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
+        if(!newTask.getFile().isEmpty()) {
+            fileName = fileName.replaceAll("\\s+", "%20");
+            String q = "http://" + ip2 + "/data/" + newTask.getNameTask() + "/" + fileName;
+            request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetCreateTask/" + prof.getUidUser() + "/"
+                    + newTask.getNameTask() + "/" + newTask.getTaskContent() + "/" + newTask.getTaskImportance() + "?File=" + URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
+        } else {
+            request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetCreateTask/" + prof.getUidUser() + "/"
+                    + newTask.getNameTask() + "/" + newTask.getTaskContent() + "/" + newTask.getTaskImportance());
+        }
         CloseableHttpClient client = HttpClientBuilder.create().build();
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
         String result;
@@ -485,7 +489,7 @@ public class UserController {
             String NumberTask = decodRequest(request.getHeader("NumberTask"));
             String NameTask = decodRequest(request.getHeader("NameTask"));
             String Until = decodRequest(request.getHeader("Until"));
-            String Login = decodRequest(request.getHeader("Login"));
+            String Login = decodRequest(request.getHeader("UserName"));
             User user = userService.findByUsername(Login);
             ChangeLogTask changeLogTask = new ChangeLogTask();
             changeLogTask.setChangetype("Изменение срока");
