@@ -7,12 +7,12 @@ $.getJSON("/clientall", function(messages){
                 var li = document.createElement('li');
                 if(!(objects.userSenders === null || objects.userSenders ===undefined))
                 {
-                    li.innerHTML = objects.userSenders + ": " + objects.message;
+                    li.innerHTML = "["+objects.dateSend+"] "+objects.userSenders + ": " + objects.message;
                     ul.appendChild(li);
                 }
                 if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
                 {
-                    li.innerHTML = objects.userRecipient + ": " + objects.message;
+                    li.innerHTML = "["+objects.dateSend+"] "+objects.userRecipient + ": " + objects.message;
                     ul.appendChild(li);
                 }
                 messageList = objects.data;
@@ -58,10 +58,12 @@ forms.forEach(form => {
 
 let ul = null;
 let messageList = null;
-
+let listul = null;
 function ShowChat(ids)
 {
+    listul = document.getElementById('messageArea'+ids);
     document.getElementById('id_'+ids).hidden= false;
+    listul.scrollTop = listul.scrollHeight;
     document.getElementById('buttonShow'+ids).hidden = true;
     document.getElementById('buttonHide'+ids).hidden = false;
 }
@@ -105,12 +107,12 @@ setInterval(function() {
                     var li = document.createElement('li');
                     if(!(objects.userSenders === null || objects.userSenders ===undefined))
                     {
-                        li.innerHTML = objects.userSenders + ": " + objects.message;
+                        li.innerHTML = "["+objects.dateSend+"] "+objects.userSenders + ": " + objects.message;
                         ul.appendChild(li);
                     }
                     if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
                     {
-                        li.innerHTML = objects.userRecipient + ": " + objects.message;
+                        li.innerHTML = "["+objects.dateSend+"] "+objects.userRecipient + ": " + objects.message;
                         ul.appendChild(li);
                     }
                     messageList = objects.data;
@@ -123,26 +125,35 @@ setInterval(function() {
             var sidebarUl = document.getElementById('sidebar-ul');
             var statusid = document.getElementById('statusid'+object.numberTask);
             var deadline = document.getElementById('deadline'+object.numberTask);
+            var nametask = document.getElementById('id'+object.nameTask);
             var li = document.createElement('li');
-            if (object.changetype=="Изменение срока") {
-                li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
-                    ' <span class="task-title">'+object.nameTask+'</span><br>' +
-                    ' <span class="change">Срок изменился на '+object.change+'</span>' +
-                    ' <hr><span class="time">'+object.time+'</span>';
-                deadline.style.backgroundColor = "#FF6347";
+            if(nametask!=null && nametask.innerHTML === object.nameTask)
+            {
+                if (object.changetype=="Изменение срока") {
+                    li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
+                        ' <span class="task-title">'+object.nameTask+'</span><br>' +
+                        ' <span class="change">Срок изменился на '+object.change+'</span>' +
+                        ' <hr><span class="time">'+object.time+'</span>';
 
+                }
+                    if (object.changetype=="Изменение статуса")
+                    {
+                        statusid.style.backgroundColor = "#FF6347";
+                        li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
+                            ' <span class="task-title">'+object.nameTask+'</span><br>' +
+                            ' <span class="change">'+object.change+'</span>' +
+                            ' <hr><span class="time">'+object.time+'</span>';
+                    }
+                    li.style.backgroundColor = "#FF6347";
+                    sidebarUl.appendChild(li);
+            }
+            if (object.changetype=="Изменение срока") {
+                deadline.style.backgroundColor = "#FF6347";
             }
             if (object.changetype=="Изменение статуса")
             {
                 statusid.style.backgroundColor = "#FF6347";
-                li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
-                    ' <span class="task-title">'+object.nameTask+'</span><br>' +
-                    ' <span class="change">'+object.change+'</span>' +
-                    ' <hr><span class="time">'+object.time+'</span>';
             }
-            li.style.backgroundColor = "#FF6347";
-            sidebarUl.appendChild(li);
-            sidebar.classList.toggle('active');
         });
     });
 }, 500);
@@ -150,7 +161,7 @@ setInterval(function() {
 
 const sidebar = document.querySelector('.sidebar')
 var sidebarUl = document.getElementById("sidebar-ul");
-function ShowModal(ids)
+function ShowModal(ids,nametask)
 {
     var elementsShow = document.getElementsByClassName("buttonShowM");
     var elementsHide = document.getElementsByClassName('buttonHideM');
@@ -160,6 +171,7 @@ function ShowModal(ids)
     }
     $.getJSON("/changesall", function(mess) {
         sidebarUl.innerHTML="";
+        sidebarUl.innerHTML='<h2 id="id'+nametask+'">'+nametask+'</h2>';
         mess.forEach(function(object) {
             var li = document.createElement('li');
         if(object.numberTask===ids) {
@@ -178,8 +190,8 @@ function ShowModal(ids)
             sidebarUl.appendChild(li);
         }
         });
-        sidebar.classList.toggle('active');
     });
+    sidebar.classList.toggle('active');
 }
 function HideModal()
 {

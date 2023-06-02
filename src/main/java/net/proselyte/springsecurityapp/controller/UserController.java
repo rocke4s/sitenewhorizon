@@ -212,6 +212,7 @@ public class UserController {
             str = str.replaceAll("Номер", "TaskNumber");
             str = str.replaceAll("Дата", "TaskData");
             str = str.replaceAll("\"Отдел\"", "TaskDepartment");
+            str = str.replaceAll("http[^\"]+", "<a href='$0'>$0</a>");
             task = g.fromJson(str, Task.class);
 //            TaskList taskList = new TaskList(); //TODO: на случай если обновление будет на нас.
 //            taskListService.findByisUidUser(user.getUidUser(), taskList);

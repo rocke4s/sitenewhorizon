@@ -39,7 +39,7 @@
      <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
         <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
-        <button class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}')">Жизненный цикл заявки</button>
+        <button class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}','${Task.getNameTask()}')">Жизненный цикл заявки</button>
         <button class="btn btn-primary buttonHideM" onclick="HideModal()" hidden="true">Скрыть жизненный цикл</button>
             <table>
                 <thead>
@@ -127,7 +127,7 @@
             </tr>
         </table>
         <div id="id_${Task.getTaskNumber()}" hidden="true">
-            <ul id="messageArea${Task.getTaskNumber()}">
+            <ul id="messageArea${Task.getTaskNumber()}" class="chat-class">
             </ul>
                                  <input type="text" id="messageForUser" placeholder="Введите сообщение...">
                             <button onclick="sendMessage1('${Task.getTaskNumber()}','${Task.getUidDoc()}')" type="submit">send</button>
@@ -171,7 +171,7 @@
 </c:forEach>
 </div>
 <div class="sidebar">
-    <h2>Журнал изменений</h2>
+    <h2>Жизненный цикл заявки</h2>
     <ul id="sidebar-ul">
 <c:forEach var="changeLogTask" items="${changeLogTask}">
         <li>
@@ -208,6 +208,7 @@
                 console.log(response);})
             .catch(function(error) {
                 console.error(error);});
+        document.querySelector('#id_' + numberDoc + ' input[type="text"]').value = "";
     }
 </script>
 </body>
