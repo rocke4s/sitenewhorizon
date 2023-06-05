@@ -9,5 +9,7 @@ public interface ChangeLogTaskService {
     List<ChangeLogTask> findAll();
     List<ChangeLogTask> findByUidUser(String uidUser);
     List<ChangeLogTask> findByisNewChanges(String isNewChanges);
+    void updateStatusByNumberTask(String newStatus, String numberTask);
+
 
 }

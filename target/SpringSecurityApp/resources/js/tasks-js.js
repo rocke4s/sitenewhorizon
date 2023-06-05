@@ -126,27 +126,29 @@ setInterval(function() {
             var statusid = document.getElementById('statusid'+object.numberTask);
             var deadline = document.getElementById('deadline'+object.numberTask);
             var nametask = document.getElementById('id'+object.nameTask);
+            var buttonshow = document.getElementById('buttonShowM'+object.numberTask);
+            var sumrTaskid = document.getElementById('sumr'+object.numberTask);
+            var changeLogId = document.getElementById('changeLogId'+object.id);
+            buttonshow.style.backgroundColor = "#FF6347";
+            sumrTaskid.style.backgroundColor = "#FF6347";
             var li = document.createElement('li');
-            if(nametask!=null && nametask.innerHTML === object.nameTask)
-            {
-                if (object.changetype=="Изменение срока") {
-                    li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
-                        ' <span class="task-title">'+object.nameTask+'</span><br>' +
-                        ' <span class="change">'+object.change+'</span>' +
-                        ' <hr><span class="time">'+object.time+'</span>';
-
-                }
-                    if (object.changetype=="Изменение статуса")
-                    {
-                        statusid.style.backgroundColor = "#FF6347";
-                        li.innerHTML = '<span class="change-type"><u>'+object.changetype+'</u></span><br>' +
-                            ' <span class="task-title">'+object.nameTask+'</span><br>' +
-                            ' <span class="change">'+object.change+'</span>' +
-                            ' <hr><span class="time">'+object.time+'</span>';
-                    }
-                    li.style.backgroundColor = "#FF6347";
-                    sidebarUl.appendChild(li);
-            }
+            // if(nametask!=null && nametask.innerHTML === object.nameTask) {
+            //             if (object.changetype == "Изменение срока") {
+            //                 li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+            //                     ' <span class="task-title">' + object.nameTask + '</span><br>' +
+            //                     ' <span class="change">' + object.change + '</span>' +
+            //                     ' <hr id="changeLogId'+object.id+'"><span class="time">' + object.time + '</span>';
+            //
+            //             }
+            //             if (object.changetype == "Изменение статуса") {
+            //                 li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+            //                     ' <span class="task-title">' + object.nameTask + '</span><br>' +
+            //                     ' <span class="change">' + object.change + '</span>' +
+            //                     ' <hr id="changeLogId'+object.id+'"><span class="time">' + object.time + '</span>';
+            //             }
+            //             li.style.backgroundColor = "#FF6347";
+            //             sidebarUl.appendChild(li);
+            // }
             if (object.changetype=="Изменение срока") {
                 deadline.style.backgroundColor = "#FF6347";
             }
@@ -159,7 +161,7 @@ setInterval(function() {
 }, 500);
 
 
-const sidebar = document.querySelector('.sidebar')
+const sidebar = document.querySelector('.sidebar');
 var sidebarUl = document.getElementById("sidebar-ul");
 function ShowModal(ids,nametask)
 {
@@ -174,32 +176,73 @@ function ShowModal(ids,nametask)
         sidebarUl.innerHTML='<h2 id="id'+nametask+'">'+nametask+'</h2>';
         mess.forEach(function(object) {
             var li = document.createElement('li');
+            var statusid = document.getElementById('statusid'+ids);
+            var deadline = document.getElementById('deadline'+ids);
+            var buttonshow = document.getElementById('buttonShowM'+ids);
+            var sumrTaskid = document.getElementById('sumr'+ids);
         if(object.numberTask===ids) {
-            if (object.changetype === 'Изменение срока') {
-                li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
-                    ' <span class="task-title">' + object.nameTask + '</span><br>' +
-                    ' <span class="change">' + object.change + '</span>' +
-                    ' <hr><span class="time">' + object.time + '</span>';
-            }
-            if (object.changetype === 'Изменение статуса') {
-                li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
-                    ' <span class="task-title">' + object.nameTask + '</span><br>' +
-                    ' <span class="change">' + object.change + '</span>' +
-                    ' <hr><span class="time">' + object.time + '</span>';
-            }
-            sidebarUl.appendChild(li);
+                if (object.changetype === 'Изменение срока') {
+                    li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+                        ' <span id="id'+object.nameTask+'" class="task-title">' + object.nameTask + '</span><br>' +
+                        ' <span class="change">' + object.change + '</span>' +
+                        ' <hr id="changeLogId'+object.id+'"><span class="time">' + object.time + '</span>';
+                }
+                if (object.changetype === 'Изменение статуса') {
+                    li.innerHTML = '<span class="change-type"><u>' + object.changetype + '</u></span><br>' +
+                        ' <span id="id'+object.nameTask+'" class="task-title">' + object.nameTask + '</span><br>' +
+                        ' <span class="change">' + object.change + '</span>' +
+                        ' <hr id="changeLogId'+object.id+'"><span class="time">' + object.time + '</span>';
+                }
+                if(object.isNewChanges==="new")
+                {
+                    sumrTaskid.style.backgroundColor = "#FF6347";
+                    li.style.backgroundColor = "#FF6347";
+                    buttonshow.style.backgroundColor = "#FF6347";
+                    if (object.changetype=="Изменение срока") {
+                        deadline.style.backgroundColor = "#FF6347";
+                    }
+                    if (object.changetype=="Изменение статуса")
+                    {
+                        statusid.style.backgroundColor = "#FF6347";
+                    }
+                }
+                sidebarUl.appendChild(li);
         }
         });
     });
     sidebar.classList.toggle('active');
 }
-function HideModal()
+function HideModal(numberDoc)
 {
     sidebar.classList.toggle('active')
+    var statusid = document.getElementById('statusid'+numberDoc);
+    var deadline = document.getElementById('deadline'+numberDoc);
     var elementsShow = document.getElementsByClassName("buttonShowM");
+    var buttonShow = document.getElementById("buttonShowM"+numberDoc);
     var elementsHide = document.getElementsByClassName('buttonHideM');
+    var sumrTaskid = document.getElementById('sumr'+numberDoc);
+    sumrTaskid.style.backgroundColor = "#69c773";
+    deadline.style.backgroundColor= "#f8f9fa";
+    statusid.style.backgroundColor= "#f8f9fa";
+    buttonShow.style.backgroundColor= "#555";
     for (var i = 0; i < elementsShow.length; i++) {
         elementsShow[i].hidden = false;
         elementsHide[i].hidden = true;
     }
+    $.ajax({
+        method: 'GET',
+        url: '/stopred',
+        headers: {
+            "NumberTask": encodeURIComponent(''+numberDoc)
+        }
+    })
+        .then(function(response) {
+            console.log(response);
+        })
+        .catch(function(jqXHR, textStatus, errorThrown) {
+            if (jqXHR.status == 404) {
+            } else {
+                console.error(error);
+            }
+        });
 }

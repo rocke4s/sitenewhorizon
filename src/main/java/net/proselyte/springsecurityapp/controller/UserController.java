@@ -28,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -212,7 +213,7 @@ public class UserController {
             str = str.replaceAll("Номер", "TaskNumber");
             str = str.replaceAll("Дата", "TaskData");
             str = str.replaceAll("\"Отдел\"", "TaskDepartment");
-            str = str.replaceAll("http[^\"]+", "<a href='$0'>$0</a>");
+            str = str.replaceAll("http://(?!['\"])[^'\"]+", "<a href='$0'>$0</a><br>");
             task = g.fromJson(str, Task.class);
 //            TaskList taskList = new TaskList(); //TODO: на случай если обновление будет на нас.
 //            taskListService.findByisUidUser(user.getUidUser(), taskList);
@@ -326,25 +327,34 @@ public class UserController {
             default:
                 break;
         }
-        String fileName= "";
-        if(!newTask.getFile().isEmpty()) {
-            fileName = StringUtils.cleanPath(newTask.getFile().getOriginalFilename());
-            try {
-                File directory = new File("data/"+newTask.getNameTask());
-                directory.mkdir();
-                Path path = Paths.get("data/"+newTask.getNameTask()+"/" + fileName);
-                Files.copy(newTask.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                e.printStackTrace();
+        List<String> fileName= new ArrayList<>();
+        int x=0;
+        if(newTask.getFile().length!=0) {
+            for (MultipartFile file : newTask.getFile()) {
+                fileName.add(StringUtils.cleanPath(file.getOriginalFilename()));
+                try {
+                    File directory = new File("data/" + newTask.getNameTask());
+                    directory.mkdir();
+                    Path path = Paths.get("data/" + newTask.getNameTask() + "/" + fileName.get(x));
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                x++;
             }
         }
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
         newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
         newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
-        if(!newTask.getFile().isEmpty()) {
-            fileName = fileName.replaceAll("\\s+", "%20");
-            String q = "http://" + ip2 + "/data/" + newTask.getNameTask() + "/" + fileName;
+        x=0;
+        String q="";
+        if(newTask.getFile().length!=0) {
+            for (MultipartFile file : newTask.getFile()) {
+                fileName.set(x,fileName.get(x).replaceAll("\\s+", "%20"));
+                q += "http://" + ip2 + "/data/" + newTask.getNameTask() + "/" + fileName.get(x)+"\'";
+                x++;
+            }
             request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetCreateTask/" + prof.getUidUser() + "/"
                     + newTask.getNameTask() + "/" + newTask.getTaskContent() + "/" + newTask.getTaskImportance() + "?File=" + URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
         } else {
@@ -429,11 +439,10 @@ public class UserController {
     @ResponseBody
     public List<ChangeLogTask> getNewChanges() {
         List<ChangeLogTask> changeLogTask = changeLogTaskService.findByisNewChanges("new");
-        for(ChangeLogTask chtask: changeLogTaskService.findByisNewChanges("new"))
-        {
-            chtask.setIsNewChanges("old");
-            changeLogTaskService.save(chtask);
-        }
+//        for(ChangeLogTask chtask: changeLogTaskService.findByisNewChanges("new"))
+//        {
+//            changeLogTaskService.save(chtask);
+//        }
         // получаем все сообщения из базы данных
         return changeLogTask;
     }
@@ -448,6 +457,15 @@ public class UserController {
             System.out.println(e);
         }
         return changeLogTaskService.findByUidUser(user.getUidUser());
+    }
+
+    @RequestMapping(value = "/stopred",method = RequestMethod.GET)
+    public void stopRed(@RequestHeader("NumberTask") String NumberTask) {
+        try {
+            changeLogTaskService.updateStatusByNumberTask("old",NumberTask);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
     public void doGets(HttpServletRequest request) throws IOException {

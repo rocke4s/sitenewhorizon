@@ -37,11 +37,11 @@
 <c:forEach var="Task" items="${Tasks.getTasks()}">
     <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
-     <summary>Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
+     <summary id="sumr${Task.getTaskNumber()}">Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
         <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
-        <button class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}','${Task.getNameTask()}')">Жизненный цикл заявки</button>
-        <button class="btn btn-primary buttonHideM" onclick="HideModal()" hidden="true">Скрыть жизненный цикл</button>
+        <button id="buttonShowM${Task.getTaskNumber()}" class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}','${Task.getNameTask()}')">Жизненный цикл заявки</button>
+        <button id="buttonHideM${Task.getTaskNumber()}" class="btn btn-primary buttonHideM" onclick="HideModal('${Task.getTaskNumber()}')" hidden="true">Скрыть жизненный цикл</button>
             <table>
                 <thead>
                 <tr>
@@ -174,14 +174,14 @@
 <div class="sidebar">
     <h2>Жизненный цикл заявки</h2>
     <ul id="sidebar-ul">
-<c:forEach var="changeLogTask" items="${changeLogTask}">
-        <li>
-            <span class="change-type"><u>${changeLogTask.getChangetype()}</u></span><br>
-            <span class="task-title">${changeLogTask.getNameTask()}</span><br>
-            <span class="change">${changeLogTask.getChange()}</span>
-            <hr><span class="time">${changeLogTask.getTime()}</span><br>
-        </li>
-</c:forEach>
+<%--<c:forEach var="changeLogTask" items="${changeLogTask}">--%>
+<%--        <li id="lifeTask${changeLogTask.getNumberTask()}">--%>
+<%--            <span class="change-type"><u>${changeLogTask.getChangetype()}</u></span><br>--%>
+<%--            <span class="task-title">${changeLogTask.getNameTask()}</span><br>--%>
+<%--            <span class="change">${changeLogTask.getChange()}</span>--%>
+<%--            <hr><span class="time">${changeLogTask.getTime()}</span><br>--%>
+<%--        </li>--%>
+<%--</c:forEach>--%>
     </ul>
 </div>
 <script src="${contextPath}/resources/js/tasks-js.js">
@@ -196,7 +196,7 @@
         var newDate = day+"."+month+"."+year+" "+time;
         $.ajax({
             method: 'GET',
-            url: 'http://194.67.111.29/worker',
+            url: '/worker',
             headers: {
                 "NumberTask": encodeURIComponent(numberDoc),
                 "uidDoc": encodeURIComponent(uidDoc),

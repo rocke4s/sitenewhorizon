@@ -47,12 +47,12 @@
               </form:select>
           </div>
       </spring:bind>
-    <spring:bind path="file">
-        <div class="file-input">
-            <form:input type="file" onchange="showFileName()" path="file" id="file" cssClass="file-input__input"></form:input>
-            <label id="file-selected" for="file" class="file-input__label" style="word-wrap: break-word; word-break: break-word; max-width: 200px;">Выбрать файл</label>
-        </div>
-    </spring:bind>
+        <spring:bind path="file">
+            <div class="file-input">
+                <form:input type="file" onchange="showFileNames()" path="file" id="file" cssClass="file-input__input" multiple="multiple"></form:input>
+                <label id="files-selected" for="file" class="file-input__label" style="word-wrap: break-word; word-break: break-word; max-width: 200px;">Выбрать файлы</label>
+            </div>
+        </spring:bind>
     <input  class="bot-send-mail" value="Отправить" type="submit">
     </div>
 </form:form>

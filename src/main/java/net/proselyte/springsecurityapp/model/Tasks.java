@@ -64,14 +64,13 @@ public class Tasks {
     @Expose
     private String typeTask;
 
-    private MultipartFile file;
+    private MultipartFile[] file;
 
-
-    public MultipartFile getFile() {
+    public MultipartFile[] getFile() {
         return file;
     }
 
-    public void setFile(MultipartFile file) {
+    public void setFile(MultipartFile[] file) {
         this.file = file;
     }
 
