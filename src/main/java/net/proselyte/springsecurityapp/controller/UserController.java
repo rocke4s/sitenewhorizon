@@ -59,10 +59,10 @@ public class UserController {
     private RatingTaskService ratingTaskService;
     @Autowired
     private UserValidator userValidator;
-//    @Autowired
+    //    @Autowired
 //    private TaskListService taskListService;
-    private String ip="217.114.183.98";//192.168.1.224 || 217.114.183.98
-    private String ip2="194.67.111.29";//localhost || 194.67.111.29
+    private String ip = "217.114.183.98";//192.168.1.224 || 217.114.183.98
+    private String ip2 = "194.67.111.29";//localhost || 194.67.111.29
 
     public UserController() throws IOException {
     }
@@ -74,7 +74,7 @@ public class UserController {
         return "registration";
     }
 
-    public String[] forBasicAuth() throws IOException{
+    public String[] forBasicAuth() throws IOException {
         Properties props = new Properties();
         try (
                 InputStream in = getClass().getClassLoader().getResourceAsStream("config.properties")) {
@@ -84,12 +84,13 @@ public class UserController {
         String password = props.getProperty("password");//basic auth
         String mailName = props.getProperty("mail.username");
         String mailPass = props.getProperty("mail.password");
-        String[] str = new String[]{username,password,mailName,mailPass};
+        String[] str = new String[]{username, password, mailName, mailPass};
         return str;
     }
+
     public String decodRequest(String text) throws UnsupportedEncodingException {
         byte[] symb = text.getBytes("cp1252");
-        text=new String(symb,"cp1251");
+        text = new String(symb, "cp1251");
         return text;
     }
 
@@ -97,19 +98,19 @@ public class UserController {
     public String registration(@ModelAttribute("userForm") UserReg userForm, BindingResult bindingResult, Model model) throws IOException {
         CloseableHttpClient client = HttpClientBuilder.create().build();
         String redName = userForm.getName().replaceAll("[^\\p{IsCyrillic}]+", "");
-        redName = redName.substring(0,1).toUpperCase()+redName.substring(1).toLowerCase();
+        redName = redName.substring(0, 1).toUpperCase() + redName.substring(1).toLowerCase();
         String redSurname = userForm.getSurname().replaceAll("[^\\p{IsCyrillic}]+", "");
-        redSurname = redSurname.substring(0,1).toUpperCase()+redSurname.substring(1).toLowerCase();
+        redSurname = redSurname.substring(0, 1).toUpperCase() + redSurname.substring(1).toLowerCase();
         String redSecondSurname = userForm.getSecondSurname().replaceAll("[^\\p{IsCyrillic}]+", "");
-        redSecondSurname = redSecondSurname.substring(0,1).toUpperCase()+redSecondSurname.substring(1).toLowerCase();
+        redSecondSurname = redSecondSurname.substring(0, 1).toUpperCase() + redSecondSurname.substring(1).toLowerCase();
         userForm.setName(redName);
         userForm.setSurname(redSurname);
         userForm.setSecondSurname(redSecondSurname);
-        userForm.setFIO(userForm.getSurname()+"%20"+userForm.getName()+"%20"+userForm.getSecondSurname());
-        String test = userForm.getFIO().replaceAll("\\s+","%20");
-        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-        HttpGet request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetGUID/"+userForm.getUsername()
-                +"/"+userForm.getINN()+"/"+userForm.getFIO()+"/"+userForm.getPhone()+"/"+userForm.getUserMail());
+        userForm.setFIO(userForm.getSurname() + "%20" + userForm.getName() + "%20" + userForm.getSecondSurname());
+        String test = userForm.getFIO().replaceAll("\\s+", "%20");
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" + forBasicAuth()[1]).getBytes());
+        HttpGet request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetGUID/" + userForm.getUsername()
+                + "/" + userForm.getINN() + "/" + userForm.getFIO() + "/" + userForm.getPhone() + "/" + userForm.getUserMail());
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
         Profile profile = new Profile();
@@ -131,7 +132,7 @@ public class UserController {
             return "registration";
         }
         if (!profile.getUidUser().isEmpty()) {
-            User userokForm=new User();
+            User userokForm = new User();
             userokForm.setUidUser(profile.getUidUser());
             userokForm.setUsername(userForm.getUsername());
             userokForm.setUserMail(userForm.getUserMail());
@@ -142,7 +143,7 @@ public class UserController {
             userokForm.setId(userForm.getId());
             userokForm.setRoles(userForm.getRoles());
 
-            model.addAttribute("profile",profile);
+            model.addAttribute("profile", profile);
             userService.save(userokForm);//сохранение в бд
             profileService.save(profile);
         }
@@ -151,7 +152,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout,User user) {
+    public String login(Model model, String error, String logout, User user) {
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }
@@ -164,7 +165,7 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(@ModelAttribute("user")User user, Model model) throws IOException {
+    public String welcome(@ModelAttribute("user") User user, Model model) throws IOException {
         System.out.println(user.getUsername());
         return "welcome";
     }
@@ -174,18 +175,18 @@ public class UserController {
         System.out.println(authentication.getName());
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-        model.addAttribute("Profile",prof);
+        model.addAttribute("Profile", prof);
         System.out.println("sad");
         return "profile";
     }
 
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
-    public ModelAndView tasks(Model model, Authentication authentication,ChangeStatus changeStatus)  throws IOException{
+    public ModelAndView tasks(Model model, Authentication authentication, ChangeStatus changeStatus) throws IOException {
         CloseableHttpClient client = HttpClientBuilder.create().build();
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
-        HttpGet request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/getDocuments/"+prof.getUidOrg()+"/"+prof.getUidUser()+"/0");
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" + forBasicAuth()[1]).getBytes());
+        HttpGet request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/getDocuments/" + prof.getUidOrg() + "/" + prof.getUidUser() + "/0");
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
         Task task = new Task();
@@ -204,7 +205,7 @@ public class UserController {
             str = str.replaceAll("ТипЗадания", "TypeTask");
             str = str.replaceAll("Важность", "TaskImportance");
             str = str.replaceAll("\"Содержание\"", "\"TaskContent\"");
-            str = str.replaceAll("Наименование","NameTask");
+            str = str.replaceAll("Наименование", "NameTask");
             str = str.replaceAll("СрокДо", "TaskDeadline");
             str = str.replaceAll("Трудоемкость", "TaskIntensity");
             str = str.replaceAll("ID", "TaskId");
@@ -234,22 +235,23 @@ public class UserController {
 //        }
         ModelAndView modelAndView = new ModelAndView("tasks");
         modelAndView.addObject("Tasks", task);
-        modelAndView.addObject("changeStatus",changeStatus);
-        modelAndView.addObject("chat",chat);
-        modelAndView.addObject("Profile",prof);
+        modelAndView.addObject("changeStatus", changeStatus);
+        modelAndView.addObject("chat", chat);
+        modelAndView.addObject("Profile", prof);
 //        modelAndView.addObject("changeLogTask",changeLogTask);
         return modelAndView;
     }
+
     @RequestMapping(value = "/ratings", method = RequestMethod.POST)
-    public String showRatings(Model model)
-    {
+    public String showRatings(Model model) {
         List<RatingTask> listRatingTask = ratingTaskService.findAll();
-        model.addAttribute("rating",listRatingTask);
+        model.addAttribute("rating", listRatingTask);
         return "ratings";
     }
+
     @RequestMapping(value = "/rating", method = RequestMethod.POST)
-    public String ratingWork(String ratingg,String NameTasker,String uidDoc_8) {
-        System.out.println("Пользователь оценил работу на: "+ratingg);
+    public String ratingWork(String ratingg, String NameTasker, String uidDoc_8) {
+        System.out.println("Пользователь оценил работу на: " + ratingg);
         RatingTask ratingTask = new RatingTask();
         ratingTask.setRating(ratingg);
         ratingTask.setUidDoc(uidDoc_8);
@@ -257,33 +259,34 @@ public class UserController {
         ratingTaskService.save(ratingTask);
         return "redirect:/tasks";
     }
+
     @RequestMapping(value = "/change_status", method = RequestMethod.GET)
-    public String changeStatus(@ModelAttribute("changeStatus")ChangeStatus changeStatus,Authentication authentication,
-                               String uidDoc_8,String uidDoc_5,String uidDoc_0) throws IOException, MessagingException {
+    public String changeStatus(@ModelAttribute("changeStatus") ChangeStatus changeStatus, Authentication authentication,
+                               String uidDoc_8, String uidDoc_5, String uidDoc_0) throws IOException, MessagingException {
         HttpGet request = null;
-        String doc="";
-        String stateDoc="";
-        if(uidDoc_5!=null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
+        String doc = "";
+        String stateDoc = "";
+        if (uidDoc_5 != null && !uidDoc_5.isEmpty())//передаем выбранное состояние заявки - "на доработку"
         {
-            changeStatus.setCauseChangeStatus(changeStatus.getCauseChangeStatus().replaceAll("\\s+","%20"));
-            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_5+"/5?Reason="+changeStatus.getCauseChangeStatus());
-            doc=uidDoc_5;
-            stateDoc="На доработке";
+            changeStatus.setCauseChangeStatus(changeStatus.getCauseChangeStatus().replaceAll("\\s+", "%20"));
+            request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetTestResult/" + uidDoc_5 + "/5?Reason=" + changeStatus.getCauseChangeStatus());
+            doc = uidDoc_5;
+            stateDoc = "На доработке";
         }
-        if(uidDoc_8!=null && !uidDoc_8.isEmpty())//передаем выбранное состояние заявки - "выполнено"
+        if (uidDoc_8 != null && !uidDoc_8.isEmpty())//передаем выбранное состояние заявки - "выполнено"
         {
-            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_8+"/8");
-            doc=uidDoc_8;
-            stateDoc="Проверено";
+            request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetTestResult/" + uidDoc_8 + "/8");
+            doc = uidDoc_8;
+            stateDoc = "Проверено";
         }
-        if(uidDoc_0!=null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
+        if (uidDoc_0 != null && !uidDoc_0.isEmpty())//передаем выбранное состояние заявки - "отмена"
         {
-            request = new HttpGet("http://"+ip+"/franrit/hs/RitExchange/GetTestResult/"+uidDoc_0+"/3");
-            doc=uidDoc_0;
-            stateDoc="Отменено";
+            request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetTestResult/" + uidDoc_0 + "/3");
+            doc = uidDoc_0;
+            stateDoc = "Отменено";
         }
         CloseableHttpClient client = HttpClientBuilder.create().build();
-        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" + forBasicAuth()[1]).getBytes());
         String result;
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
@@ -300,21 +303,22 @@ public class UserController {
 
         return "redirect:/tasks";
     }
+
     @RequestMapping(value = "/new_task", method = RequestMethod.POST)
     public String createTask(Tasks newTask, Model model) {
         List<String> listImportance = new ArrayList<>();
         listImportance.add("Высокая");
         listImportance.add("Средняя");
         listImportance.add("Низкая");
-        model.addAttribute("newTask",newTask);
-        model.addAttribute("listImportance",listImportance);
+        model.addAttribute("newTask", newTask);
+        model.addAttribute("listImportance", listImportance);
         return "new_task";
     }
-    @RequestMapping(value = "/new_tasker", method = RequestMethod.POST,consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String postNewTask(@ModelAttribute("newTask")Tasks newTask,Authentication authentication) throws IOException {
+
+    @RequestMapping(value = "/new_tasker", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String postNewTask(@ModelAttribute("newTask") Tasks newTask, Authentication authentication) throws IOException {
         HttpGet request = null;
-        switch (newTask.getTaskImportance())
-        {
+        switch (newTask.getTaskImportance()) {
             case "Высокая":
                 newTask.setTaskImportance("2");
                 break;
@@ -327,9 +331,9 @@ public class UserController {
             default:
                 break;
         }
-        List<String> fileName= new ArrayList<>();
-        int x=0;
-        if(newTask.getFile().length!=0) {
+        List<String> fileName = new ArrayList<>();
+        int x = 0;
+        if (newTask.getFile().length > 0) {
             for (MultipartFile file : newTask.getFile()) {
                 fileName.add(StringUtils.cleanPath(file.getOriginalFilename()));
                 try {
@@ -345,24 +349,27 @@ public class UserController {
         }
         User user = userService.findByUsername(authentication.getName());
         Profile prof = profileService.findByUidUser(user.getUidUser());
-        newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+","%20"));
-        newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+","%20"));
-        x=0;
-        String q="";
-        if(newTask.getFile().length!=0) {
-            for (MultipartFile file : newTask.getFile()) {
-                fileName.set(x,fileName.get(x).replaceAll("\\s+", "%20"));
-                q += "http://" + ip2 + "/data/" + newTask.getNameTask() + "/" + fileName.get(x)+"\'";
+        newTask.setNameTask(newTask.getNameTask().replaceAll("\\s+", "%20"));
+        newTask.setTaskContent(newTask.getTaskContent().replaceAll("\\s+", "%20"));
+        x = 0;
+        String q = "";
+        for (MultipartFile file : newTask.getFile()) {
+            if (file.getSize() != 0) {
+                fileName.set(x, fileName.get(x).replaceAll("\\s+", "%20"));
+                q += "http://" + ip2 + "/data/" + newTask.getNameTask() + "/" + fileName.get(x) + "\'";
                 x++;
             }
+        }
+        if (q != "") {
             request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetCreateTask/" + prof.getUidUser() + "/"
-                    + newTask.getNameTask() + "/" + newTask.getTaskContent() + "/" + newTask.getTaskImportance() + "?File=" + URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
+                    + newTask.getNameTask() + "/" + newTask.getTaskContent() + "/"
+                    + newTask.getTaskImportance() + "?File=" + URLEncoder.encode(q, StandardCharsets.UTF_8.toString()));
         } else {
             request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/GetCreateTask/" + prof.getUidUser() + "/"
                     + newTask.getNameTask() + "/" + newTask.getTaskContent() + "/" + newTask.getTaskImportance());
         }
         CloseableHttpClient client = HttpClientBuilder.create().build();
-        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" + forBasicAuth()[1]).getBytes());
         String result;
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
         CloseableHttpResponse response = client.execute(request);//выполняем запрос
@@ -381,29 +388,29 @@ public class UserController {
     }
 
     @RequestMapping(value = "/worker", method = RequestMethod.GET)
-    public void sendMessage(@RequestHeader("NumberTask") String NumberTask,@RequestHeader(value = "userSender",required = false) String userSender,
-                            @RequestHeader(value = "userRecipient",required = false) String userRecipient,
-                            @RequestHeader("message") String message,@RequestHeader("dataSend") String dataSend,
-                            @RequestHeader(value = "userName",required = false) String userName,
-                            @RequestHeader(value = "uidDoc",required = false) String uidDoc) throws IOException {
+    public void sendMessage(@RequestHeader("NumberTask") String NumberTask, @RequestHeader(value = "userSender", required = false) String userSender,
+                            @RequestHeader(value = "userRecipient", required = false) String userRecipient,
+                            @RequestHeader("message") String message, @RequestHeader("dataSend") String dataSend,
+                            @RequestHeader(value = "userName", required = false) String userName,
+                            @RequestHeader(value = "uidDoc", required = false) String uidDoc) throws IOException {
         HttpPost request = null;
         HttpClient httpClient = HttpClientBuilder.create().build();
-        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" +forBasicAuth()[1]).getBytes());
+        String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" + forBasicAuth()[1]).getBytes());
         User user = userService.findByUsername(userName);
         ChatUser chatUser = new ChatUser();
         try {
             chatUser.setNumberTask(URLDecoder.decode(NumberTask, "UTF-8"));
-            if(userSender!=null){
-                request = new HttpPost("http://"+ip+"/franrit/hs/RitExchange/discussion/"+uidDoc+"/"+user.getUidUser());
+            if (userSender != null) {
+                request = new HttpPost("http://" + ip + "/franrit/hs/RitExchange/discussion/" + uidDoc + "/" + user.getUidUser());
                 request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
                 request.setHeader("Content-Type", "charset=UTF-8");
-                StringEntity requestBodyEntity = new StringEntity(URLDecoder.decode(message, "UTF-8"),"UTF-8");
+                StringEntity requestBodyEntity = new StringEntity(URLDecoder.decode(message, "UTF-8"), "UTF-8");
                 request.setEntity(requestBodyEntity);
                 HttpResponse httpResponse = httpClient.execute(request);
                 chatUser.setUserSenders(URLDecoder.decode(userSender, "UTF-8"));
                 chatUser.setMessage(URLDecoder.decode(message, "UTF-8"));
             }
-            if(userRecipient!=null) {
+            if (userRecipient != null) {
                 chatUser.setUserRecipient(URLDecoder.decode(decodRequest(userRecipient), "UTF-8"));
                 chatUser.setMessage(URLDecoder.decode(decodRequest(message), "UTF-8"));
             }
@@ -416,26 +423,26 @@ public class UserController {
         chatUserService.save(chatUser);
     }
 
-    @RequestMapping(value = "/client",method = RequestMethod.GET)
+    @RequestMapping(value = "/client", method = RequestMethod.GET)
     @ResponseBody
     public List<ChatUser> getMessages() {
         List<ChatUser> listChatUser = chatUserService.findByisNewMessage("new");
-        for(ChatUser chuser: chatUserService.findByisNewMessage("new"))
-        {
+        for (ChatUser chuser : chatUserService.findByisNewMessage("new")) {
             chuser.setIsNewMessage("old");
             chatUserService.save(chuser);
         }
         // получаем все сообщения из базы данных
         return listChatUser;
     }
-    @RequestMapping(value = "/clientall",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/clientall", method = RequestMethod.GET)
     @ResponseBody
     public List<ChatUser> getAllMessages() {
 
         return chatUserService.findByisNewMessage("old");
     }
 
-    @RequestMapping(value = "/newchanges",method = RequestMethod.GET)
+    @RequestMapping(value = "/newchanges", method = RequestMethod.GET)
     @ResponseBody
     public List<ChangeLogTask> getNewChanges() {
         List<ChangeLogTask> changeLogTask = changeLogTaskService.findByisNewChanges("new");
@@ -446,7 +453,8 @@ public class UserController {
         // получаем все сообщения из базы данных
         return changeLogTask;
     }
-    @RequestMapping(value = "/changesall",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/changesall", method = RequestMethod.GET)
     @ResponseBody
     public List<ChangeLogTask> getAllMessages(Authentication authentication) {
         User user = userService.findByUsername(authentication.getName());
@@ -459,18 +467,20 @@ public class UserController {
         return changeLogTaskService.findByUidUser(user.getUidUser());
     }
 
-    @RequestMapping(value = "/stopred",method = RequestMethod.GET)
+    @RequestMapping(value = "/stopred", method = RequestMethod.GET)
     public void stopRed(@RequestHeader("NumberTask") String NumberTask) {
         try {
-            changeLogTaskService.updateStatusByNumberTask("old",NumberTask);
+            changeLogTaskService.updateStatusByNumberTask("old", NumberTask);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
+
     @RequestMapping(value = "/statuser", method = RequestMethod.GET)
     public void doGets(HttpServletRequest request) throws IOException {
         try {
             // Получаем данные из GET запроса
+
             String NameTask = decodRequest(request.getHeader("NameTask"));
             String NumberTask = decodRequest(request.getHeader("NumberTask"));
             String OldStatus = decodRequest(request.getHeader("OldStatus"));
@@ -490,7 +500,7 @@ public class UserController {
             ChangeLogTask changeLogTask = new ChangeLogTask();
             changeLogTask.setNumberTask(NumberTask);
             changeLogTask.setChangetype("Изменение статуса");
-            changeLogTask.setChange("Статус изменен с "+OldStatus+" на "+NewStatus);
+            changeLogTask.setChange("Статус изменен с " + OldStatus + " на " + NewStatus);
             changeLogTask.setNameTask(NameTask);
             Calendar currentCalendar = Calendar.getInstance();
             changeLogTask.setTime(currentCalendar.getTime().toString());
@@ -501,8 +511,9 @@ public class UserController {
             System.out.println(e);
         }
     }
+
     @RequestMapping(value = "/untiluser", method = RequestMethod.GET)
-    public void doUntil(HttpServletRequest request,Authentication authentication) {
+    public void doUntil(HttpServletRequest request, Authentication authentication) {
         try {
             String NumberTask = decodRequest(request.getHeader("NumberTask"));
             String NameTask = decodRequest(request.getHeader("NameTask"));
@@ -512,7 +523,7 @@ public class UserController {
             User user = userService.findByUsername(Login);
             ChangeLogTask changeLogTask = new ChangeLogTask();
             changeLogTask.setChangetype("Изменение срока");
-            changeLogTask.setChange("Срок изменен с "+OldUntil+" на "+NewUntil);
+            changeLogTask.setChange("Срок изменен с " + OldUntil + " на " + NewUntil);
             changeLogTask.setNameTask(NameTask);
             changeLogTask.setNumberTask(NumberTask);
             Calendar currentCalendar = Calendar.getInstance();
@@ -524,6 +535,7 @@ public class UserController {
             System.out.println(e);
         }
     }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String admin(Model model) {
         return "admin";

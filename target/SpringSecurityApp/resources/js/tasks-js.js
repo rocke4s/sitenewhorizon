@@ -246,3 +246,58 @@ function HideModal(numberDoc)
             }
         });
 }
+const modal = document.querySelector('#modals');
+const closeModalButton = document.querySelector('#close-modals');
+closeModalButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+    modal.hidden = true;
+});
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+        modal.hidden = true;
+    }
+});
+function sendMessage1(numberDoc,uidDoc) {
+    var date = new Date();
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    var newDate = day+"."+month+"."+year+" "+time;
+    $.ajax({
+        method: 'GET',
+        url: '/worker',
+        headers: {
+            "NumberTask": encodeURIComponent(numberDoc),
+            "uidDoc": encodeURIComponent(uidDoc),
+            "userSender": encodeURIComponent("${Profile.getName()}"),
+            "message": encodeURIComponent(""+document.querySelector('#id_' + numberDoc + ' input[type="text"]').value),
+            "dataSend": encodeURIComponent(""+newDate),
+            "userName": encodeURIComponent("${pageContext.request.userPrincipal.name}")
+        }})
+        .then(function(response) {
+            console.log(response);})
+        .catch(function(error) {
+            console.error(error);});
+    document.querySelector('#id_' + numberDoc + ' input[type="text"]').value = "";
+}
+function showFullText() {
+    const modal = document.querySelector('#modals');
+    modal.style.display = 'block';
+    modal.hidden = false;
+    const fullText = document.querySelector('#full-text');
+    fullText.innerHTML = document.getElementById(this.id).innerHTML.replace(/<button[^>]*>.*<\/button>/gi, "");
+}
+var elements = document.getElementsByClassName('short-text');
+for (var i = 0; i < elements.length; i++) {
+    if (elements[i].innerHTML.length > 200) {
+        var button = document.createElement("button");
+        button.setAttribute("class", "read-more-button");
+        button.innerHTML = "Прочитать полностью";
+        elements[i].style = "overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;"
+        button.id = elements[i].id;
+        button.onclick =showFullText;
+        elements[i].appendChild(button);
+    }
+}

@@ -256,3 +256,42 @@ ul.chat-class {
     max-height: 200px; /*максимальная высота ul*/
     overflow-y: auto; /*добавляем ползунок вертикальной прокрутки*/
 }
+
+.modals {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+/* стили для модального окна */
+
+.modal-contents {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+/* стили для кнопки закрытия модального окна */
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+#full-text {
+    white-space: pre-wrap;
+}
+/* стили для отступов в модальном окне */
+
+.modal-contents p {
+    margin: 0 0 20px 0;
+}

@@ -22,6 +22,7 @@
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
         </form>
+        <input type="text" id="searchbox" >Поиск по задачам
         <a href="/welcome" class="btn">Назад</a>
         <h2><a class="btn" onclick="document.forms['logoutForm'].submit()">Выйти</a>
         </h2>
@@ -35,14 +36,14 @@
 <label id="togLabel" >Показать задачи</label>
 <div class="all-list-task" id="all-list-task">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
-    <details><div class="layer1" margin-top="5px"  margin-bottom="5px">
+    <details id ="details${Task.getTaskNumber()}"><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
      <summary id="sumr${Task.getTaskNumber()}">Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
         <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
         <button id="buttonShowM${Task.getTaskNumber()}" class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}','${Task.getNameTask()}')">Жизненный цикл заявки</button>
         <button id="buttonHideM${Task.getTaskNumber()}" class="btn btn-primary buttonHideM" onclick="HideModal('${Task.getTaskNumber()}')" hidden="true">Скрыть жизненный цикл</button>
-            <table>
+            <table id="${Task.getTaskNumber()}">
                 <thead>
                 <tr>
                     <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
@@ -113,7 +114,9 @@
                     </c:if>
                     <c:if test="${!Tasks.getTypeTask().isEmpty()}"><td>${Tasks.getTypeTask()}</td></c:if>
                     <c:if test="${!Tasks.getTaskImportance().isEmpty()}"><td>${Tasks.getTaskImportance()}</td></c:if>
-                    <c:if test="${!Tasks.getTaskContent().isEmpty()}"><td style="word-wrap: break-word; word-break: break-word; max-width: 200px;">${Tasks.getTaskContent()}</td></c:if>
+                    <c:if test="${!Tasks.getTaskContent().isEmpty()}">
+                        <td id="TaskContent${Tasks.getTaskNumber()}" class="short-text">${Tasks.getTaskContent()}</td>
+                    </c:if>
                     <c:if test="${!Tasks.getTaskDeadline().isEmpty()}"><td id="deadline${Tasks.getTaskNumber()}">${Tasks.getTaskDeadline()}</td></c:if>
                     <c:if test="${!Tasks.getTaskIntensity().isEmpty()}"><td>${Tasks.getTaskIntensity()}</td></c:if>
                     <c:if test="${!Tasks.getTaskId().isEmpty()}"><td>${Tasks.getTaskId()}</td></c:if>
@@ -184,33 +187,80 @@
 <%--</c:forEach>--%>
     </ul>
 </div>
+    <div id="modals" class="modals" hidden="true">
+        <div class="modal-contents"> <span id="close-modals" class="close">&times;</span>
+            <p id="full-text"></p>
+        </div>
+    </div>
 <script src="${contextPath}/resources/js/tasks-js.js">
 </script>
 <script>
-    function sendMessage1(numberDoc,uidDoc) {
-        var date = new Date();
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const year = date.getFullYear();
-        const time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        var newDate = day+"."+month+"."+year+" "+time;
-        $.ajax({
-            method: 'GET',
-            url: '/worker',
-            headers: {
-                "NumberTask": encodeURIComponent(numberDoc),
-                "uidDoc": encodeURIComponent(uidDoc),
-            "userSender": encodeURIComponent("${Profile.getName()}"),
-            "message": encodeURIComponent(""+document.querySelector('#id_' + numberDoc + ' input[type="text"]').value),
-            "dataSend": encodeURIComponent(""+newDate),
-                "userName": encodeURIComponent("${pageContext.request.userPrincipal.name}")
-        }})
-            .then(function(response) {
-                console.log(response);})
-            .catch(function(error) {
-                console.error(error);});
-        document.querySelector('#id_' + numberDoc + ' input[type="text"]').value = "";
+
+    const input = document.getElementById('searchbox');
+
+    function handleSearch(event) {
+        var tableId = [];
+        if (event.keyCode === 13) { // Если нажата клавиша Enter
+            const searchValue = input.value;
+            var searchQuery = document.getElementById('searchbox').value;
+            // находим все теги td на странице
+            var tds = document.getElementsByTagName('td');
+            // проходимся по всем найденным тегам td
+            var x=0;
+            for (var i = 0; i < tds.length; i++) {
+                var td = tds[i];
+                // если содержимое тега td содержит искомый текст, то
+                if (searchQuery && td.textContent.includes(searchQuery)) {
+                    // находим родительский тег table
+                    var table = td.closest('table');
+                    // получаем id тега table
+                    tableId[x]= table.getAttribute('id');
+                    x++;
+                }
+            }
+            console.log(tableId);
+                var detailElements = document.getElementsByTagName('details');
+                if(searchQuery!="") {
+                    var tdElements = document.getElementsByTagName('td');
+                    for (var i = 0; i < tdElements.length; i++) {
+                        var tdElement = tdElements[i];
+                        var detailsElement = tdElement.closest('details');
+                        if (detailsElement) {
+                            detailsElement.style.display = 'none';
+                        }
+                    }
+                    for(var z=0;z<tableId.length;z++) {
+                        for (var i = 0; i < detailElements.length; i++) {
+                            if (detailElements[i].id === document.getElementById("details"+tableId[z]).id) {
+                                detailElements[i].style.display = '';
+                            }
+                        }
+                    }
+                }
+                else {
+                    var tdElements = document.getElementsByTagName('td');
+                    for (var i = 0; i < tdElements.length; i++) {
+                        var tdElement = tdElements[i];
+                        var detailsElement = tdElement.closest('details');
+                        if (detailsElement) {
+                            detailsElement.style.display = '';
+                        }
+                    }
+                    for (var i = 0; i < tdElements.length; i++) {
+                        var tdElement = tdElements[i];
+                        if (tdElement.innerHTML === 'Проверено' || tdElement.innerHTML === 'Отменено') {
+                            var detailsElement = tdElement.closest('details');
+                            if (detailsElement) {
+                                detailsElement.style.display = 'none';
+
+                            }
+                        }
+                    }
+                }
+        }
     }
+
+    input.addEventListener('keyup', handleSearch);
 </script>
 </c:if>
 <c:if test="${Tasks.getTasks().size()==0}">
