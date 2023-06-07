@@ -4,6 +4,7 @@ import net.proselyte.springsecurityapp.dao.ChatUserDao;
 import net.proselyte.springsecurityapp.model.ChatUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -25,5 +26,9 @@ public class ChatUserServiceImpl  implements ChatUserService{
     public List<ChatUser> findByisNewMessage(String isNewMessage)
     {
         return chatUserDao.findByisNewMessage(isNewMessage);
+    }
+    @Transactional
+    public void updateChatByNumberDoc(String newStatus, String numberTask) {
+        chatUserDao.updateChatByNumberDoc(newStatus, numberTask);
     }
 }

@@ -133,7 +133,7 @@
         <div id="id_${Task.getTaskNumber()}" hidden="true">
             <ul id="messageArea${Task.getTaskNumber()}" class="chat-class">
             </ul>
-                                 <input type="text" id="messageForUser" placeholder="Введите сообщение...">
+                                 <input type="text" id="messageForUser" onchange="stopRed('${Task.getTaskNumber()}')" placeholder="Введите сообщение...">
                             <button onclick="sendMessage1('${Task.getTaskNumber()}','${Task.getUidDoc()}')" type="submit">send</button>
         </div>
     </details>

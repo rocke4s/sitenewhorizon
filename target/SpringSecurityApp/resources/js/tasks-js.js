@@ -2,6 +2,7 @@ $.getJSON("/clientall", function(messages){
     messages.forEach(function(objects){
         if (objects.message !== undefined) {
             var ul = document.getElementById("messageArea" + objects.numberTask);
+            var sumr = document.getElementById("sumr"+objects.numberTask);
             if(ul!=null)
             {
                 var li = document.createElement('li');
@@ -12,6 +13,11 @@ $.getJSON("/clientall", function(messages){
                 }
                 if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
                 {
+                    if(objects.isNewMessage==='wait')
+                    {
+                        sumr.style.backgroundColor = "#BF2233";
+                        li.style.color="#BF2233";
+                    }
                     li.innerHTML = "["+objects.dateSend+"] "+objects.userRecipient + ": " + objects.message;
                     ul.appendChild(li);
                 }
@@ -69,6 +75,10 @@ function ShowChat(ids)
 }
 function HideChat(ids)
 {
+    let ulList = document.getElementsByClassName('messageAreas'+ids);
+    for (let i = 0; i < ulList.length; i++) {
+        ulList[i].style.color = "#000000";
+    }
     document.getElementById('id_'+ids).hidden= true;
     document.getElementById('buttonShow'+ids).hidden = false;
     document.getElementById('buttonHide'+ids).hidden = true;
@@ -104,7 +114,6 @@ setInterval(function() {
                 var ul = document.getElementById("messageArea" + objects.numberTask);
                 if(ul!=null)
                 {
-                    var newMessageInDetails = document.getElementById("")
                     var li = document.createElement('li');
                     if(!(objects.userSenders === null || objects.userSenders ===undefined))
                     {
@@ -113,8 +122,15 @@ setInterval(function() {
                     }
                     if(!(objects.userRecipient === null || objects.userRecipient ===undefined))
                     {
-                        li.innerHTML = "["+objects.dateSend+"] "+objects.userRecipient + ": " + objects.message;
-                        ul.appendChild(li);
+                        if(objects.isNewMessage==='new') {
+                            li.innerHTML = "[" + objects.dateSend + "] " + objects.userRecipient + ": " + objects.message;
+                            li.style.color = "#BF2233";
+                            li.className = "messageArea"+objects.numberTask;
+                            ul.appendChild(li);
+                            var newMessageInDetails = document.getElementById("sumr" + objects.numberTask);
+                            newMessageInDetails.style.backgroundColor = "#F9E0BB";
+                            newMessageInDetails.style.color = "#555555";
+                        }
                     }
                     messageList = objects.data;
                 }
@@ -130,8 +146,8 @@ setInterval(function() {
             var buttonshow = document.getElementById('buttonShowM'+object.numberTask);
             var sumrTaskid = document.getElementById('sumr'+object.numberTask);
             var changeLogId = document.getElementById('changeLogId'+object.id);
-            buttonshow.style.backgroundColor = "#FF6347";
-            sumrTaskid.style.backgroundColor = "#FF6347";
+            buttonshow.style.backgroundColor = "#BF2233";
+            sumrTaskid.style.backgroundColor = "#BF2233";
             var li = document.createElement('li');
             // if(nametask!=null && nametask.innerHTML === object.nameTask) {
             //             if (object.changetype == "Изменение срока") {
@@ -147,15 +163,17 @@ setInterval(function() {
             //                     ' <span class="change">' + object.change + '</span>' +
             //                     ' <hr id="changeLogId'+object.id+'"><span class="time">' + object.time + '</span>';
             //             }
-            //             li.style.backgroundColor = "#FF6347";
+            //             li.style.backgroundColor = "#BF2233";
             //             sidebarUl.appendChild(li);
             // }
             if (object.changetype=="Изменение срока") {
-                deadline.style.backgroundColor = "#FF6347";
+                deadline.style.backgroundColor = "#BF2233";
+                deadline.innerHTML = oject.change;
             }
             if (object.changetype=="Изменение статуса")
             {
-                statusid.style.backgroundColor = "#FF6347";
+                statusid.style.backgroundColor = "#BF2233";
+                statusid.innerHTML = object.change;
             }
         });
     });
@@ -196,15 +214,15 @@ function ShowModal(ids,nametask)
                 }
                 if(object.isNewChanges==="new")
                 {
-                    sumrTaskid.style.backgroundColor = "#FF6347";
-                    li.style.backgroundColor = "#FF6347";
-                    buttonshow.style.backgroundColor = "#FF6347";
+                    sumrTaskid.style.backgroundColor = "#BF2233";
+                    li.style.backgroundColor = "#BF2233";
+                    buttonshow.style.backgroundColor = "#BF2233";
                     if (object.changetype=="Изменение срока") {
-                        deadline.style.backgroundColor = "#FF6347";
+                        deadline.style.backgroundColor = "#BF2233";
                     }
                     if (object.changetype=="Изменение статуса")
                     {
-                        statusid.style.backgroundColor = "#FF6347";
+                        statusid.style.backgroundColor = "#BF2233";
                     }
                 }
                 sidebarUl.appendChild(li);
@@ -212,6 +230,32 @@ function ShowModal(ids,nametask)
         });
     });
     sidebar.classList.toggle('active');
+}
+function stopRed(numberDoc) {
+    let ulList = document.getElementsByClassName('messageArea'+numberDoc);
+    var sumr = document.getElementById('sumr'+numberDoc);
+    sumr.style.backgroundColor = "#884A39";
+    sumr.style.color = "#FFFFFF";
+    for (let i = 0; i < ulList.length; i++) {
+        ulList[i].style.color = "#555555";
+    }
+    $.ajax({
+        method: 'GET',
+        url: '/stopred',
+        headers: {
+            "NumberTask": encodeURIComponent(''+numberDoc),
+            "Type": encodeURIComponent('chat')
+        }
+    })
+        .then(function(response) {
+            console.log(response);
+        })
+        .catch(function(jqXHR, textStatus, errorThrown) {
+            if (jqXHR.status == 404) {
+            } else {
+                console.error(error);
+            }
+        });
 }
 function HideModal(numberDoc)
 {
@@ -222,7 +266,8 @@ function HideModal(numberDoc)
     var buttonShow = document.getElementById("buttonShowM"+numberDoc);
     var elementsHide = document.getElementsByClassName('buttonHideM');
     var sumrTaskid = document.getElementById('sumr'+numberDoc);
-    sumrTaskid.style.backgroundColor = "#69c773";
+    sumrTaskid.style.backgroundColor = "#884A39";
+    sumrTaskid.style.color = "#f8f9fa";
     deadline.style.backgroundColor= "#f8f9fa";
     statusid.style.backgroundColor= "#f8f9fa";
     buttonShow.style.backgroundColor= "#555";
@@ -234,7 +279,8 @@ function HideModal(numberDoc)
         method: 'GET',
         url: '/stopred',
         headers: {
-            "NumberTask": encodeURIComponent(''+numberDoc)
+            "NumberTask": encodeURIComponent(''+numberDoc),
+            "Type": encodeURIComponent('stats')
         }
     })
         .then(function(response) {
@@ -302,7 +348,6 @@ function handleSearch(event) {
                 x++;
             }
         }
-        console.log(tableId);
         var detailElements = document.getElementsByTagName('details');
         if(searchQuery!="") {
             var tdElements = document.getElementsByTagName('td');

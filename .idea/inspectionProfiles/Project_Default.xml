@@ -13,6 +13,7 @@
           <option value="NumberTask" />
           <option value="userName" />
           <option value="uidDoc" />
+          <option value="Type" />
         </set>
       </option>
     </inspection_tool>

@@ -428,7 +428,7 @@ public class UserController {
     public List<ChatUser> getMessages() {
         List<ChatUser> listChatUser = chatUserService.findByisNewMessage("new");
         for (ChatUser chuser : chatUserService.findByisNewMessage("new")) {
-            chuser.setIsNewMessage("old");
+            chuser.setIsNewMessage("wait");
             chatUserService.save(chuser);
         }
         // получаем все сообщения из базы данных
@@ -438,8 +438,9 @@ public class UserController {
     @RequestMapping(value = "/clientall", method = RequestMethod.GET)
     @ResponseBody
     public List<ChatUser> getAllMessages() {
-
-        return chatUserService.findByisNewMessage("old");
+        List<ChatUser> listChatUser1 = chatUserService.findByisNewMessage("old");
+        listChatUser1.addAll(chatUserService.findByisNewMessage("wait"));
+        return listChatUser1;
     }
 
     @RequestMapping(value = "/newchanges", method = RequestMethod.GET)
@@ -468,9 +469,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/stopred", method = RequestMethod.GET)
-    public void stopRed(@RequestHeader("NumberTask") String NumberTask) {
+    public void stopRed(@RequestHeader("NumberTask") String NumberTask,@RequestHeader("Type") String Type) {
         try {
-            changeLogTaskService.updateStatusByNumberTask("old", NumberTask);
+            if(Type.equals("stats"))
+            {
+                changeLogTaskService.updateStatusByNumberTask("old", NumberTask);
+            }
+            if(Type.equals("chat"))
+            {
+                chatUserService.updateChatByNumberDoc("old",NumberTask);
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
