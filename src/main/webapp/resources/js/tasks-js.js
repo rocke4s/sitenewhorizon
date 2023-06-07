@@ -104,6 +104,7 @@ setInterval(function() {
                 var ul = document.getElementById("messageArea" + objects.numberTask);
                 if(ul!=null)
                 {
+                    var newMessageInDetails = document.getElementById("")
                     var li = document.createElement('li');
                     if(!(objects.userSenders === null || objects.userSenders ===undefined))
                     {
@@ -258,30 +259,7 @@ window.addEventListener('click', (event) => {
         modal.hidden = true;
     }
 });
-function sendMessage1(numberDoc,uidDoc) {
-    var date = new Date();
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    const time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    var newDate = day+"."+month+"."+year+" "+time;
-    $.ajax({
-        method: 'GET',
-        url: '/worker',
-        headers: {
-            "NumberTask": encodeURIComponent(numberDoc),
-            "uidDoc": encodeURIComponent(uidDoc),
-            "userSender": encodeURIComponent("${Profile.getName()}"),
-            "message": encodeURIComponent(""+document.querySelector('#id_' + numberDoc + ' input[type="text"]').value),
-            "dataSend": encodeURIComponent(""+newDate),
-            "userName": encodeURIComponent("${pageContext.request.userPrincipal.name}")
-        }})
-        .then(function(response) {
-            console.log(response);})
-        .catch(function(error) {
-            console.error(error);});
-    document.querySelector('#id_' + numberDoc + ' input[type="text"]').value = "";
-}
+
 function showFullText() {
     const modal = document.querySelector('#modals');
     modal.style.display = 'block';
@@ -301,3 +279,69 @@ for (var i = 0; i < elements.length; i++) {
         elements[i].appendChild(button);
     }
 }
+
+const input = document.getElementById('searchbox');
+
+function handleSearch(event) {
+    var tableId = [];
+    if (event.keyCode === 13) { // Если нажата клавиша Enter
+        const searchValue = input.value;
+        var searchQuery = document.getElementById('searchbox').value;
+        // находим все теги td на странице
+        var tds = document.getElementsByTagName('td');
+        // проходимся по всем найденным тегам td
+        var x=0;
+        for (var i = 0; i < tds.length; i++) {
+            var td = tds[i];
+            // если содержимое тега td содержит искомый текст, то
+            if (searchQuery && td.textContent.includes(searchQuery)) {
+                // находим родительский тег table
+                var table = td.closest('table');
+                // получаем id тега table
+                tableId[x]= table.getAttribute('id');
+                x++;
+            }
+        }
+        console.log(tableId);
+        var detailElements = document.getElementsByTagName('details');
+        if(searchQuery!="") {
+            var tdElements = document.getElementsByTagName('td');
+            for (var i = 0; i < tdElements.length; i++) {
+                var tdElement = tdElements[i];
+                var detailsElement = tdElement.closest('details');
+                if (detailsElement) {
+                    detailsElement.style.display = 'none';
+                }
+            }
+            for(var z=0;z<tableId.length;z++) {
+                for (var i = 0; i < detailElements.length; i++) {
+                    if (detailElements[i].id === document.getElementById("details"+tableId[z]).id) {
+                        detailElements[i].style.display = '';
+                    }
+                }
+            }
+        }
+        else {
+            var tdElements = document.getElementsByTagName('td');
+            for (var i = 0; i < tdElements.length; i++) {
+                var tdElement = tdElements[i];
+                var detailsElement = tdElement.closest('details');
+                if (detailsElement) {
+                    detailsElement.style.display = '';
+                }
+            }
+            for (var i = 0; i < tdElements.length; i++) {
+                var tdElement = tdElements[i];
+                if (tdElement.innerHTML === 'Проверено' || tdElement.innerHTML === 'Отменено') {
+                    var detailsElement = tdElement.closest('details');
+                    if (detailsElement) {
+                        detailsElement.style.display = 'none';
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+input.addEventListener('keyup', handleSearch);
