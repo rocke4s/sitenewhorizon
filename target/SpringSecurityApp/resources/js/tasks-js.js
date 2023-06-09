@@ -305,21 +305,22 @@ window.addEventListener('click', (event) => {
         modal.hidden = true;
     }
 });
-
+const elementData = {};
 function showFullText() {
     const modal = document.querySelector('#modals');
     modal.style.display = 'block';
     modal.hidden = false;
     const fullText = document.querySelector('#full-text');
-    fullText.innerHTML = document.getElementById(this.id).innerHTML.replace(/<button[^>]*>.*<\/button>/gi, "");
+    fullText.innerHTML = elementData[this.id].replace(/<button[^>]*>.*<\/button>/gi, "");
 }
 var elements = document.getElementsByClassName('short-text');
 for (var i = 0; i < elements.length; i++) {
     if (elements[i].innerHTML.length > 200) {
+        elementData[elements[i].id] = elements[i].innerHTML;
         var button = document.createElement("button");
+        elements[i].innerHTML=elements[i].innerHTML.substring(0, 200) + '...';
         button.setAttribute("class", "read-more-button");
-        button.innerHTML = "Прочитать полностью";
-        elements[i].style = "overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;"
+        button.innerHTML = "показать полностью";
         button.id = elements[i].id;
         button.onclick =showFullText;
         elements[i].appendChild(button);

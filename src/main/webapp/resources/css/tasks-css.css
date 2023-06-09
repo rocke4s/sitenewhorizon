@@ -121,10 +121,10 @@ details[open] summary {
 
 
 table {
-    border: 0;
-    width: 100%;
-    overflow: auto; /* или scroll */
-    max-width: 100%;
+    overflow: scroll; /* или scroll */
+    width: auto;
+    table-layout: fixed;
+    margin: 0 auto;
 }
 
 th, td {

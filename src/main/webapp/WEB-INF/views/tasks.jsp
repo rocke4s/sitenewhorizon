@@ -22,7 +22,8 @@
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
         </form>
-        <input type="text" id="searchbox" >Поиск по задачам
+        <input type="text" id="searchbox" placeholder="Поиск по задачам">
+        <button onclick=""></button>
         <a href="/welcome" class="btn">Назад</a>
         <h2><a class="btn" onclick="document.forms['logoutForm'].submit()">Выйти</a>
         </h2>
@@ -34,16 +35,16 @@
     <label for="toggle" class="toggle-label"></label>
 </div>
 <label id="togLabel" >Показать задачи</label>
-<div class="all-list-task" id="all-list-task">
+<div class="all-list-task" id="all-list-task" style="overflow-x:auto;">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
-    <details id ="details${Task.getTaskNumber()}"><div class="layer1" margin-top="5px"  margin-bottom="5px">
+    <details id ="details${Task.getTaskNumber()}"><div class="layer1" margin-top="5px"  margin-bottom="5px" style="overflow: auto;">
     </div>
-     <summary id="sumr${Task.getTaskNumber()}">Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
+     <summary id="sumr${Task.getTaskNumber()}" style="overflow: auto;">Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
         <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
         <button id="buttonShowM${Task.getTaskNumber()}" class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}','${Task.getNameTask()}')">Жизненный цикл заявки</button>
         <button id="buttonHideM${Task.getTaskNumber()}" class="btn btn-primary buttonHideM" onclick="HideModal('${Task.getTaskNumber()}')" hidden="true">Скрыть жизненный цикл</button>
-            <table id="${Task.getTaskNumber()}">
+            <table id="${Task.getTaskNumber()}" style="overflow: scroll;">
                 <thead>
                 <tr>
                     <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
@@ -115,7 +116,7 @@
                     <c:if test="${!Tasks.getTypeTask().isEmpty()}"><td>${Tasks.getTypeTask()}</td></c:if>
                     <c:if test="${!Tasks.getTaskImportance().isEmpty()}"><td>${Tasks.getTaskImportance()}</td></c:if>
                     <c:if test="${!Tasks.getTaskContent().isEmpty()}">
-                        <td id="TaskContent${Tasks.getTaskNumber()}" class="short-text">${Tasks.getTaskContent()}</td>
+                        <td id="TaskContent${Tasks.getTaskNumber()}" class="short-text" style="white-space: pre-wrap;word-wrap:break-word;">${Tasks.getTaskContent()}</td>
                     </c:if>
                     <c:if test="${!Tasks.getTaskDeadline().isEmpty()}"><td id="deadline${Tasks.getTaskNumber()}">${Tasks.getTaskDeadline()}</td></c:if>
                     <c:if test="${!Tasks.getTaskIntensity().isEmpty()}"><td>${Tasks.getTaskIntensity()}</td></c:if>
