@@ -9,6 +9,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
     <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="${contextPath}/resources/css/tasks-css.css" rel="stylesheet">
@@ -22,8 +26,7 @@
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
         </form>
-        <input type="text" id="searchbox" placeholder="Поиск по задачам">
-        <button onclick=""></button>
+        <input type="text" id="searchbox" onchange="handleSearch()" placeholder="Поиск по задачам">
         <a href="/welcome" class="btn">Назад</a>
         <h2><a class="btn" onclick="document.forms['logoutForm'].submit()">Выйти</a>
         </h2>
@@ -35,16 +38,17 @@
     <label for="toggle" class="toggle-label"></label>
 </div>
 <label id="togLabel" >Показать задачи</label>
-<div class="all-list-task" id="all-list-task" style="overflow-x:auto;">
+<div class="all-list-task" id="all-list-task">
 <c:forEach var="Task" items="${Tasks.getTasks()}">
-    <details id ="details${Task.getTaskNumber()}"><div class="layer1" margin-top="5px"  margin-bottom="5px" style="overflow: auto;">
+    <details id ="details${Task.getTaskNumber()}"><div class="layer1" margin-top="5px"  margin-bottom="5px">
     </div>
      <summary id="sumr${Task.getTaskNumber()}" style="overflow: auto;">Номер задачи: [${Task.getTaskNumber()}]; Название задачи - ${Task.getNameTask()}</summary>
         <button id="buttonShow${Task.getTaskNumber()}" class="btn btn-primary" onclick="ShowChat('${Task.getTaskNumber()}')">Показать чат</button>
         <button id="buttonHide${Task.getTaskNumber()}" class="btn btn-primary" onclick="HideChat('${Task.getTaskNumber()}')" hidden="true">Скрыть чат</button>
         <button id="buttonShowM${Task.getTaskNumber()}" class="btn btn-primary buttonShowM" onclick="ShowModal('${Task.getTaskNumber()}','${Task.getNameTask()}')">Жизненный цикл заявки</button>
         <button id="buttonHideM${Task.getTaskNumber()}" class="btn btn-primary buttonHideM" onclick="HideModal('${Task.getTaskNumber()}')" hidden="true">Скрыть жизненный цикл</button>
-            <table id="${Task.getTaskNumber()}" style="overflow: scroll;">
+        <div class="tableq" style="overflow-x: auto;">
+            <table id="${Task.getTaskNumber()}">
                 <thead>
                 <tr>
                     <c:if test="${!Task.getTaskUrl().isEmpty()}"><th>Ссылка</th></c:if>
@@ -125,12 +129,14 @@
                     <c:if test="${!Tasks.getTaskContentLVR().isEmpty()}"><td>${Tasks.getTaskContentLVR()}</td></c:if>
                     <c:if test="${!Tasks.getTaskData().isEmpty()}"><td>${Tasks.getTaskData()}</td></c:if>
                     <c:if test="${!Tasks.getTaskDepartment().isEmpty()}"><td>${Tasks.getTaskDepartment()}</td></c:if>
+                    <td hidden>${Tasks.getNameTask()}</td>
                 </tr>
             </c:if>
             </c:forEach>
 
             </tr>
         </table>
+        </div>
         <div id="id_${Task.getTaskNumber()}" hidden="true">
             <ul id="messageArea${Task.getTaskNumber()}" class="chat-class">
             </ul>

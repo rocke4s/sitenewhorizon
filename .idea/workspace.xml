@@ -9,15 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(3) 07.06.2023&#10;build с исправлениями уведомлений в чате">
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 09.06.2023&#10;еще изменения">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/tasks-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/tasks-css.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/tasks-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/tasks-css.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +95,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
@@ -291,14 +294,7 @@
       <workItem from="1684221910504" duration="17793000" />
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
-      <workItem from="1685073130574" duration="303718000" />
-    </task>
-    <task id="LOCAL-00098" summary="Good work">
-      <created>1684830733771</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1684830733772</updated>
+      <workItem from="1685073130574" duration="317665000" />
     </task>
     <task id="LOCAL-00099" summary="Good work">
       <created>1684831207612</created>
@@ -636,7 +632,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686141869482</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="(1) 09.06.2023&#10;еще изменения">
+      <created>1686311200944</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1686311200944</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +657,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="(4) 24.05.2023&#10;Мини комит" />
     <MESSAGE value="(1) 25.05.2023&#10;Исправление косяков" />
     <MESSAGE value="(1) 26.05.2023&#10;GGWP" />
     <MESSAGE value="(1) 26.05.2023&#10;Хотел как лучше получилось как всегда" />
@@ -679,7 +681,20 @@
     <MESSAGE value="(1) 07.06.2023&#10;build с исправлениями уведомлений, поиска по задачам" />
     <MESSAGE value="(2) 07.06.2023&#10;build с исправлениями уведомлений, поиска по задачам" />
     <MESSAGE value="(3) 07.06.2023&#10;build с исправлениями уведомлений в чате" />
-    <option name="LAST_COMMIT_MESSAGE" value="(3) 07.06.2023&#10;build с исправлениями уведомлений в чате" />
+    <MESSAGE value="(1) 09.06.2023&#10;еще изменения" />
+    <option name="LAST_COMMIT_MESSAGE" value="(1) 09.06.2023&#10;еще изменения" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js</url>
+          <line>356</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

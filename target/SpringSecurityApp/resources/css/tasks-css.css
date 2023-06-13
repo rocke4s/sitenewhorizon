@@ -82,7 +82,7 @@ h1 {
     border-radius: 3px; /* Скругляем уголки */
 }
 summary {
-    background: #884A39;
+    background: #213555;
     color: #FFFFFF;
     border-radius: 7px;
     padding: 5px 10px;
@@ -91,7 +91,7 @@ summary {
 
 /* Style the summary when details box is open */
 details[open] summary {
-    background: #C38154;
+    background: #4F709C;
     color: #000000;
 }
 /* Custom Markers */
@@ -295,4 +295,8 @@ ul.chat-class {
 
 .modal-contents p {
     margin: 0 0 20px 0;
+}
+
+tableq {
+    overflow-x: auto;
 }

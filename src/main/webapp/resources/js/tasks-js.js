@@ -168,11 +168,13 @@ setInterval(function() {
             // }
             if (object.changetype=="Изменение срока") {
                 deadline.style.backgroundColor = "#BF2233";
-                deadline.innerHTML = oject.change;
+                deadline.style.color = "#FFFFFF";
+                deadline.innerHTML = object.change;
             }
             if (object.changetype=="Изменение статуса")
             {
                 statusid.style.backgroundColor = "#BF2233";
+                statusid.style.color = "#FFFFFF";
                 statusid.innerHTML = object.change;
             }
         });
@@ -216,6 +218,7 @@ function ShowModal(ids,nametask)
                 {
                     sumrTaskid.style.backgroundColor = "#BF2233";
                     li.style.backgroundColor = "#BF2233";
+                    li.style.color = "#FFFFFF";
                     buttonshow.style.backgroundColor = "#BF2233";
                     if (object.changetype=="Изменение срока") {
                         deadline.style.backgroundColor = "#BF2233";
@@ -234,7 +237,7 @@ function ShowModal(ids,nametask)
 function stopRed(numberDoc) {
     let ulList = document.getElementsByClassName('messageArea'+numberDoc);
     var sumr = document.getElementById('sumr'+numberDoc);
-    sumr.style.backgroundColor = "#884A39";
+    sumr.style.backgroundColor = "#213555";
     sumr.style.color = "#FFFFFF";
     for (let i = 0; i < ulList.length; i++) {
         ulList[i].style.color = "#555555";
@@ -266,10 +269,12 @@ function HideModal(numberDoc)
     var buttonShow = document.getElementById("buttonShowM"+numberDoc);
     var elementsHide = document.getElementsByClassName('buttonHideM');
     var sumrTaskid = document.getElementById('sumr'+numberDoc);
-    sumrTaskid.style.backgroundColor = "#884A39";
+    sumrTaskid.style.backgroundColor = "#213555";
     sumrTaskid.style.color = "#f8f9fa";
     deadline.style.backgroundColor= "#f8f9fa";
     statusid.style.backgroundColor= "#f8f9fa";
+    deadline.style.color = "#555";
+    statusid.style.color = "#555";
     buttonShow.style.backgroundColor= "#555";
     for (var i = 0; i < elementsShow.length; i++) {
         elementsShow[i].hidden = false;
@@ -329,9 +334,8 @@ for (var i = 0; i < elements.length; i++) {
 
 const input = document.getElementById('searchbox');
 
-function handleSearch(event) {
-    var tableId = [];
-    if (event.keyCode === 13) { // Если нажата клавиша Enter
+function handleSearch() {
+    var tableId = [];// Если нажата клавиша Enter
         const searchValue = input.value;
         var searchQuery = document.getElementById('searchbox').value;
         // находим все теги td на странице
@@ -350,6 +354,7 @@ function handleSearch(event) {
             }
         }
         var detailElements = document.getElementsByTagName('details');
+        console.log(searchQuery);
         if(searchQuery!="") {
             var tdElements = document.getElementsByTagName('td');
             for (var i = 0; i < tdElements.length; i++) {
@@ -367,7 +372,7 @@ function handleSearch(event) {
                 }
             }
         }
-        else {
+        else if(searchQuery===""){
             var tdElements = document.getElementsByTagName('td');
             for (var i = 0; i < tdElements.length; i++) {
                 var tdElement = tdElements[i];
@@ -382,12 +387,9 @@ function handleSearch(event) {
                     var detailsElement = tdElement.closest('details');
                     if (detailsElement) {
                         detailsElement.style.display = 'none';
-
                     }
                 }
             }
         }
-    }
 }
-
 input.addEventListener('keyup', handleSearch);

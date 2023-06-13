@@ -154,11 +154,11 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout, User user) {
         if (error != null) {
-            model.addAttribute("error", "Username or password is incorrect.");
+            model.addAttribute("error", "Логин или пароль не совпадают!");
         }
 
         if (logout != null) {
-            model.addAttribute("message", "Logged out successfully.");
+            model.addAttribute("message", "Выход выполнен успешно!");
         }
         model.addAttribute("user", user);
         return "login";
@@ -188,11 +188,12 @@ public class UserController {
         String encoding = Base64.getEncoder().encodeToString((forBasicAuth()[0] + ":" + forBasicAuth()[1]).getBytes());
         HttpGet request = new HttpGet("http://" + ip + "/franrit/hs/RitExchange/getDocuments/" + prof.getUidOrg() + "/" + prof.getUidUser() + "/0");
         request.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);//добавляем в заголовок запроса basic auth
-        CloseableHttpResponse response = client.execute(request);//выполняем запрос
+        CloseableHttpResponse response= null;
         Task task = new Task();
         Chat chat = new Chat();
         Profile profile = new Profile();
         try {
+            response = client.execute(request);//выполняем запрос
             HttpEntity entity = response.getEntity();//получаем ответ от АПИ
             String result = EntityUtils.toString(entity);//засовываем ответ в строку
             EntityUtils.consume(entity);
@@ -223,8 +224,10 @@ public class UserController {
 //            }
 
             Collections.sort(task.getTasks(), Comparator.comparing(Tasks::getTaskNumber).reversed());
-        } finally {
+        } catch (Exception ex) {
+            ModelAndView modelAndView = new ModelAndView("error-page");
             response.close();
+            return modelAndView;
         }
 
 //        List<ChangeLogTask> changeLogTask = new ArrayList<>();
@@ -233,6 +236,7 @@ public class UserController {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
+        response.close();
         ModelAndView modelAndView = new ModelAndView("tasks");
         modelAndView.addObject("Tasks", task);
         modelAndView.addObject("changeStatus", changeStatus);
