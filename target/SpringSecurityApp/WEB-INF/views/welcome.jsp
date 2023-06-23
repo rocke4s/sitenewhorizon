@@ -48,6 +48,14 @@
                 </form:form>
             </div>
         </sec:authorize>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="buttons">
+                <form:form method="GET" action="/stats">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button class="show-tasks" type="submit">Показать статистику по клиентам</button>
+                </form:form>
+            </div>
+        </sec:authorize>
         <sec:authorize access="hasRole('ROLE_USER')">
         <div class="buttons">
             <form:form method="GET" action="/tasks">
@@ -57,7 +65,7 @@
             </form:form>
         </div>
         <div class="buttons">
-            <form:form method="POST" action="/new_task">
+            <form:form method="GET" action="/new_task">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <input type="hidden" name="Profile" value="${User}"/>
                 <button class="create-task" type="submit">Создать задачу</button>

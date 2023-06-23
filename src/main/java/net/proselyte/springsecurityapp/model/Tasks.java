@@ -63,6 +63,17 @@ public class Tasks {
     @SerializedName("TypeTask")
     @Expose
     private String typeTask;
+    @SerializedName("TaskAuthor")
+    @Expose
+    private String taskAuthor;
+
+    public String getTaskAuthor() {
+        return taskAuthor;
+    }
+
+    public void setTaskAuthor(String taskAuthor) {
+        this.taskAuthor = taskAuthor;
+    }
 
     private MultipartFile[] file;
 

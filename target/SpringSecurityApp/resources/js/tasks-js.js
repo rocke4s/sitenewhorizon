@@ -1,3 +1,18 @@
+var elements = document.querySelectorAll('.deadlines');
+
+// проходимся по каждому элементу
+for (var i = 0; i < elements.length; i++) {
+    console.log(elements[i].innerHTML);
+    // проверяем, содержит ли элемент дату в формате "16.06.2023 16:33:45"
+    if (/\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2}/.test(elements[i].innerHTML)) {
+        // преобразуем текст элемента в объект даты
+        var date = new Date(elements[i].innerHTML.replace(/(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:$6Z'));
+        // проверяем, если дата прошла, выводим сообщение
+        if (date < new Date()) {
+            elements[i].innerHTML += '<br><span style="color:red;">Дата уже прошла!</span>';
+        }
+    }
+}
 $.getJSON("/clientall", function(messages){
     messages.forEach(function(objects){
         if (objects.message !== undefined) {
@@ -335,8 +350,7 @@ for (var i = 0; i < elements.length; i++) {
 const input = document.getElementById('searchbox');
 
 function handleSearch() {
-    var tableId = [];// Если нажата клавиша Enter
-        const searchValue = input.value;
+    var tableId = [];
         var searchQuery = document.getElementById('searchbox').value;
         // находим все теги td на странице
         var tds = document.getElementsByTagName('td');
@@ -393,3 +407,13 @@ function handleSearch() {
         }
 }
 input.addEventListener('keyup', handleSearch);
+const selectElement = document.getElementById('sort-select');
+selectElement.addEventListener('change', (event) => {
+    const selectedValue = event.target.value;
+    const elements = document.querySelectorAll(selectedValue); // выбираем элементы
+    const sortedElements = Array.from(elements).sort((a, b) => a.id - b.id);
+    const parentElement = document.querySelector('.details-class');
+    for (let i = sortedElements.length - 1; i >= 0; i--) {
+        parentElement.appendChild(sortedElements[i]);
+    }
+});

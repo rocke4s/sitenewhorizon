@@ -22,9 +22,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
 </head>
-
 <body>
-
 <div class="container">
     <h2 class="form-main">Авторизация в личный кабинет Инфотех</h2>
     <form:form method="POST" action="${contextPath}/login" modelAttribute="user" class="form-signin">
@@ -51,7 +49,6 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
             <h4 class="text-center"><a href="${contextPath}/registration">Создать нового пользователя</a></h4>
         </div>
-
     </form:form>
 
 </div>

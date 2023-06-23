@@ -1,7 +1,16 @@
-function showFileName()
-{
+function showFileNames() {
     let fileInput = document.getElementById('file');
-    let fileName = fileInput.files[0].name;
-    let output = document.getElementById('file-selected');
-    output.innerHTML = `Выбранный файл: ${fileName}`;
+    let output = document.getElementById('files-selected');
+    let strFiles ='';
+    for(var x=0;x<fileInput.files.length;x++)
+    {
+        strFiles += fileInput.files[x].name+"<br>";
+    }
+    if(fileInput.files.length>1)
+    {
+        output.innerHTML = 'Выбранныe файлы:'+strFiles;
+    }
+    else {
+        output.innerHTML = 'Выбранный файл:'+strFiles;
+    }
 }

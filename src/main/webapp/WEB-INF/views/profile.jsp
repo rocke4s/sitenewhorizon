@@ -22,7 +22,9 @@
 <div class="container">
     <div class="header">
         <div class="logo">
-            <img src="${contextPath}/resources/image/logo.png" alt="Логотип">
+            <a href="/welcome">
+                <img src="${contextPath}/resources/image/logo.png" onclick="" alt="Логотип">
+            </a>
             <h1>Данные пользователя ${pageContext.request.userPrincipal.name}</h1>
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
