@@ -9,65 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 13.06.2023">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/config/BasicAuthConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/ChangesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/NewTaskController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/ProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/RatingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/StatsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/TaskController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/WelcomeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/dao/User_rolesDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/User_roles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/result_stats/ResultStats.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/UserRolesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/UserRolesServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/stats.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/admin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/stats.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/stats.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/dao/TaskListUserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/Tasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/model/Tasks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/SecurityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/SecurityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/validation.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/validation.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/appconfig-security.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/new_task.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/new_task.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/profile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/tasks.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/welcome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/welcome.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/new_task-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/new_task-css.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/profile-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/profile-css.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/new_task-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/new_task-js.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/tasks-js.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-security.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/appconfig-security.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/model/Tasks.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/model/Tasks.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/service/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/validation.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/validation.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/new_task.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/new_task.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/profile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/tasks.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/welcome.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/welcome.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/new_task-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/new_task-css.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/profile-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/profile-css.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/new_task-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/new_task-js.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/tasks-js.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/model/Tasks.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/model/Tasks.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/service/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/validation.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/validation.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)">
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/config/BasicAuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/config/BasicAuthConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,14 +285,7 @@
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
       <workItem from="1685073130574" duration="348429000" />
-      <workItem from="1686801344239" duration="171397000" />
-    </task>
-    <task id="LOCAL-00100" summary="Good work">
-      <created>1684831276440</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1684831276440</updated>
+      <workItem from="1686801344239" duration="171809000" />
     </task>
     <task id="LOCAL-00101" summary="Good work1">
       <created>1684833005425</created>
@@ -687,7 +623,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686647463836</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="(1) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)">
+      <created>1687520742652</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1687520742652</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -705,7 +648,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="(1) 26.05.2023&#10;GGWP" />
     <MESSAGE value="(1) 26.05.2023&#10;Хотел как лучше получилось как всегда" />
     <MESSAGE value="(2) 26.05.2023&#10;WSS" />
     <MESSAGE value="(3) 26.05.2023&#10;Cometa" />
@@ -730,7 +672,8 @@
     <MESSAGE value="(3) 07.06.2023&#10;build с исправлениями уведомлений в чате" />
     <MESSAGE value="(1) 09.06.2023&#10;еще изменения" />
     <MESSAGE value="(1) 13.06.2023" />
-    <option name="LAST_COMMIT_MESSAGE" value="(1) 13.06.2023" />
+    <MESSAGE value="(1) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)" />
+    <option name="LAST_COMMIT_MESSAGE" value="(1) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
