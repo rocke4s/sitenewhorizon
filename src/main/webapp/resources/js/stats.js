@@ -245,12 +245,16 @@ submitBtn.addEventListener('click', () => {
         // Получаем значение ячейки с датой
         var dateString = rows[i].rows[1].cells[11].innerHTML;
         // Преобразуем строку в объект Date
-        var date = new Date(dateString.replace(/(\d{2}).(\d{2}).(\d{4}) (\d{2}):(\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:$6Z'));
+        console.log(dateString+" ::dateString");
+        var date = new Date(dateString.replace(/(\d{2}).(\d{2}).(\d{4})(?:\s+)(\d{1,2}|\d{2}):(\d{2}):(\d{2})/,
+            function(match, p1, p2, p3, p4, p5, p6) {  return p3 + '-' + p2 + '-' + p1 + 'T' + p4.padStart(2, '0') + ':' + p5 + ':' + p6 + 'Z';}));
         // Если дата не входит в промежуток, скрываем строку
-        if (date < startDate || date > endDate) {
-            rows[i].style.display = "none";
-        } else {
+        console.log(date+" ::date");
+        console.log(date.getTime()+" - "+startDate+" - "+endDate);
+        if (date.getTime() > startDate && date.getTime() < endDate) {
             rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
         }
     }
 });
