@@ -83,7 +83,42 @@ h1 {
     text-decoration: none; /* Убираем подчёркивание */
     border-radius: 3px; /* Скругляем уголки */
 }
-table {
-    max-width: 100%;
-    width: 100%;
+.table-class {
+    width: 100%; /* Растягивание таблицы на все доступное место */
+    border-collapse: collapse; /* Объединение границ ячеек */
+    margin-bottom: 20px; /* Добавление отступа снизу */
+}
+.taskTr {
+    background-color: #f9f9f9; /* Задний фон каждой строки таблицы */
+}
+.taskTr:nth-child(even) {
+    background-color: #f2f2f2; /* Задний фон каждой четной строки таблицы */
+}
+.taskTr:hover {
+    background-color: #ddd; /* Задний фон каждой строки таблицы при наведении */
+}
+th {
+    background-color: #696969; /* Задний фон заголовков столбцов */
+    color: #fff; /* Цвет текста заголовков столбцов */
+}
+th, td {
+    padding: 8px; /* Отступы в ячейках */
+    text-align: left; /* Выравнивание текста в ячейках */
+    border: 1px solid #ddd; /* Границы ячеек */
+}
+.taskPartner, .taskStatus, .short-text, .deadlines, .taskIntensity, .taskDataDone, .taskData, .taskDepartment, .taskAuthor {
+    white-space: nowrap; /* Запрет переноса строки внутри ячеек */
+    overflow: hidden; /* Скрытие текста, выходящего за границы ячеек */
+    text-overflow: ellipsis; /* Добавление многоточия в конце текста, выходящего за границы ячеек */
+    max-width: 150px; /* Максимальная ширина ячеек таблицы */
+}
+.expandable {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.expandable.expanded {
+    overflow: auto;
+    white-space: normal;
 }

@@ -61,10 +61,10 @@
         Оценка 50/35/25.<br></p>
     <p style="font-size: 14px; margin-top: 5px; margin-left: 120px;">(Хорошо/удовлетворительно/плохо)</p>
 </div>
-<div id="fortablediv" style="border: 2px dashed red;">
-    <table id="table-class" class="table-class" style="width: 100%; table-layout: fixed;">
+<div id="fortablediv">
+    <table id="table-class" class="table-class">
         <c:forEach var="Tasks" items="${Tasks.getTasks()}">
-        <tbody class="taskTr" id="table${Tasks.getTaskNumber()}" style="display: block; overflow-x: auto;">
+        <tbody class="taskTr" id="table${Tasks.getTaskNumber()}" style="overflow-x: auto;">
         <tr>
             <th>Ссылка</th>
             <th>Контрагент</th>
@@ -88,8 +88,7 @@
                 class="taskStatus">${Tasks.getTaskStatus()}</td>
             <td>${Tasks.getTypeTask()}</td>
             <td>${Tasks.getTaskImportance()}</td>
-            <td id="TaskContent${Tasks.getTaskNumber()}" class="short-text"
-                style="white-space: pre-wrap;word-wrap:break-word;">${Tasks.getTaskContent()}</td>
+            <td id="TaskContent${Tasks.getTaskNumber()}" class="short-text expandable">${Tasks.getTaskContent()}</td>
             <td id="deadline${Tasks.getTaskNumber()}"
                 class="deadlines">${Tasks.getTaskDeadline()}</td>
             <td class="taskIntensity">${Tasks.getTaskIntensity()}</td>

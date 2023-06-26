@@ -9,12 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(1) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)">
+    <list default="true" id="55bdc8de-217e-4b6d-9525-e064fcad17e2" name="Changes" comment="(2) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/config/BasicAuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/proselyte/springsecurityapp/config/BasicAuthConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/stats.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/stats.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/stats.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/stats.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/stats.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/stats.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/config/BasicAuthConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/classes/net/proselyte/springsecurityapp/config/BasicAuthConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/stats.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/WEB-INF/views/stats.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/stats.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/css/stats.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/stats.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringSecurityApp/resources/js/stats.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/config/BasicAuthConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/proselyte/springsecurityapp/config/BasicAuthConfig.class" afterDir="false" />
     </list>
@@ -291,14 +295,7 @@
       <workItem from="1684296115678" duration="136169000" />
       <workItem from="1684836927069" duration="50735000" />
       <workItem from="1685073130574" duration="348429000" />
-      <workItem from="1686801344239" duration="175575000" />
-    </task>
-    <task id="LOCAL-00102" summary="Good work1">
-      <created>1684833854413</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1684833854413</updated>
+      <workItem from="1686801344239" duration="179084000" />
     </task>
     <task id="LOCAL-00103" summary="Good work2">
       <created>1684836203249</created>
@@ -636,7 +633,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687520985870</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="(2) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)">
+      <created>1687524996335</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1687524996335</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +658,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="(1) 26.05.2023&#10;Хотел как лучше получилось как всегда" />
     <MESSAGE value="(2) 26.05.2023&#10;WSS" />
     <MESSAGE value="(3) 26.05.2023&#10;Cometa" />
     <MESSAGE value="(4) 26.05.2023" />
@@ -679,7 +682,8 @@
     <MESSAGE value="(1) 09.06.2023&#10;еще изменения" />
     <MESSAGE value="(1) 13.06.2023" />
     <MESSAGE value="(1) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)" />
-    <option name="LAST_COMMIT_MESSAGE" value="(1) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)" />
+    <MESSAGE value="(2) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)" />
+    <option name="LAST_COMMIT_MESSAGE" value="(2) 23.06.2023&#10;статистика для админа&#10;чутка чистка кода(для каждой страницы контроллер и тд)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

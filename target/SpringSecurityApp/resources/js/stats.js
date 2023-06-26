@@ -310,3 +310,15 @@ function handleSearch() {
 }
 
 //Конец поиска
+
+var cells = document.querySelectorAll('.expandable');
+
+for (var i = 0; i < cells.length; i++) {
+    cells[i].addEventListener('click', function() {
+        if (this.classList.contains('expanded')) {
+            this.classList.remove('expanded');
+        } else {
+            this.classList.add('expanded');
+        }
+    });
+}
