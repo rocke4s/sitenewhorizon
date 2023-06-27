@@ -96,6 +96,25 @@ let taskDepartment = document.getElementsByClassName('taskDepartment');
 let taskAuthor = document.getElementsByClassName('taskAuthor');
 let taskPartner = document.getElementsByClassName('taskPartner');
 
+
+var originalTable = [];
+
+function saveOriginalTable() {
+    var table = document.getElementById("table-class");
+    var tbodi = table.tBodies;
+    originalTable = [];
+    for (let i = 0; i < tbodi.length; i++) {
+        originalTable.push(tbodi[i]);
+    }
+}
+function restoreOriginalTable() {
+    var table = document.getElementById("table-class");
+    var tbodi = table.tBodies;
+    for (let i = 0; i < originalTable.length; i++) {
+        table.appendChild(originalTable[i]);
+    }
+}
+
 function filtrOrg() {//по организации
     var table = document.getElementById("table-class");
     var tbodi = table.tBodies;
@@ -134,6 +153,9 @@ function compareFirstValues(a, b) {
 function filtrDepart() {//по отделу
     var table = document.getElementById("table-class");
     var tbodi = table.tBodies;
+    if (originalTable.length === 0) {
+        saveOriginalTable();
+    }
     var arr = [];
     for (let i = 0; i < tbodi.length; i++) {
         arr[i] = [];
@@ -172,6 +194,46 @@ function filtrWorker() {// по сотруднику
     }
     arr.sort(compareFirstValues);
     let sortedArr = arr.map(elem => elem[1]);
+    for (var k = 0; k < sortedArr.length; k++) {
+        for (var j = 0; j < sortedArr.length; j++) {
+            if (tbodi[j].rows[1].cells[0].innerHTML === sortedArr[k]) {
+                table.appendChild(tbodi[j]);
+            }
+        }
+    }
+}
+
+function filtrWorkerWithRestore() {
+    var table = document.getElementById("table-class");
+    var tbodi = table.tBodies;
+    var arr = [];
+
+    // сохраняем исходное состояние таблицы
+    if (originalTable.length === 0) {
+        saveOriginalTable();
+    }
+
+    // если все уже показано, то восстанавливаем таблицу
+    if (tbodi.length === originalTable.length) {
+        restoreOriginalTable();
+        return;
+    }
+
+    // как и ранее, сортируем таблицу
+    for (let i = 0; i < tbodi.length; i++) {
+        arr[i] = [];
+        for (let j = 0; j < 2; j++) {
+            if (j === 0) {
+                arr[i][j] = tbodi[i].rows[1].cells[13].innerHTML;
+            } else {
+                arr[i][j] = tbodi[i].rows[1].cells[0].innerHTML;
+            }
+        }
+    }
+    arr.sort(compareFirstValues);
+    let sortedArr = arr.map(elem => elem[1]);
+
+    // добавляем элементы обратно в таблицу
     for (var k = 0; k < sortedArr.length; k++) {
         for (var j = 0; j < sortedArr.length; j++) {
             if (tbodi[j].rows[1].cells[0].innerHTML === sortedArr[k]) {
@@ -245,13 +307,10 @@ submitBtn.addEventListener('click', () => {
         // Получаем значение ячейки с датой
         var dateString = rows[i].rows[1].cells[11].innerHTML;
         // Преобразуем строку в объект Date
-        console.log(dateString+" ::dateString");
         var date = new Date(dateString.replace(/(\d{2}).(\d{2}).(\d{4})(?:\s+)(\d{1,2}|\d{2}):(\d{2}):(\d{2})/,
             function(match, p1, p2, p3, p4, p5, p6) {  return p3 + '-' + p2 + '-' + p1 + 'T' + p4.padStart(2, '0') + ':' + p5 + ':' + p6 + 'Z';}));
         // Если дата не входит в промежуток, скрываем строку
-        console.log(date+" ::date");
-        console.log(date.getTime()+" - "+startDate+" - "+endDate);
-        if (date.getTime() > startDate && date.getTime() < endDate) {
+        if (date.getTime() > startDate && date.getTime() < getEndOfDay(endDate)) {
             rows[i].style.display = "";
         } else {
             rows[i].style.display = "none";
@@ -259,7 +318,14 @@ submitBtn.addEventListener('click', () => {
     }
 });
 //конец вывода
-
+function getEndOfDay(timestamp) {
+    var date = new Date(timestamp);
+    date.setHours(23);
+    date.setMinutes(59);
+    date.setSeconds(59);
+    date.setMilliseconds(999);
+    return date.getTime();
+}
 //Поиск по задачам
 function handleSearch() {
     var tableId = [];

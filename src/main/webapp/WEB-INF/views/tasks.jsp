@@ -24,16 +24,12 @@
             <a href="/welcome">
                 <img src="${contextPath}/resources/image/logo.png" onclick="" alt="Логотип">
             </a>
+            <div class="user-online">Пользователей онлайн</div>
             <h1>Список задач</h1>
         </div>
         <form id="logoutForm" method="POST" action="${contextPath}/logout?${_csrf.parameterName}=${_csrf.token}">
         </form>
         <input type="text" id="searchbox" onchange="handleSearch()" placeholder="Поиск по задачам">
-        <label for="sort-select">Выберите тип сортировки:</label>
-        <select id="sort-select">
-            <option value="author">по автору</option>
-            <option value="date">по дате</option>
-        </select><br>
         <a href="/welcome" class="btn">Назад</a>
         <h2><a class="btn" onclick="document.forms['logoutForm'].submit()">Выйти</a>
         </h2>

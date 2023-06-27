@@ -1,6 +1,7 @@
 net\proselyte\springsecurityapp\dao\ChangeLogTaskDao.class
 net\proselyte\springsecurityapp\dao\ChatUserDao.class
 net\proselyte\springsecurityapp\model\Statuska.class
+net\proselyte\springsecurityapp\controller\WelcomeController$1.class
 net\proselyte\springsecurityapp\service\ProfileService.class
 net\proselyte\springsecurityapp\model\ChatUser.class
 net\proselyte\springsecurityapp\controller\UserController.class
@@ -9,6 +10,7 @@ net\proselyte\springsecurityapp\model\Message.class
 net\proselyte\springsecurityapp\config\Sender$1.class
 net\proselyte\springsecurityapp\controller\ProfileController.class
 net\proselyte\springsecurityapp\controller\NewTaskController.class
+net\proselyte\springsecurityapp\controller\WelcomeController$2.class
 net\proselyte\springsecurityapp\service\SecurityService.class
 net\proselyte\springsecurityapp\service\RatingTaskService.class
 net\proselyte\springsecurityapp\model\ChangeStatus.class

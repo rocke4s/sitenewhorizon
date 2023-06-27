@@ -82,3 +82,40 @@ h1 {
     text-decoration: none; /* Убираем подчёркивание */
     border-radius: 3px; /* Скругляем уголки */
 }
+#online-users {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#online-users-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#users-list {
+    margin-top: 5px;
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#users-list > li {
+    margin-bottom: 5px;
+    padding-left: 20px;
+    position: relative;
+}
+
+#users-list > li::before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+}

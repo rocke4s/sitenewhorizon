@@ -17,6 +17,9 @@
         <intercept-url pattern="/tasks" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/new_task" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/new_tasker" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/getUsersOnline" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/addUserToOnlineList" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/removeUserFromOnlineList" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/data/**" access="permitAll"/>
         <intercept-url pattern="/statuser" access="permitAll"/>
         <intercept-url pattern="/chat" access="permitAll"/>

@@ -17,6 +17,12 @@
     <link rel="icon" type="image/x-icon" href="${contextPath}/resources/image/111.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="${contextPath}/resources/css/welcome-css.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 </head>
 <body>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -74,9 +80,52 @@
         </sec:authorize>
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+    <div id="online-users">
+        <div>Пользователей онлайн:</div>
+        <ul id="users-list"></ul>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "/addUserToOnlineList",
+                headers: {
+                    "user": encodeURIComponent("${pageContext.request.userPrincipal.name}")
+                },
+                type: "GET",
+                success: function() {
+                    console.log("User added to online list");
+                },
+                error: function() {
+                    console.error("Unable to add user to online list");
+                }
+            });
+        });
+        function updateUsersOnline() {
+            $.get("/getUsersOnline", function(mess) {
+                // обработчик успешного выполнения запроса
+                $("#users-list").text(mess);
+            }).fail(function() {
+                // обработчик ошибок выполнения запроса
+                alert("Ошибка при выполнении запроса");
+            });
+        }
+        setInterval(updateUsersOnline, 1000);
+        $(window).unload(function() {
+            $.ajax({
+                url: "/removeUserFromOnlineList",
+                headers: {
+                    "user": encodeURIComponent("${pageContext.request.userPrincipal.name}")
+                },
+                type: "GET",
+                success: function() {
+                    console.log("User removed from online list");
+                },
+                error: function() {
+                    console.error("Unable to remove user from online list");
+                }
+            });
+        });
+    </script>
 </c:if>
 </body>
 </html>

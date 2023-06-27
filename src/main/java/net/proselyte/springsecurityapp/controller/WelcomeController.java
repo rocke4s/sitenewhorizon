@@ -3,14 +3,18 @@ package net.proselyte.springsecurityapp.controller;
 import net.proselyte.springsecurityapp.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 @Controller
 public class WelcomeController {
-
+    private int countUserOnline = 0;
+    private List<String> users = new ArrayList<>();
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(@ModelAttribute("user") User user, Model model) throws IOException {
@@ -43,5 +47,56 @@ public class WelcomeController {
 //            System.out.println(ex);
 //        }
         return "welcome";
+    }
+
+    @RequestMapping(value = {"/getUsersOnline"}, method = RequestMethod.GET)
+    @ResponseBody
+    public String getUsersOnline() {
+        int count = getCountOfUsersOnline();
+        return Integer.toString(count);
+    }
+
+    @RequestMapping(value = {"/addUserToOnlineList"}, method = RequestMethod.GET)
+    public void addUserToOnlineList(@RequestHeader("user") String user) {
+        if (users.size() == 0) {
+            users.add(user);
+            countUserOnline++;
+
+            // Создаем новый таймер и запускаем его через 2 минуты
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    users.remove(user);
+                    countUserOnline--;
+                }
+            }, 120000);
+        } else {
+            int countCorr=0;
+            for (int x = 0; x < users.size(); x++) {
+                if (users.get(x).equals(user)) {
+                    countCorr++;
+                }
+            }
+            if(countCorr==0)
+            {
+                users.add(user);
+                countUserOnline++;
+
+                // Создаем новый таймер и запускаем его через 2 минуты
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        users.remove(user);
+                        countUserOnline--;
+                    }
+                }, 120000);
+            }
+        }
+    }
+
+    private int getCountOfUsersOnline() {
+        return countUserOnline;
     }
 }

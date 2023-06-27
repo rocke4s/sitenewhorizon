@@ -36,7 +36,8 @@
             <br>
             <button onclick="filtrDepart()">По отделу</button>
             <br>
-            <button onclick="filtrWorker()">По сотруднику</button>
+            <button onclick="filtrWorker()">По сотруднику</button><br>
+            <button onclick="filtrWorkerWithRestore()">Сбросить фильтр</button>
         </div>
         <div style="display: inline-block; margin-left: 140px;">
             <label for="date-range-select">Выберите период:</label><select id="date-range-select">
